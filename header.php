@@ -5,7 +5,9 @@
 <head>
     <title>Torneos Gameshow</title>
     <link rel="stylesheet" href="./css/style.css">
-    <link href="jquery.bracket.min.css" rel="stylesheet"/>
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="js/jquery.bracket.min.js"></script>
+    <link href="js/jquery.bracket.min.css" rel="stylesheet">
 </head>
 
 

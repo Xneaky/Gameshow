@@ -6,6 +6,11 @@
 <section class="main-container">
     <div class="main-wrapper">
         <h2>ESTA ES LA PAGINA PRINCIPAL</h2>
+
+        <?php
+        require './brackets.php';
+        ?>
+
         <a href="cerrar.php">CERRAR SESION</a>
     </div>
 

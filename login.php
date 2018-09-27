@@ -15,7 +15,7 @@ include_once 'header.php';
 
 
         try{
-            $conexion = new PDO('mysql:host=localhost;dbname=gameshow', 'root', 'admin');
+            $conexion = new PDO('mysql:host=localhost;dbname=gameshow', 'root', '');
             }catch(PDOException $prueba_error){
                 echo "Error: " . $prueba_error->getMessage();
             }

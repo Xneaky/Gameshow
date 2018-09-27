@@ -43,23 +43,6 @@
 		}
 ?>
 
-<!DOCTYPE html>
-<html lang="es">  
-	<head>    
-		<title>Título de la WEB</title>    
-		<meta charset="UTF-8">
-		<meta name="title" content="Título de la WEB">
-		<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-		<script src="js/jquery.bracket.min.js"></script>
-		<link href="js/jquery.bracket.min.css" rel="stylesheet">
-	</head>  
-	<body>    
-		<header>
-		</header>    
-		<section>      
-			<article>
-			</article>      
-		</section>
 		<div class="demo">
 		</div>
 		<script type="text/javascript">
@@ -84,7 +67,3 @@
 				scoreWidth: 30
 			});
 		</script>
-		<footer>
-		</footer>
-	</body>  
-</html>
