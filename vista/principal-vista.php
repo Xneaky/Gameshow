@@ -12,7 +12,11 @@
 
         <?php
         require '../model/brackets.php';
+
         ?>
+
+
+
 
         <a href="../model/cerrar.php">CERRAR SESION</a>
     </div>

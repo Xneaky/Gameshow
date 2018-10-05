@@ -1,4 +1,10 @@
 <?php
+if(isset($_SESSION['usuario'])){
+    $show = $_SESSION['usuario'];
+}else{
+    $show = "";
+}
+
 $header1 =
 '<div class="nav-login">
     <form action="" method="post">
@@ -9,7 +15,8 @@ $header1 =
     <a href="../vista/registro-vista.php">Registrarse</a>
 </div>';
 
-$header2 = ''
+$header2 = '<div class="nav-login">
+            <a class="perfil">'. $show . '</a></div>'
 ?>
 <!DOCTYPE html>
 <html>

@@ -204,6 +204,23 @@ header .nav-login a {
 
 }
 
+header .nav-login .perfil {
+    display: block;
+    width: 90px;
+    height: 30px;
+    margin-right: 10px;
+    border: none;
+    float: left;
+    background-color: #282638;
+    font-family: arial;
+    font-size: 16px;
+    color: #fff;
+    line-height: 63px;
+    cursor: pointer;
+
+}
+
+
 .main-container {
     padding-top: 40px
 }
