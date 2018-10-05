@@ -1,5 +1,5 @@
 <?php session_start();
-include_once 'header.php';
+include_once '../vista/header.php';
 
     if(isset($_SESSION['usuario'])) {
         header('location: index.php');
@@ -33,21 +33,11 @@ include_once 'header.php';
 
         if ($resultado !== false){
             $_SESSION['usuario'] = $usuario;
-            header('location: principal.php');
+            header('location: ../vista/principal-vista.php');
         }else{
             $error .= '<i>Este usuario no existe</i>';
         }
     }
-?>
 
-<section class="main-container">
-    <div class="main-wrapper">
-        <h2>Home</h2>
-
-    </div>
-
-</section>
-
-<?php
-    include_once 'footer.php';
+include '../vista/homeVista.php';
 ?>

@@ -1,7 +1,7 @@
 <?php
 
 		try {
-			require "DbConDuelos.php";
+			require "../config/conexion.php";
 
 			$conn = new DbConDuelos();
 			$version = 0;
@@ -12,7 +12,7 @@
 			$sql = " SELECT * FROM duelos ";
 
 			$conn = $conn->conn();
-			
+
 			$stmt1 = $conn->prepare($sql);
 
 			$stmt1->execute();

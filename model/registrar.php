@@ -1,7 +1,7 @@
 <?php session_start();
 
     if(isset($_SESSION['usuario'])) {
-        header('location: index.php');
+        header('location: ../index.php');
     }
 
 
@@ -63,6 +63,6 @@
     }
 
 
-    require 'vista/registro-vista.php';
+    require '../vista/registro-vista.php';
 
 ?>

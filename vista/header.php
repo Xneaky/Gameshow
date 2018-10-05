@@ -4,10 +4,10 @@
 
 <head>
     <title>Torneos Gameshow</title>
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="../lib/css/style.css">
     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-    <script src="js/jquery.bracket.min.js"></script>
-    <link href="js/jquery.bracket.min.css" rel="stylesheet">
+    <script src="../lib/js/jquery.bracket.min.js"></script>
+    <link href="../lib/js/jquery.bracket.min.css" rel="stylesheet">
 </head>
 
 
@@ -17,7 +17,7 @@
     <nav>
         <div class="main-wrapper">
             <ul>
-                <li><a href="./index.php">Home</a></li>
+                <li><a href="../index.php">Home</a></li>
             </ul>
             <div class="nav-login">
                 <form action="" method="post">
@@ -25,7 +25,7 @@
                     <input type="password" name="pwd" placeholder="Contrasena">
                     <button type="submit" name="submit">Login</button>
                 </form>
-                <a href="vista/registro-vista.php">Registrarse</a>
+                <a href="../vista/registro-vista.php">Registrarse</a>
             </div>
         </div>
     </nav>

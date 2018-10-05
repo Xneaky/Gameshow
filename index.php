@@ -1,10 +1,9 @@
 <?php
-
     session_start();
     if(isset($_SESSION['usuario'])){
-        header('location: principal.php');
+        header('location: vista/principal-vista.php');
     }else{
-        header('location: login.php');
+        header('location: model/login.php');
     }
     include_once 'header.php';
 ?>
@@ -18,7 +17,7 @@
 
 
 <?php
-    include_once 'footer.php';
+    include_once 'vista/footer.php';
 ?>
 
 

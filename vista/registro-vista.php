@@ -35,7 +35,7 @@
         <h2>Registrarse</h2>
 
 
-        <form class="registro-f" action="../registrar.php" method="post">
+        <form class="registro-f" action="../model/registrar.php" method="post">
             <input type="text" name="nombre" placeholder="Nombre">
             <input type="text" name="apellido" placeholder="Apellido">
             <input type="text" name="email" placeholder="E-mail">
