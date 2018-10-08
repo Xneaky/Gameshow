@@ -21,7 +21,7 @@
                 <input type="password" name="pwd" required="">
                     <label>Contrasena</label>
                </div>
-                <button class="loginBtn" >Login</button>
+                <button class="logBtn" >Login</button>
             </form>
         </div>
     </div>

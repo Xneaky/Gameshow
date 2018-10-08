@@ -8,7 +8,7 @@ if(isset($_SESSION['usuario'])){
 $header1 =
 '<div class="nav-login">
     <div class="btns">
-        <button id="modalBtn" class="button">Login</button>
+        <button id="loginBtn" class="button">Login</button>
     </div>
     <a href="../vista/registro-vista.php">Registrarse</a>
 </div>';
