@@ -1,35 +1,6 @@
-<!DOCTYPE html>
-<html>
-
-
-<head>
-    <title>Torneos Gameshow</title>
-    <link rel="stylesheet" href="../css/style.css">
-</head>
-
-
-<body>
-
-<header>
-    <nav>
-        <div class="main-wrapper">
-            <ul>
-                <li><a href="../index.php">Home</a></li>
-            </ul>
-<!--             <div class="nav-login">
-                <form action="" method="post">
-                    <input type="text" name="usuario" placeholder="Usuario">
-                    <input type="password" name="pwd" placeholder="Contrasena">
-                    <button type="submit" name="submit">Login</button>
-                </form>
-                <a href="vista/registro-vista.php">Registrarse</a>
-            </div> -->
-        </div>
-    </nav>
-
-
-</header>
-
+<?php
+include_once '../vista/header.php';
+?>
 <section class="main-container">
     <div class="main-wrapper">
         <h2>Registrarse</h2>

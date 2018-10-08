@@ -7,11 +7,9 @@ if(isset($_SESSION['usuario'])){
 
 $header1 =
 '<div class="nav-login">
-    <form action="" method="post">
-        <input type="text" name="usuario" placeholder="Usuario">
-        <input type="password" name="pwd" placeholder="Contrasena">
-        <button type="submit" name="submit">Login</button>
-    </form>
+    <div class="btns">
+        <button id="modalBtn" class="button">Login</button>
+    </div>
     <a href="../vista/registro-vista.php">Registrarse</a>
 </div>';
 
@@ -28,6 +26,7 @@ $header2 = '<div class="nav-login">
     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="../lib/js/jquery.bracket.min.js"></script>
     <link href="../lib/js/jquery.bracket.min.css" rel="stylesheet">
+
 </head>
 
 
@@ -39,7 +38,6 @@ $header2 = '<div class="nav-login">
                 <ul>
                     <li><a href="../index.php">Home</a></li>
                 </ul>
-
 
                 <?php
         if(!isset($_SESSION['usuario'])){

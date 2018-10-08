@@ -146,13 +146,13 @@ header .nav-login {
     float: right;
 }
 
-header .nav-login form {
+header .nav-login .btns{
     float: left;
     padding-top: 15px;
 
 }
 
-header .nav-login form input{
+header .nav-login .btns input{
     float: left;
     width: 140px;
     height: 30px;
@@ -168,7 +168,7 @@ header .nav-login form input{
 
 }
 
-header .nav-login form button{
+header .nav-login .btns button{
     float: left;
     width: 60px;
     height: 30px;
@@ -183,7 +183,7 @@ header .nav-login form button{
 
 }
 
-header .nav-login form button:hover{
+header .nav-login button:hover{
     background-color: #ccc
 
 }
@@ -225,12 +225,122 @@ header .nav-login .perfil {
     padding-top: 40px
 }
 
-.main-container h2 {
+.main-container .titulo-home {
     font-family: arial;
     font-size: 40px;
     color: #111;
     line-height: 50px;
     text-align: center;
+}
+
+.modal{
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.5);
+    font-size: 17px;
+    line-height: 1.6;
+
+}
+
+.modal-conte{
+    background-color: rgba(40, 38, 56, 0.8);
+    font-family: sans-serif;
+    margin: 20% auto;
+    width: 400px;
+    box-shadow: 0 5px 8px 0 rgba(0,0,0,0.2), 0 7px 20px 0 rgba(0,0,0,0.17);
+    border-radius: 10px;
+    animation-name: modalopen;
+    animation-duration: 1000ms;
+    padding: 40px;
+
+}
+
+.modal-header h2{
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    font-size: 30px;
+
+
+}
+
+.modal-header{
+    background: transparent;
+    padding: 10px;
+    color: #fff;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.modal-body{
+    padding: 10px 20px;
+}
+
+
+.inputbox {
+    position: relative;
+}
+
+.inputbox input {
+    width: 100%;
+    padding: 10px 0;
+    font-size: 16px;
+    color: #fff;
+    letter-spacing: 1px;
+    margin-bottom: 30px;
+    border: none;
+    border-bottom: 1px solid;
+    outline: none;
+    background: transparent;
+}
+
+.inputbox label{
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: #fff;
+    padding: 10px 0;
+    font-size: 16px;
+    pointer-events: none;
+    transition: 500ms;
+
+}
+
+.inputbox input:focus ~ label, .inputbox input:valid ~ label{
+    top: -18px;
+    left: 0;
+    color: #03a9f4;
+    font-size: 12px;
+}
+
+.loginBtn{
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #fff;
+    background: #03a9f4;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+
+}
+
+.closeBtn{
+    color: #fff;
+    float: right;
+    font-size: 30px;
+}
+
+.closeBtn:hover, .closeBtn:focus{
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
 }
 
 /* registro.php */
@@ -278,6 +388,11 @@ header .nav-login .perfil {
 .alerta {
     padding: 20px;
     text-align: center
+}
+
+@keyframes modalopen{
+    from{opacity:0}
+    to{opacity: 1}
 }
 
 
