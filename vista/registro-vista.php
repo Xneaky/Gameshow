@@ -3,7 +3,7 @@ include_once '../vista/header.php';
 ?>
 <section class="main-container">
     <div class="main-wrapper">
-        <h2>Registrarse</h2>
+        <h2 class="titulo-home">Registrarse</h2>
 
 
         <form class="registro-f" action="../model/registrar.php" method="post">
@@ -25,6 +25,8 @@ include_once '../vista/header.php';
 
 </section>
 
-</body>
-</html>
+<?php
+    include_once '../model/modal-login.php';
+    include_once '../vista/footer.php';
+?>
 
