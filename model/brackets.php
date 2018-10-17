@@ -1,4 +1,5 @@
 <?php
+include_once '../vista/header.php';
 
 		try {
 			require "../config/conexion.php";
