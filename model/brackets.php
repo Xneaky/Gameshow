@@ -5,66 +5,99 @@ include_once '../vista/header.php';
 			require "../config/conexion.php";
 
 			$conn = new DbConDuelos();
-			$version = 0;
-			$array_teams = array();
-			$cuartos = array();
-			$semi = array();
-			$final = array();
-			$sql = " SELECT * FROM duelos ";
 
 			$conn = $conn->conn();
 
-			$stmt1 = $conn->prepare($sql);
+			$sql2 = " SELECT * FROM torneos ";
 
-			$stmt1->execute();
+			$stmt2 = $conn->prepare($sql2);
 
-			$rows = $stmt1->fetchAll();
+			$stmt2 ->execute();
 
-			for ($i = 0; $i < 4; $i++) { //EL NUMERO 4 SERA LA CLAVE PARA QUE EL BUCLE RECORRA LA CANTIDAD INDICADA DE ENCUENTROS
-			    $team = array($rows[$i]['equipo_1'], $rows[$i]['equipo_2']);
-			    array_push($array_teams, $team);
-			}
-			for ($i = 0; $i < 4; $i++) { //EL NUMERO 4 SERA LA CLAVE PARA OCTAVOS, CUARTOS, SEMIS, ETC
-			    $team = array(intval($rows[$i]['gol_equipo_1']), intval($rows[$i]['gol_equipo_2']));
-			    array_push($cuartos, $team);
-			}
-			for ($i = 0; $i < 2; $i++) { //EL NUMERO 2 SERA LA CLAVE PARA OCTAVOS, CUARTOS, SEMIS, ETC
-			    $team = array(intval($rows[$i + 4]['gol_equipo_1']), intval($rows[$i + 4]['gol_equipo_2']));
-			    array_push($semi, $team);
-			}
-			for ($i = 0; $i < 1; $i++) { //EL NUMERO 1 SERA LA CLAVE PARA OCTAVOS, CUARTOS, SEMIS, ETC
-			    $team = array(intval($rows[$i + 6]['gol_equipo_1']), intval($rows[$i + 6]['gol_equipo_2']));
-			    array_push($final, $team);
-			}
-			$resultado = $rows;
+			$rows2 = $stmt2->fetchAll();
 		}
-
 		catch(PDOException $e) {
 			return '{"status":"fail","description":"'. $e->getMessage() .'"}';
 		}
 ?>
 
+		<script>
+            $(document).ready(function(){
+	            $('#myDropDown').change(function(){
+            		$(".block").addClass("loading");
+	                //Selected value
+	                var inputValue = $(this).val();
+
+	                //Ajax for calling php function
+	                $.post('obtener-teams.php', { dropdownValue: inputValue }, function(data) {
+						var teamsArr = [];
+						var itemsArr = [];
+	                	if (data) {
+							var datos = JSON.parse(data);
+							var contador = 1;
+							datos.forEach(function(item) {
+								itemsArr.push(item.nombre)
+								if (contador == 2) {
+									teamsArr.push(itemsArr);
+									itemsArr = [];
+									contador = 1;
+								} else {
+									contador++;
+								}
+								if (datos.length - 1 == datos.indexOf(item)) {
+									var singleElimination = {
+										"teams": teamsArr,
+										"results": [
+											[
+												
+											]
+										]
+									}
+									$('.demo').bracket({
+										init: singleElimination,
+										teamWidth: 100,
+										scoreWidth: 30
+									});
+									$(".block").removeClass("loading");
+									//console.log(JSON.stringify(teamsArr));
+								}
+							});
+	                	} else {
+	                		var singleElimination = {
+								"teams": teamsArr,
+								"results": [
+									[
+										
+									]
+								]
+							}
+							$('.demo').bracket({
+								init: singleElimination,
+								teamWidth: 100,
+								scoreWidth: 30
+							});
+							$(".block").removeClass("loading");
+	                	}
+	                });
+	            });
+	        });
+        </script>
+		<div class="block"></div>
+		<div class="row">
+			<label>Torneos Activos</label>
+
+			<select class="form-control" id="myDropDown">
+				<?php
+					if (count($rows2) > 0) {
+					foreach ($rows2 as $data) {
+						echo "<option value='0'>Seleccionar</option>";
+						echo "<option value='" . $data['codTorneo'] . "'>" . $data['Nombre'] . "</option>";
+					}
+				} else { ?>
+				<option value="0">No hay registros</option>
+				<?php } ?>
+			</select>
+		</div>
+
 		<div class="demo">
 		</div>
-		<script type="text/javascript">
-			var equiposCompletos = <?php echo json_encode($array_teams); ?>;
-			var cuartos = <?php echo json_encode($cuartos); ?>;
-			var semifinales = <?php echo json_encode($semi); ?>;
-			var final = <?php echo json_encode($final); ?>;
-			var doubleElimination = {
-				"teams": equiposCompletos,
-				"results": [
-					[
-						cuartos,
-						semifinales,
-						final
-					]
-				]
-			}
-
-			$('.demo').bracket({
-				init: doubleElimination,
-				teamWidth: 100,
-				scoreWidth: 30
-			});
-		</script>
