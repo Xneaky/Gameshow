@@ -1,0 +1,27 @@
+<div class="modal-header">
+  <h1>Nuevo Usuario</h1>
+</div>'
+<div class="modal-body">
+        <div class="form-group">
+            <label>Seleccione el ról</label>
+            <select class="form-control" name="rol" ng-model="newUsuario.id_rol" ng-options="rol.id_rol as rol.nombre_rol for rol in roles | orderBy:'nombre_rol'">
+                <option value="">seleccione</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Nombres</label>
+            <input type="text" placeholder="Ingrese nombre" name="nombre_usuario" class="form-control" ng-model="newUsuario.nombre_usuario">
+        </div>
+        <div class="form-group">
+            <label>Apellidos</label>
+            <input type="text" placeholder="Ingrese apellido" name="apellido_usuario" class="form-control" ng-model="newUsuario.apellido_usuario">
+        </div>
+        <div class="form-group">
+            <label>Email</label>
+            <input type="text" placeholder="Ingrese el Email" name="email" class="form-control" ng-model="newUsuario.email">
+        </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-outline btn-default" ng-click="cerrarModal()">Cancelar</button>
+    <button type="button" class="btn btn-primary" ng-click="guardar(newUsuario)"> Guardar</button>
+</div>

@@ -1,0 +1,27 @@
+<div class="modal-header">
+  <h1>Editar Usuario</h1>
+</div>'
+<div class="modal-body">
+    <div class="form-group">
+        <label>Seleccione el ról</label>
+        <select class="form-control" name="rol" ng-model="editarUsuario.id_rol" ng-options="rol.id_rol as rol.nombre_rol for rol in roles | orderBy:'nombre_rol'">
+            <option value="">seleccione</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label>Nombres</label>
+        <input type="text" placeholder="Ingrese el nombre" name="nombre" class="form-control" ng-model="editarUsuario.nombre_usuario">
+    </div>
+    <div class="form-group">
+        <label>Apellidos</label>
+        <input type="text" placeholder="Ingrese el nombre" name="apellido" class="form-control" ng-model="editarUsuario.apellido_usuario">
+    </div>
+    <div class="form-group">
+        <label>Email</label>
+        <input type="text" placeholder="Ingrese el Email" name="email" class="form-control" ng-model="editarUsuario.email">
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-outline btn-default" ng-click="cerrarModal()">Cancelar</button>
+    <button type="button" class="btn btn-primary" ng-click="modificar(editarUsuario)">Guardar</button>
+</div>

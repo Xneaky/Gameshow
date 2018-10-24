@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html ng-app="myApp" ng-app lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Gameshow</title>
+
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../font-awesome/css/font-awesome.css" rel="stylesheet">
+
+    <link href="../../css/animate.css" rel="stylesheet">
+    <link href="../../css/style.css" rel="stylesheet">
+
+    <!-- Sweetalert CSS-->
+    <link rel="stylesheet" href="../../css/sweetalert.css">
+
+</head>
+
+<body>
+
+    <div id="wrapper" ng-controller="usuarioCtrl">
+
+        <nav class="navbar-default navbar-static-side" role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav" id="side-menu">
+                    <li class="nav-header">
+                        <div class="dropdown profile-element">
+                            <span>
+                                <img alt="image" class="img-circle" src="../../img/profile_small.jpg" />
+                            </span>
+                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                                <span class="clear"><span class="block m-t-xs">
+                                <strong class="font-bold">David López</strong>
+                                </span> <span class="text-muted text-xs block">Director <b class="caret"></b></span></span>
+                            </a>
+                        </div>
+                        <div class="logo-element">
+                            GS
+                        </div>
+                    </li>
+                    <!-- Menú -->
+                    <li>
+                        <a href="../jugadores/jugadores.html"><i class="fa fa-users"></i><span class="nav-label">Jugadores</span></a>   
+                        <a href="../modulos/modulos.html"><i class="fa fa-eye"></i> <span class="nav-label">Modulos</span> </a>
+                        <a href="../roles/roles.html"><i class="fa fa-chain"></i><span class="nav-label">Roles</span></a>
+                        <a href="usuarios.html"><i class="fa fa-key"></i><span class="nav-label">Usuarios</span></a>
+                    </li>
+                    <!-- END Menú -->
+                </ul>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="gray-bg">
+            <div class="row border-bottom">
+                <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+                    <div class="navbar-header">
+                        <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+                    </div>
+                    <ul class="nav navbar-top-links navbar-right">
+                        <li>
+                            <span class="m-r-sm text-muted welcome-message">Gameshow.</span>
+                        </li>
+                        <li>
+                            <a href="../../index.html">
+                                <i class="fa fa-sign-out"></i> Cerrar Sesión
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="row wrapper border-bottom white-bg page-heading">
+                <div class="col-lg-10">
+                    <h2>Usuarios</h2>
+                    <ol class="breadcrumb">
+                        <li>
+                            <a href="index.html">Inicio</a>
+                        </li>
+                        <li>
+                            <a>Usuarios</a>
+                        </li>
+                    </ol>
+                </div>
+                <div class="col-lg-2">
+
+                </div>
+            </div>
+            <div class="wrapper wrapper-content animated fadeInRight">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>Listado de usuarios</h5>
+                                <div class="ibox-tools">
+                                    <a href="" class="btn btn-primary btn-xs" ng-click="nuevoUsuario()">Nuevo usuario</a>
+                                </div>
+                            </div>
+                            <div class="ibox-content">
+                                <div class="row m-b-sm m-t-sm">
+                                    <div class="col-lg-12">
+                                        <div class="input-group"><input type="text" placeholder="Buscar" class="input-sm form-control" ng-model="query"> <span class="input-group-btn">
+                                            <button type="button" class="btn btn-sm btn-primary">Buscar</button> </span>
+                                        </div>
+                                     </div>
+                                </div>
+
+                                <div class="project-list">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Ról</th>
+                                                <th>Nombres</th>
+                                                <th>Apellidos</th>
+                                                <th>Email</th>
+                                                <th>Estado</th>
+                                                <th>Acciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="usuario in usuarios| filter: query">
+                                                <td class="project-title">{{usuario.nombre_rol}}</span></td>
+                                                <td class="project-title"><span class="pie">{{usuario.nombre_usuario}}</span></td>
+                                                <td class="project-title">{{usuario.apellido_usuario}}</td>
+                                                <td class="project-title">{{usuario.email}}</td>
+                                                <td class="project-title"><span class="label {{cssEstado(usuario.activo)}}">{{etiquetaEstado(usuario.activo)}}</span></td>
+                                                <td class="text-navy">
+                                                    <button type="button" class="btn btn-xs btn-default" ng-click="seleccionarUsuario(usuario)">Editar</button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer">
+
+                    <div>
+                        <strong>Gameshow</strong> Company &copy; 2018
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Mainly scripts -->
+        <script src="../../js/jquery-2.1.1.js"></script>
+        <script src="../../js/bootstrap.min.js"></script>
+        <script src="../../js/plugins/metisMenu/jquery.metisMenu.js"></script>
+        <script src="../../js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+        <!-- Custom and plugin javascript -->
+        <script src="../../js/inspinia.js"></script>
+        <script src="../../js/plugins/pace/pace.min.js"></script>
+
+        <!-- Scripts de AngularJS-->
+        <script src="../../js/angular.js"></script>
+        <script src="../../js/angular-animate.js"></script>
+        <script src="../../js/angular-route.min.js"></script>
+        <script src="../../js/angular-sanitize.js"></script>
+        <script src="../../js/ui-bootstrap-tpls-2.1.4.js"></script>
+        <!--<script src="app/menuDirective.js"></script>-->
+        <script src="../../app/appUsuario.js"></script>
+
+        <!-- Page-Level Scripts -->
+        <!-- Sweetalert JS-->
+        <script src="../../js/sweetalert-dev.js"></script>
+
+    </body>
+
+    </html>
