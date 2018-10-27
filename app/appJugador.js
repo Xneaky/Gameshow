@@ -16,7 +16,6 @@ app.controller('jugadorCtrl', function ($scope, $uibModal, $http) {
     };
 
     $scope.seleccionarJugador = function(jugador) {
-        console.log("jugador : " + JSON.stringify(jugador));
         $scope.editarJugador = angular.copy(jugador);
         $scope.modaleditarJugador = $uibModal.open({
             backdrop: 'static',
