@@ -19,8 +19,8 @@
 		$result = $objMmto->crud($consulta);
 		
 		$arr = array();
-		if(mysql_num_rows($result) > 0) {
-			while($row = mysql_fetch_assoc($result)) {
+		if(mysqli_num_rows($result) > 0) {
+			while($row = mysqli_fetch_assoc($result)) {
 				$arr[] = $row;	
 			}
 		}

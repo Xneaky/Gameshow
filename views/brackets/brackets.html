@@ -23,7 +23,7 @@
 <body>
 
     <div id="wrapper" ng-controller="bracketCtrl">
-
+        <div class="block"></div>
         <nav class="navbar-default navbar-static-side" role="navigation">
             <div class="sidebar-collapse">
                 <ul class="nav" id="side-menu">
@@ -97,13 +97,13 @@
                                 <h5>Brackets de los torneos</h5>
                             </div>
                             <div class="ibox-content">
-                                <div class="bracket">
+                                <div class="playoff">
                                 </div>
 
                                 <div class="project-list">
                                     <label>Seleccione el torneo</label>
                                     <select class="form-control" name="torneos" ng-model="newTorneo.codigoTorneo" ng-options="torneo.codTorneo as torneo.Nombre for torneo in torneos | orderBy:'Nombre'" ng-change="getTorneo(newTorneo)">
-                                        <option value="">seleccione</option>
+                                        <option value="">Seleccionar</option>
                                     </select>
                                 </div>
                                 

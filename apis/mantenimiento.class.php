@@ -9,9 +9,7 @@
 	 	}
 
 		function crud($sql) {
-			if($this->con->conectar()==true){
-				return mysql_query($sql);
-			}
+			return mysqli_query($this->con->conectar(), $sql);
 		}
 	}
 ?>

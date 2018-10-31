@@ -3,8 +3,6 @@ var app = angular.module('myApp', ['ngRoute', 'ngAnimate', 'ngSanitize', 'ui.boo
 
 app.controller('bracketCtrl', function ($scope, $uibModal, $http) {
     $scope.torneos = [];
-    //$scope.modulos = [];
-
 
     $scope.listarTorneos = function() {
         $scope.torneos = [];
@@ -24,95 +22,156 @@ app.controller('bracketCtrl', function ($scope, $uibModal, $http) {
 
     $scope.listarTorneos();
 
-
-    $scope.cssEstado = function(activo) {
-        var css = 'label-danger';
-        if (activo) 
-            css = 'label-info';
-        return css;
-    };
-
-    $scope.etiquetaEstado = function(activo) {
-        var etiqueta = 'Inactivo';
-        if (activo) 
-            etiqueta = 'Activo'
-        return etiqueta;
-    };
-
     $scope.getTorneo = function(torneo) {
-        var teamsArr = [];
-        var itemsArr = [];
-        var consulta = {
-            query:"SELECT t1.nombre FROM team AS t1 INNER JOIN participantes AS t2 ON t1.codTeam = t2.team_codTeams WHERE t2.torneos_codTorneo = " + parseInt(torneo.codigoTorneo) + "",
-            method: "GET"
-        }
-
-        $http.post('../../apis/porcesaAPI.php', {
-            data: {params:  consulta}
-        }).success(function(data){
-            $scope.brackets = data;
-            if (data) {
-                var contador = 1;
-                data.forEach(function(item) {
-                    itemsArr.push(item.nombre)
-                    if (contador == 2) {
-                        teamsArr.push(itemsArr);
-                        itemsArr = [];
-                        contador = 1;
-                    } else {
-                        contador++;
-                    }
-                    if (data.length - 1 == data.indexOf(item)) {
-                        var singleElimination = {
-                            "teams": teamsArr,
-                            "results": [
-                                [
-                                    
-                                ]
-                            ]
-                        }
-                        $('.bracket').bracket({
-                            init: singleElimination,
-                            teamWidth: 100,
-                            scoreWidth: 30
-                        });
-                        $(".block").removeClass("loading");
-                    }
-                });
-            } else {
-                var singleElimination = {
-                    "teams": teamsArr,
-                    "results": [
-                        [
-                            
-                        ]
-                    ]
-                }
-                $('.bracket').bracket({
-                    init: singleElimination,
-                    teamWidth: 100,
-                    scoreWidth: 30
-                });
-                $(".block").removeClass("loading");
+        $(".block").addClass("loading");
+        if (torneo.codigoTorneo != null) {
+            var teamsArr = [];
+            var itemsArr = [];
+            var consulta = {
+                query:"SELECT t1.nombre FROM team AS t1 INNER JOIN participantes AS t2 ON t1.codTeam = t2.team_codTeams WHERE t2.torneos_codTorneo = " + parseInt(torneo.codigoTorneo) + "",
+                method: "GET"
             }
-        }).error(function(){
-            alert('Error al intentar enviar el query.');
-        });
-    }
-    $(document).ready(function(){
-                $('#myDropDown').change(function(){
-                    $(".block").addClass("loading");
-                    //Selected value
-                    var inputValue = $(this).val();
 
-                    //Ajax for calling php function
-                    $.post('obtener-teams.php', { dropdownValue: inputValue }, function(data) {
-                        var teamsArr = [];
-                        var itemsArr = [];
-
+            $http.post('../../apis/porcesaAPI.php', {
+                data: {params:  consulta}
+            }).success(function(data) {
+                if (data.length == 4 || data.length == 8 || data.length == 16 || data.length == 32 || data.length == 64) {
+                    data.forEach(function(item) {
+                        itemsArr.push(item.nombre);
+                        if (itemsArr.length == 2) {
+                            teamsArr.push(itemsArr);
+                            itemsArr = [];
+                        }
+                        if (data.length - 1 == data.indexOf(item)) {
+                            var singleEliminations = {
+                                "teams": teamsArr,
+                                "results": [
+                                    [
+                                        
+                                    ]
+                                ]
+                            }
+                            $('.playoff').bracket({
+                                init: singleEliminations,
+                                skipConsolationRound: true,
+                                teamWidth: 100,
+                                scoreWidth: 30,
+                                determineWinner: function(match) {
+                                    switch(match.data) { 
+                                        case 1: [match.a, match.b]; // first team is the winner
+                                        case 2: return [match.b, match.a]; // second team is the winner
+                                        default : return []; // no winner yet
+                                    }
+                                }
+                            });
+                            $(".block").removeClass("loading");
+                        }
                     });
-                });
+                } else {
+                    var i = data.length;
+                    data.forEach(function(item) {
+                        itemsArr.push(item.nombre);
+                        if (itemsArr.length == 2) {
+                            teamsArr.push(itemsArr);
+                            itemsArr = [];
+                        }
+                        if (data.length - 1 == data.indexOf(item)) {
+                            if (data.length > 4) {
+                                if (data.length > 8) {
+                                    if (data.length > 16) {
+                                        if (data.length > 32) {
+                                            if (data.length > 64) {
+                                                //No se ejecuta nada
+                                            } else {
+                                                while (i < 65) {
+                                                    if(itemsArr.length == 1) {
+                                                        itemsArr.push(null);
+                                                        teamsArr.push(itemsArr);
+                                                        itemsArr = [];
+                                                        i++;
+                                                    } else {
+                                                        itemsArr.push(null);
+                                                        i++;
+                                                    }
+                                                }
+                                            }
+                                        } else {
+                                            while (i < 33) {
+                                                if(itemsArr.length == 1) {
+                                                    itemsArr.push(null);
+                                                    teamsArr.push(itemsArr);
+                                                    itemsArr = [];
+                                                    i++;
+                                                } else {
+                                                    itemsArr.push(null);
+                                                    i++;
+                                                }
+                                            }
+                                        }
+                                    } else {
+                                        while (i < 17) {
+                                            if(itemsArr.length == 1) {
+                                                itemsArr.push(null);
+                                                teamsArr.push(itemsArr);
+                                                itemsArr = [];
+                                                i++;
+                                            } else {
+                                                itemsArr.push(null);
+                                                i++;
+                                            }
+                                        }
+                                    }
+                                } else {
+                                    while (i < 9) {
+                                        if(itemsArr.length == 1) {
+                                            itemsArr.push(null);
+                                            teamsArr.push(itemsArr);
+                                            itemsArr = [];
+                                            i++;
+                                        } else {
+                                            itemsArr.push(null);
+                                            i++;
+                                        }
+                                    }
+                                }
+                            } else {
+                                while (i < 5) {
+                                    if(itemsArr.length == 1) {
+                                        itemsArr.push(null);
+                                        teamsArr.push(itemsArr);
+                                        itemsArr = [];
+                                        i++;
+                                    } else {
+                                        itemsArr.push(null);
+                                        i++;
+                                    }
+                                }
+                            }
+                            var singleEliminations = {
+                                "teams": teamsArr,
+                                "results": [
+                                    [
+                                        
+                                    ]
+                                ]
+                            }
+                            $('.playoff').bracket({
+                                init: singleEliminations,
+                                teamWidth: 100,
+                                scoreWidth: 30
+                            });
+                            $(".block").removeClass("loading");
+                        }
+                    });
+                }
+            }).error(function(){
+                alert('Error al intentar enviar el query.');
             });
+        } else {
+            $(".playoff").empty();
+            $(".block").removeClass("loading");
+        }
+    }
 });
 
 
