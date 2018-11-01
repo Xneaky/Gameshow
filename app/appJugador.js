@@ -4,14 +4,14 @@ var app = angular.module('myApp', ['ngRoute', 'ngAnimate', 'ngSanitize', 'ui.boo
 app.controller('jugadorCtrl', function ($scope, $uibModal, $http) {
     $scope.jugadores = [];
 
-    $scope.nuevoJugador = function(size) {
+    $scope.nuevoJugador = function() {
+        console.log('entrando');
         $scope.modalInstance = $uibModal.open({
             backdrop: 'static',
             scope: $scope,
             keyboard: false,
             templateUrl: 'modalNuevoJugador.html',
-            controller: 'crearJugadorCtrl',
-            size: size
+            controller: 'crearJugadorCtrl'
         });
     };
 
@@ -46,14 +46,14 @@ app.controller('jugadorCtrl', function ($scope, $uibModal, $http) {
 
     $scope.cssEstado = function(activo) {
         var css = 'label-danger';
-        if (activo) 
+        if (activo == 1)
             css = 'label-info';
         return css;
     };
 
     $scope.etiquetaEstado = function(activo) {
         var etiqueta = 'Inactivo';
-        if (activo) 
+        if (activo == 1)
             etiqueta = 'Activo'
         return etiqueta;
     };
@@ -80,13 +80,13 @@ app.controller('crearJugadorCtrl', function ($scope, $http, $uibModal, $uibModal
 
     $scope.guardar = function(newJugador) {
 
-        var stringQuery = "INSERT INTO jugadores (nombre_jugador, apellido_jugador, nickname_jugador, email, pwd_jugador, fecha_nacimiento, activo) VALUES (" +
+        var stringQuery = "INSERT INTO jugadores (nombre_jugador, apellido_jugador, nickname_jugador, email, pwd_jugador, fecha_nacimiento, activo, team_codTeam) VALUES (" +
         "'" + newJugador.nombre_jugador + "'," +
         "'" + newJugador.apellido_jugador + "'," +
         "'" + newJugador.nickname_jugador + "'," +
         "'" + newJugador.email + "'," +
         "'" + newJugador.email + "'," +
-        "'" + new Date(newJugador.fecha_nacimiento) + "', true)";
+        "'" + new Date(newJugador.fecha_nacimiento) + "', true, 0)";
 
         console.log("stringQuery : " + JSON.stringify(stringQuery));
 
@@ -138,7 +138,7 @@ app.controller('editarJugadorCtrl', function ($scope, $http, $uibModal, $uibModa
         "email = '" + editarJugador.email + "', " +
         "fecha_nacimiento = '" + editarJugador.fecha_nacimiento + "', " +
         "activo = '" + editarJugador.activo + "' " +
-        "where id_jugador = '" + editarJugador.id_jugador + "'";
+        "where codJugadores = " + editarJugador.codJugadores + "";
         var consulta = {
             query: stringQuery,
             method: "POST"
@@ -149,7 +149,7 @@ app.controller('editarJugadorCtrl', function ($scope, $http, $uibModal, $uibModa
             console.log('stringQuery:' + JSON.stringify(stringQuery));
             if (response == "1") {
                 $scope.listarJugadores();
-                administrarMensajeSweet({titulo:'Ról actualizado', tipo:'success', texto: ''});
+                administrarMensajeSweet({titulo:'Jugador actualizado', tipo:'success', texto: ''});
             } else {
                 administrarMensajeSweet({titulo:'Error al actualizar', tipo:'error', texto: ''});
             }
