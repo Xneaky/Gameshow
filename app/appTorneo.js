@@ -4,25 +4,24 @@ var app = angular.module('myApp', ['ngRoute', 'ngAnimate', 'ngSanitize', 'ui.boo
 app.controller('torneoCtrl', function ($scope, $uibModal, $http) {
     $scope.jugadores = [];
 
-    $scope.nuevoJugador = function(size) {
+    $scope.nuevoTorneo = function() {
+        console.log('entrando');
         $scope.modalInstance = $uibModal.open({
             backdrop: 'static',
             scope: $scope,
             keyboard: false,
             templateUrl: 'modalNuevoTorneo.html',
-            controller: 'crearTorneoCtrl',
-            size: size
+            controller: 'crearTorneoCtrl'
         });
     };
 
-    $scope.seleccionarJugador = function(torneo) {
-        console.log("torneo : " + JSON.stringify(torneo));
+    $scope.seleccionarTorneo = function(torneo) {
         $scope.editarTorneo = angular.copy(torneo);
         $scope.modaleditarTorneo = $uibModal.open({
             backdrop: 'static',
             scope: $scope,
             keyboard: false,
-            templateUrl: 'modalEditarJugador.html',
+            templateUrl: 'modalEditarTorneo.html',
             controller: 'editarTorneoCtrl'
         });
     };
@@ -47,14 +46,14 @@ app.controller('torneoCtrl', function ($scope, $uibModal, $http) {
 
     $scope.cssEstado = function(activo) {
         var css = 'label-danger';
-        if (activo) 
+        if (activo == 1) 
             css = 'label-info';
         return css;
     };
 
     $scope.etiquetaEstado = function(activo) {
         var etiqueta = 'Inactivo';
-        if (activo) 
+        if (activo == 1) 
             etiqueta = 'Activo'
         return etiqueta;
     };
@@ -62,9 +61,12 @@ app.controller('torneoCtrl', function ($scope, $uibModal, $http) {
     console.log("torneos");
 });
 
-app.controller('crearJugadorCtrl', function ($scope, $http, $uibModal, $uibModalInstance, $window) {
-    $scope.newJugador = {};
-
+app.controller('crearTorneoCtrl', function ($scope, $http, $uibModal, $uibModalInstance, $window) {
+    $scope.newTorneo = {};
+    $scope.numeroParticipantes = [];
+    for (var i = 1; i < 65; i++) { 
+        $scope.numeroParticipantes.push(i);
+    }
     var administrarMensajeSweet = function(conf) {
         $window.swal({
             title: conf.titulo,
@@ -79,34 +81,32 @@ app.controller('crearJugadorCtrl', function ($scope, $http, $uibModal, $uibModal
         });
     };
 
-    $scope.guardar = function(newJugador) {
+    $scope.guardar = function(newTorneo) {
 
-        var stringQuery = "INSERT INTO jugadores (nombre_jugador, apellido_jugador, nickname_jugador, email, pwd_jugador, fecha_nacimiento, activo) VALUES (" +
-        "'" + newJugador.nombre_jugador + "'," +
-        "'" + newJugador.apellido_jugador + "'," +
-        "'" + newJugador.nickname_jugador + "'," +
-        "'" + newJugador.email + "'," +
-        "'" + newJugador.email + "'," +
-        "'" + new Date(newJugador.fecha_nacimiento) + "', true)";
+        var stringQuery = "INSERT INTO torneos (Nombre, activo, tipo_torneo, num_participantes) VALUES (" +
+        "'" + newTorneo.Nombre + "'," +
+        "true," +
+        "'" + newTorneo.tipo_torneo + "'," +
+        "" + newTorneo.num_participantes + ")";
 
         console.log("stringQuery : " + JSON.stringify(stringQuery));
 
-        var consulta = {
-            query: stringQuery,
-            method: "POST"
-        }
-        $http.post('../../apis/porcesaAPI.php', {
-            data: {params:  consulta}
-        }).success(function(response){
-            if (response == "1") {
-                $scope.listarJugadores();
-                administrarMensajeSweet({titulo:'Jugador ingresado', tipo:'success', texto: ''});
-            } else {
-                administrarMensajeSweet({titulo:'Error al ingresar', tipo:'error', texto: ''});
-            }
-        }).error(function(){
-            administrarMensajeSweet({titulo:'Error al enviar params', tipo:'error', texto: ''});
-        });
+       var consulta = {
+           query: stringQuery,
+           method: "POST"
+       }
+       $http.post('../../apis/porcesaAPI.php', {
+           data: {params:  consulta}
+       }).success(function(response){
+           if (response == "1") {
+               $scope.listarTorneos();
+               administrarMensajeSweet({titulo:'Torneo ingresado', tipo:'success', texto: ''});
+           } else {
+               administrarMensajeSweet({titulo:'Error al ingresar', tipo:'error', texto: ''});
+           }
+       }).error(function(){
+           administrarMensajeSweet({titulo:'Error al enviar params', tipo:'error', texto: ''});
+       });
     };
 
 
@@ -115,7 +115,7 @@ app.controller('crearJugadorCtrl', function ($scope, $http, $uibModal, $uibModal
     };
 });
 
-app.controller('editarJugadorCtrl', function ($scope, $http, $uibModal, $uibModalInstance, $window) {
+app.controller('editarTorneoCtrl', function ($scope, $http, $uibModal, $uibModalInstance, $window) {
 
     var administrarMensajeSweet = function(conf) {
         $window.swal({
@@ -131,15 +131,13 @@ app.controller('editarJugadorCtrl', function ($scope, $http, $uibModal, $uibModa
         });
     };
 
-    $scope.modificar = function(editarJugador) {
-        var stringQuery = "UPDATE jugadores set  " + 
-        "nombre_jugador = '" + editarJugador.nombre_jugador + "', " +
-        "apellido_jugador = '" + editarJugador.apellido_jugador + "', " +
-        "nickname_jugador = '" + editarJugador.nickname_jugador + "', " +
-        "email = '" + editarJugador.email + "', " +
-        "fecha_nacimiento = '" + editarJugador.fecha_nacimiento + "', " +
-        "activo = '" + editarJugador.activo + "' " +
-        "where id_jugador = '" + editarJugador.id_jugador + "'";
+    $scope.modificar = function(editarTorneo) {
+        var stringQuery = "UPDATE torneos set  " + 
+        "Nombre = '" + editarTorneo.Nombre + "', " +
+        "tipo_torneo = '" + editarTorneo.tipo_torneo + "', " +
+        "num_participantes = '" + editarTorneo.num_participantes + "', " +
+        "activo = '" + editarTorneo.activo + "' " +
+        "where codTorneo = " + editarTorneo.codTorneo + "";
         var consulta = {
             query: stringQuery,
             method: "POST"
@@ -149,8 +147,8 @@ app.controller('editarJugadorCtrl', function ($scope, $http, $uibModal, $uibModa
         }).success(function(response){
             console.log('stringQuery:' + JSON.stringify(stringQuery));
             if (response == "1") {
-                $scope.listarJugadores();
-                administrarMensajeSweet({titulo:'Ról actualizado', tipo:'success', texto: ''});
+                $scope.listarTorneos();
+                administrarMensajeSweet({titulo:'Torneo actualizado', tipo:'success', texto: ''});
             } else {
                 administrarMensajeSweet({titulo:'Error al actualizar', tipo:'error', texto: ''});
             }

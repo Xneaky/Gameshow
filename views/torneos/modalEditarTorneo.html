@@ -1,0 +1,32 @@
+<div class="modal-header">
+  <h1>Editar Torneo</h1>
+</div>'
+<div class="modal-body">
+    <div class="form-group">
+        <label>Nombre del torneo</label>
+        <input type="text" placeholder="Ingrese el nombre del torneo" name="nombre_torneo" class="form-control" ng-model="editarTorneo.Nombre">
+    </div>
+    <div class="form-group">
+        <label>Tipo de torneo</label>
+        <select class="form-control" name="tipo_torneo" ng-model="editarTorneo.tipo_torneo">
+            <option value="">Seleccionar</option>
+            <option value="Equipos">Equipos</option>
+            <option value="Solitario">Solitario</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label>Numero de participantes</label>
+        <input type="text" placeholder="Ingrese el numero de participantes" name="numero_participantes" class="form-control" ng-model="editarTorneo.num_participantes">
+    </div>
+    <div class="form-group">
+        <label>Tipo de torneo</label>
+        <select class="form-control" name="tipo_torneo" ng-model="editarTorneo.activo">
+            <option value="1">Activo</option>
+            <option value="0">Inactivo</option>
+        </select>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-outline btn-default" ng-click="cerrarModal()">Cancelar</button>
+    <button type="button" class="btn btn-primary" ng-click="modificar(editarTorneo)"> Guardar</button>
+</div>

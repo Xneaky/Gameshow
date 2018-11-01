@@ -112,15 +112,17 @@
                                         <thead>
                                             <tr>
                                                 <th>Nombre</th>
-                                                <th>Fecha Creación</th>
-                                                <th>Estado</th>
+                                                <th>Tipo de torneo</th>
+                                                <th>Numero de participantes</th>
+                                                <th>Activo</th>
                                                 <th>Acciones</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr ng-repeat="torneo in torneos| filter: query">
-                                                <td class="project-title"><span class="pie">{{torneo.nombre_torneo}}</span></td>
-                                                <td class="project-title">{{torneo.fecha_creacion}}</td>
+                                                <td class="project-title"><span class="pie">{{torneo.Nombre}}</span></td>
+                                                <td class="project-title">{{torneo.tipo_torneo}}</td>
+                                                <td class="project-title">{{torneo.num_participantes}}</td>
                                                 <td class="project-title"><span class="label {{cssEstado(torneo.activo)}}">{{etiquetaEstado(torneo.activo)}}</span></td>
                                                 <td class="text-navy">
                                                     <button type="button" class="btn btn-xs btn-default" ng-click="seleccionarTorneo(torneo)">Editar</button>
@@ -142,7 +144,7 @@
                 </div>
 
             </div>
-        </div>
+    </div>
 
         <!-- Mainly scripts -->
         <script src="../../js/jquery-2.1.1.js"></script>
