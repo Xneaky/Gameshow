@@ -2,10 +2,8 @@
 var app = angular.module('myApp', ['ngRoute', 'ngAnimate', 'ngSanitize', 'ui.bootstrap']);
 
 app.controller('torneoCtrl', function ($scope, $uibModal, $http) {
-    $scope.jugadores = [];
 
     $scope.nuevoTorneo = function() {
-        console.log('entrando');
         $scope.modalInstance = $uibModal.open({
             backdrop: 'static',
             scope: $scope,
@@ -57,8 +55,6 @@ app.controller('torneoCtrl', function ($scope, $uibModal, $http) {
             etiqueta = 'Activo'
         return etiqueta;
     };
-
-    console.log("torneos");
 });
 
 app.controller('crearTorneoCtrl', function ($scope, $http, $uibModal, $uibModalInstance, $window) {
