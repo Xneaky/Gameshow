@@ -104,7 +104,7 @@
 
                                 <div class="project-list">
                                     <label>Seleccione el torneo</label>
-                                    <select class="form-control" name="torneos" ng-model="newTorneo.codigoTorneo" ng-options="torneo.codTorneo as torneo.Nombre for torneo in torneos | orderBy:'Nombre'" ng-change="getTorneo(newTorneo)">
+                                    <select class="form-control" name="torneos" ng-model="newTorneo" ng-options="torneo as torneo.Nombre for torneo in torneos | orderBy:'Nombre'" ng-change="getTorneo(newTorneo)">
                                         <option value="">Seleccionar</option>
                                     </select>
                                 </div>
