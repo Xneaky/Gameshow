@@ -23,8 +23,7 @@ app.controller('usuarioCtrl', function ($scope, $uibModal, $http) {
             scope: $scope,
             keyboard: false,
             templateUrl: 'modalEditarUsuario.html',
-            controller: 'editarUsuarioCtrl',
-            //size: size
+            controller: 'editarUsuarioCtrl'
         });
     };
 
@@ -68,14 +67,14 @@ app.controller('usuarioCtrl', function ($scope, $uibModal, $http) {
 
     $scope.cssEstado = function(activo) {
         var css = 'label-danger';
-        if (activo)
+        if (activo == 1)
             css = 'label-info';
         return css;
     };
 
     $scope.etiquetaEstado = function(activo) {
         var etiqueta = 'Inactivo';
-        if (activo) 
+        if (activo == 1)
             etiqueta = 'Activo'
         return etiqueta;
     };
@@ -150,11 +149,12 @@ app.controller('editarUsuarioCtrl', function ($scope, $http, $uibModal, $uibModa
 
     $scope.modificar = function(editarUsuario) {
         var stringQuery = "UPDATE usuarios set  " +
-        "id_rol = '" + editarUsuario.id_rol + "', " +
-        "nombre_usuario = '" + editarUsuario.nombre_usuario + "', " +
-        "apellido_usuario = '" + editarUsuario.apellido_usuario + "', " +
-        "activo = '" + editarUsuario.activo + "' " +
-        "where id_usuario = '" + editarUsuario.id_usuario + "'";
+        "idrol = '" + editarUsuario.id_rol + "', " +
+        "nombre = '" + editarUsuario.nombre_usuario + "', " +
+        "apellido = '" + editarUsuario.apellido_usuario + "', " +
+        "email = '" + editarUsuario.email + "', " +
+        "username = '" + editarUsuario.usuario + "' " +
+        "where id_usuarios = '" + editarUsuario.id_usuarios + "'";
 
         var consulta = {
             query: stringQuery,
@@ -164,6 +164,7 @@ app.controller('editarUsuarioCtrl', function ($scope, $http, $uibModal, $uibModa
         $http.post('../../apis/porcesaAPI.php', {
             data: {params:  consulta}
         }).success(function(response){
+            console.log('stringQuery:' + JSON.stringify(stringQuery));
             if (response == "1") {
                 $scope.listarUsuarios();
                 administrarMensajeSweet({titulo:'Usuario actualizado', tipo:'success', texto: ''});

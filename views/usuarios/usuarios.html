@@ -115,16 +115,18 @@
                                                 <th>Ról</th>
                                                 <th>Nombres</th>
                                                 <th>Apellidos</th>
+                                                <th>Usuario</th>
                                                 <th>Email</th>
                                                 <th>Estado</th>
                                                 <th>Acciones</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr ng-repeat="usuario in usuarios | filter: query track by $index">
-                                                <td class="project-title">{{usuario.nombre_rol}}</span></td>
+                                            <tr ng-repeat="usuario in usuarios | filter: query track by $index" >
+                                                <td class="project-title"><span>{{usuario.idrol}}</span></td>
                                                 <td class="project-title"><span class="pie">{{usuario.nombre}}</span></td>
                                                 <td class="project-title">{{usuario.apellido}}</td>
+                                                <td class="project-title">{{usuario.username}}</td>
                                                 <td class="project-title">{{usuario.email}}</td>
                                                 <td class="project-title"><span class="label {{cssEstado(usuario.activo)}}">{{etiquetaEstado(usuario.activo)}}</span></td>
                                                 <td class="text-navy">
