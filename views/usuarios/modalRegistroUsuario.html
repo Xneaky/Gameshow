@@ -1,0 +1,29 @@
+<div class="modal-header">
+    <h1>Registrarse!</h1>
+</div>'
+<div class="modal-body">
+    <div class="form-group">
+        <label>Nombres</label>
+        <input type="text" placeholder="Ingrese nombre" name="nombre_usuario" class="form-control" ng-model="newUsuario.nombre_usuario">
+    </div>
+    <div class="form-group">
+        <label>Apellidos</label>
+        <input type="text" placeholder="Ingrese apellido" name="apellido_usuario" class="form-control" ng-model="newUsuario.apellido_usuario">
+    </div>
+    <div class="form-group">
+        <label>Email</label>
+        <input type="text" placeholder="Ingrese su correo electronico" name="email" class="form-control" ng-model="newUsuario.email">
+    </div>
+    <div class="form-group">
+        <label>Usuario</label>
+        <input type="text" placeholder="Ingrese su usuario" name="username" class="form-control" ng-model="newUsuario.username">
+    </div>
+    <div class="form-group">
+        <label>Contraseña</label>
+        <input type="password" placeholder="Ingrese su contraseña" name="pwd" class="form-control" ng-model="newUsuario.pwd">
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-outline btn-default" ng-click="cerrarModal()">Cancelar</button>
+    <button type="button" class="btn btn-primary" ng-click="guardar(newUsuario)"> Guardar</button>
+</div>

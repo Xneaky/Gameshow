@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="myApp" ng-app lang="en">
 
 <head>
 
@@ -13,68 +13,58 @@
 
     <link href="css/animate.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
 
 </head>
 
-<body class="gray-bg">
+<body ng-controller="loginCtrl" class="gray-bg">
 
-<div ng-app="login_register_app" ng-controller="login_register_controller" class="container form_style">
+<div class="container form_style">
 
-    <div class="middle-box text-center loginscreen  animated fadeInDown" ng-show="login_form" >
+    <div class="middle-box text-center loginscreen  animated fadeInDown">
         <div>
             <h3>Bienvenido a Gameshow</h3>
                 <!--Continually expanded and constantly improved Inspinia Admin Them (IN+)-->
             <p></p>
             <p>Favor ingrese su usuario y password</p>
-            <form method="post" ng-submit="submitLogin()" class="m-t" role="form">
+            <form method="post" class="m-t" role="form">
                 <div class="form-group">
-                    <input type="text" name="email" ng-model="loginData.email" class="form-control" placeholder="Email" required="">
+                    <input type="text" name="email" ng-model="loginData.email" class="form-control" placeholder="Email">
                 </div>
                 <div class="form-group">
-                    <input type="password" name="pwd" ng-model="loginData.pwd" class="form-control" placeholder="Password" required="">
+                    <input type="password" name="pwd" ng-model="loginData.pwd" class="form-control" placeholder="Password">
                 </div>
-                <button type="submit" name="login" class="btn btn-primary block full-width m-b" ng-click="(loginData)">Entrar</button>
-                <button name="register_link" class="btn btn-primary block full-width m-b" ng-click="showRegister()">Registrarse</button>
+                <button type="submit" name="login" class="btn btn-primary block full-width m-b" ng-click="">Entrar</button>
+                <button name="register_link" class="btn btn-primary block full-width m-b" ng-click="nuevoUsuario()">Registrarse</button>
             </form>
 
-        </div>
-    </div>
-
-    <div class="middle-box text-center loginscreen  animated fadeInDown" ng-show="register_form" >
-        <div>
-            <h3>Bienvenido a Gameshow</h3>
-            <!--Continually expanded and constantly improved Inspinia Admin Them (IN+)-->
-            <p></p>
-            <p>Favor ingrese su informacion</p>
-            <form method="post" ng-submit="submitRegister()" class="m-t" role="form">
-                <div class="form-group">
-                    <input type="text" name="newNombre" ng-model="newUsuario.nombre_usuario" class="form-control" placeholder="Nombre" required="">
-                </div>
-                <div class="form-group">
-                    <input type="text" name="newApellido" ng-model="newUsuario.apellido_usuario" class="form-control" placeholder="Apellido" required="">
-                </div>
-                <div class="form-group">
-                    <input type="text" name="newEmail" ng-model="newUsuario.email" class="form-control" placeholder="Email" required="">
-                </div>
-                <div class="form-group">
-                    <input type="text" name="newNickname" ng-model="newUsuario.nickname" class="form-control" placeholder="Nickname" required="">
-                </div>
-                <div class="form-group">
-                    <input type="password" name="newPwd" ng-model="newUsuario.pwd" class="form-control" placeholder="Contraseña" required="">
-                </div>
-                <button type="submit" name="register" class="btn btn-primary block full-width m-b" ng-click="">Registrar</button>
-                <button name="login_link" class="btn btn-primary block full-width m-b" ng-click="showLogin()">Login</button>
-            </form>
         </div>
     </div>
 </div>
 
-    <!-- Mainly scripts -->
-    <script src="js/jquery-2.1.1.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+<!-- Mainly scripts -->
+<script src="js/jquery-2.1.1.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+<!-- Custom and plugin javascript -->
+<script src="js/inspinia.js"></script>
+<script src="js/plugins/pace/pace.min.js"></script>
+
+<!-- Scripts de AngularJS-->
+<script src="js/angular.js"></script>
+<script src="js/angular-animate.js"></script>
+<script src="js/angular-route.min.js"></script>
+<script src="js/angular-sanitize.js"></script>
+<script src="js/ui-bootstrap-tpls-2.1.4.js"></script>
+<!--<script src="app/menuDirective.js"></script>-->
+<script src="app/appRegistro.js"></script>
+
+<!-- Page-Level Scripts -->
+<!-- Sweetalert JS-->
+<script src="js/sweetalert-dev.js"></script>
 
 </body>
 
 </html>
-<script src="app/appLogin.js"></script>
+
