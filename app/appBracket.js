@@ -7,7 +7,7 @@ app.controller('bracketCtrl', function ($scope, $uibModal, $http) {
     $scope.listarTorneos = function() {
         $scope.torneos = [];
         var consulta = {
-            query:"select * from torneos",
+            query:"select * from torneos where activo = 1",
             method: "GET"
         }
 
@@ -22,13 +22,101 @@ app.controller('bracketCtrl', function ($scope, $uibModal, $http) {
 
     $scope.listarTorneos();
 
+    $scope.crearBracketBye = function(parametro, itemsArr = [], teamsArr = []) {
+        var i = parametro;
+        if (parametro > 4) {
+            if (parametro > 8) {
+                if (parametro > 16) {
+                    if (parametro > 32) {
+                        if (parametro > 64) {
+                            //No se ejecuta nada
+                        } else {
+                            while (i < 65) {
+                                if(itemsArr.length == 1) {
+                                    itemsArr.push(null);
+                                    teamsArr.push(itemsArr);
+                                    itemsArr = [];
+                                    i++;
+                                } else {
+                                    itemsArr.push(null);
+                                    i++;
+                                }
+                            }
+                            return teamsArr;
+                        }
+                    } else {
+                        while (i < 33) {
+                            if(itemsArr.length == 1) {
+                                itemsArr.push(null);
+                                teamsArr.push(itemsArr);
+                                itemsArr = [];
+                                i++;
+                            } else {
+                                itemsArr.push(null);
+                                i++;
+                            }
+                        }
+                        return teamsArr;
+                    }
+                } else {
+                    while (i < 17) {
+                        if(itemsArr.length == 1) {
+                            itemsArr.push(null);
+                            teamsArr.push(itemsArr);
+                            itemsArr = [];
+                            i++;
+                        } else {
+                            itemsArr.push(null);
+                            i++;
+                        }
+                    }
+                    return teamsArr;
+                }
+            } else {
+                while (i < 9) {
+                    if(itemsArr.length == 1) {
+                        itemsArr.push(null);
+                        teamsArr.push(itemsArr);
+                        itemsArr = [];
+                        i++;
+                    } else {
+                        itemsArr.push(null);
+                        i++;
+                    }
+                }
+                return teamsArr;
+            }
+        } else {
+            while (i < 5) {
+                if(itemsArr.length == 1) {
+                    itemsArr.push(null);
+                    teamsArr.push(itemsArr);
+                    itemsArr = [];
+                    i++;
+                } else {
+                    itemsArr.push(null);
+                    i++;
+                }
+            }
+            return teamsArr;
+        }
+    }
+
+    function saveFn(data) {
+        console.log(data);
+    }
+
+    function onclick(data) {
+        $('#matchCallback').text("onclick(data: '" + data + "')")
+    }
+
     $scope.getTorneo = function(torneo) {
         $(".block").addClass("loading");
-        if (torneo.codigoTorneo != null) {
+        if (torneo != null) {
             var teamsArr = [];
             var itemsArr = [];
             var consulta = {
-                query:"SELECT t1.nombre FROM team AS t1 INNER JOIN participantes AS t2 ON t1.codTeam = t2.team_codTeams WHERE t2.torneos_codTorneo = " + parseInt(torneo.codigoTorneo) + "",
+                query:"SELECT t1.nombre FROM team AS t1 INNER JOIN participantes AS t2 ON t1.codTeam = t2.team_codTeams WHERE t2.torneos_codTorneo = " + parseInt(torneo.codTorneo) + "",
                 method: "GET"
             }
 
@@ -68,101 +156,52 @@ app.controller('bracketCtrl', function ($scope, $uibModal, $http) {
                         }
                     });
                 } else {
-                    var i = data.length;
-                    data.forEach(function(item) {
-                        itemsArr.push(item.nombre);
-                        if (itemsArr.length == 2) {
-                            teamsArr.push(itemsArr);
-                            itemsArr = [];
-                        }
-                        if (data.length - 1 == data.indexOf(item)) {
-                            if (data.length > 4) {
-                                if (data.length > 8) {
-                                    if (data.length > 16) {
-                                        if (data.length > 32) {
-                                            if (data.length > 64) {
-                                                //No se ejecuta nada
-                                            } else {
-                                                while (i < 65) {
-                                                    if(itemsArr.length == 1) {
-                                                        itemsArr.push(null);
-                                                        teamsArr.push(itemsArr);
-                                                        itemsArr = [];
-                                                        i++;
-                                                    } else {
-                                                        itemsArr.push(null);
-                                                        i++;
-                                                    }
-                                                }
-                                            }
-                                        } else {
-                                            while (i < 33) {
-                                                if(itemsArr.length == 1) {
-                                                    itemsArr.push(null);
-                                                    teamsArr.push(itemsArr);
-                                                    itemsArr = [];
-                                                    i++;
-                                                } else {
-                                                    itemsArr.push(null);
-                                                    i++;
-                                                }
-                                            }
-                                        }
-                                    } else {
-                                        while (i < 17) {
-                                            if(itemsArr.length == 1) {
-                                                itemsArr.push(null);
-                                                teamsArr.push(itemsArr);
-                                                itemsArr = [];
-                                                i++;
-                                            } else {
-                                                itemsArr.push(null);
-                                                i++;
-                                            }
-                                        }
-                                    }
-                                } else {
-                                    while (i < 9) {
-                                        if(itemsArr.length == 1) {
-                                            itemsArr.push(null);
-                                            teamsArr.push(itemsArr);
-                                            itemsArr = [];
-                                            i++;
-                                        } else {
-                                            itemsArr.push(null);
-                                            i++;
-                                        }
-                                    }
-                                }
-                            } else {
-                                while (i < 5) {
-                                    if(itemsArr.length == 1) {
-                                        itemsArr.push(null);
-                                        teamsArr.push(itemsArr);
-                                        itemsArr = [];
-                                        i++;
-                                    } else {
-                                        itemsArr.push(null);
-                                        i++;
-                                    }
-                                }
-                            }
-                            var singleEliminations = {
-                                "teams": teamsArr,
-                                "results": [
-                                    [
-                                        
-                                    ]
+                    if (data.length == 0) {
+                        var registros = $scope.crearBracketBye(torneo.num_participantes, itemsArr, teamsArr);
+                        var singleEliminations = {
+                            "teams": registros,
+                            "results": [
+                                [
+                                    
                                 ]
-                            }
-                            $('.playoff').bracket({
-                                init: singleEliminations,
-                                teamWidth: 100,
-                                scoreWidth: 30
-                            });
-                            $(".block").removeClass("loading");
+                            ]
                         }
-                    });
+                        $('.playoff').bracket({
+                            init: singleEliminations,
+                            teamWidth: 100,
+                            scoreWidth: 30
+                        });
+                        $(".block").removeClass("loading");
+                    } else {
+                        data.forEach(function(item) {
+                            itemsArr.push(item.nombre);
+                            if (itemsArr.length == 2) {
+                                teamsArr.push(itemsArr);
+                                itemsArr = [];
+                            }
+                            if (data.length - 1 == data.indexOf(item)) {
+                                var registros = $scope.crearBracketBye(data.length, itemsArr, teamsArr);
+                                var singleEliminations = {
+                                    "teams": registros,
+                                    "results": [
+                                        [
+                                            
+                                        ]
+                                    ]
+                                }
+                                $('.playoff').bracket({
+                                    init: singleEliminations,
+                                    teamWidth: 100,
+                                    scoreWidth: 30,
+                                    save: saveFn,
+                                    disableToolbar: false,
+                                    disableTeamEdit: false
+                                });
+                                $(".team.highlight").children().prop('disabled',true);
+                                $(".block").removeClass("loading");
+                            }
+                        });
+                    }
                 }
             }).error(function(){
                 alert('Error al intentar enviar el query.');
