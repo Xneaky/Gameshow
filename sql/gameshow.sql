@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 01, 2018 at 07:27 AM
+-- Generation Time: Nov 02, 2018 at 08:42 PM
 -- Server version: 5.7.20-log
 -- PHP Version: 5.6.23
 
@@ -63,32 +63,34 @@ CREATE TABLE `jugadores` (
   `pwd_jugador` varchar(200) NOT NULL,
   `fecha_nacimiento` varchar(200) NOT NULL,
   `activo` tinyint(1) NOT NULL,
-  `team_codTeam` int(11) NOT NULL
+  `team_codTeam` int(11) NOT NULL,
+  `telefono_jugador` int(8) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `jugadores`
 --
 
-INSERT INTO `jugadores` (`codJugadores`, `nombre_jugador`, `apellido_jugador`, `nickname_jugador`, `email`, `pwd_jugador`, `fecha_nacimiento`, `activo`, `team_codTeam`) VALUES
-(1, 'Cesar ', 'Flamenco', '', '', '', '', 0, 1),
-(2, 'Marco', 'De Berlin', '', '', '', '', 0, 2),
-(3, 'Sebastian ', 'Urias', '', '', '', '', 0, 3),
-(4, 'Fidel ', 'Cordova', '', '', '', '', 0, 4),
-(5, 'Manuel ', 'Flores', '', '', '', '', 0, 5),
-(6, 'Felipe', 'Cruz', '', '', '', '', 0, 6),
-(7, 'Julio', 'Maximo', '', '', '', '', 0, 7),
-(8, 'Paulino', 'James', '', '', '', '', 0, 8),
-(9, 'Roberto', 'Palermo', '', '', '', '', 0, 9),
-(10, 'Miguel ', 'Antonio', '', '', '', '', 0, 10),
-(11, 'Barlomeo', 'Rodriguez', '', '', '', '', 0, 11),
-(12, 'Hector', 'Mendoza', '', '', '', '', 0, 12),
-(13, 'Cristian ', 'Gomez ', '', '', '', '', 0, 13),
-(14, 'Omar', 'Angulo', '', '', '', '', 0, 14),
-(15, 'Anthony', 'De la O', '', '', '', '', 0, 15),
-(16, 'Franco', 'Escamilla', '', '', '', '', 0, 16),
-(17, 'asd', 'asd', 'das', 'das', 'das', 'Wed Oct 31 2018 00:00:00 GMT-0600 (Central Standard Time)', 1, 0),
-(18, '123', '123', '123', '123', 'email', 'Tue Jan 08 2019 00:00:00 GMT-0600 (Central Standard Time)', 1, 0);
+INSERT INTO `jugadores` (`codJugadores`, `nombre_jugador`, `apellido_jugador`, `nickname_jugador`, `email`, `pwd_jugador`, `fecha_nacimiento`, `activo`, `team_codTeam`, `telefono_jugador`) VALUES
+(1, 'Cesar ', 'Flamenco', 'asd', 'asd', '', '', 0, 1, 70008000),
+(2, 'Marco', 'De Berlin', '', '', '', '', 0, 2, 12345678),
+(3, 'Sebastian ', 'Urias', '', '', '', '', 0, 3, NULL),
+(4, 'Fidel ', 'Cordova', '', '', '', '', 0, 4, NULL),
+(5, 'Manuel ', 'Flores', '', '', '', '', 0, 5, NULL),
+(6, 'Felipe', 'Cruz', '', '', '', '', 0, 6, NULL),
+(7, 'Julio', 'Maximo', '', '', '', '', 0, 7, NULL),
+(8, 'Paulino', 'James', '', '', '', '', 0, 8, NULL),
+(9, 'Roberto', 'Palermo', '', '', '', '', 0, 9, NULL),
+(10, 'Miguel ', 'Antonio', '', '', '', '', 0, 10, NULL),
+(11, 'Barlomeo', 'Rodriguez', '', '', '', '', 0, 11, NULL),
+(12, 'Hector', 'Mendoza', '', '', '', '', 0, 12, NULL),
+(13, 'Cristian ', 'Gomez ', '', '', '', '', 0, 13, NULL),
+(14, 'Omar', 'Angulo', '', '', '', '', 0, 14, NULL),
+(15, 'Anthony', 'De la O', '', '', '', '', 0, 15, NULL),
+(16, 'Franco', 'Escamilla', '', '', '', '', 0, 16, NULL),
+(17, 'asd', 'asd', 'das', 'das', 'das', 'Wed Oct 31 2018 00:00:00 GMT-0600 (Central Standard Time)', 1, 0, NULL),
+(18, '123', '123', '123', '123', 'email', 'Tue Jan 08 2019 00:00:00 GMT-0600 (Central Standard Time)', 1, 0, NULL),
+(19, 'David', 'prueba2', 'prueba2', 'prueba@prueba.com', 'prueba@prueba.com', 'Sun Nov 11 2018 00:00:00 GMT-0600 (Central Standard Time)', 1, 0, 88887777);
 
 -- --------------------------------------------------------
 
@@ -181,7 +183,8 @@ CREATE TABLE `roles` (
 --
 
 INSERT INTO `roles` (`id_rol`, `nombre_rol`, `modulos`, `descripcion_rol`, `activo`) VALUES
-(1, 'Administrador', '3,2,1', 'Todos los privilegios', b'1');
+(1, 'Administrador', '3,2,1', 'Todos los privilegios', b'1'),
+(2, 'Admin', '3,2,1,', 'admin', b'1');
 
 -- --------------------------------------------------------
 
@@ -248,27 +251,30 @@ INSERT INTO `torneos` (`codTorneo`, `Nombre`, `activo`, `tipo_torneo`, `num_part
 
 CREATE TABLE `usuarios` (
   `id_usuarios` int(11) NOT NULL,
+  `idrol` tinyint(1) NOT NULL,
   `nombre` varchar(100) NOT NULL,
   `apellido` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
   `username` varchar(100) NOT NULL,
-  `pwd` varchar(300) NOT NULL
+  `pwd` varchar(300) NOT NULL,
+  `activo` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `usuarios`
 --
 
-INSERT INTO `usuarios` (`id_usuarios`, `nombre`, `apellido`, `email`, `username`, `pwd`) VALUES
-(1, 'aaaaa', 'aaaaaa', 'castillo_5326@hotmail.com', 'admin', 'admin'),
-(2, 'bbbb', 'bbbb', 'bbbb@bbbb.com', 'bb', 'bb'),
-(3, 'ccc', 'ccc', 'ccc@ccc.com', 'ccc', 'ccc'),
-(4, 'dd', 'dd', 'dd', 'dd', 'dd'),
-(8, 'fff', 'fff', 'fff', 'fff', 'd1d7e84d9049900299ee9c0b2c04b11bfa9a0437afc0bf03d8ce0e3fb8523919f13fa3a5130c5ba7987679c6f6945ca87655e746eb5345bdc8131298fa5a9b20'),
-(9, 'ggg', 'ggg', 'ggg', 'ggg', 'fb5b2f7f3010f9c4f8d8bdb528c8a3d402f0413bf9e1e35a4fa0ff857015ae269638fbe6911bae14b51f555e27748f499ce6b68d593c4ddd059818d42860099a'),
-(10, 'hh', 'hh', 'hh', 'hh', '7de896b588a8efaf14ecf59bcf17e883194ecbc7115e259b435551d69dbaf17741f13aaab0a759567d9b6ff361b5354edb35204d41c651bb944d2d5405e5b1de'),
-(11, 'Javier', 'Castillo', 'asd@aasd,com', 'Xneaky', 'd404559f602eab6fd602ac7680dacbfaadd13630335e951f097af3900e9de176b6db28512f2e000b9d04fba5133e8b1c6e8df59db3a8ab9d60be4b97cc9e81db'),
-(12, 'xxx', 'xxx', 'xxx', 'xxx', '9057ff1aa9509b2a0af624d687461d2bbeb07e2f37d953b1ce4a9dc921a7f19c45dc35d7c5363b373792add57d0d7dc41596e1c585d6ef7844cdf8ae87af443f');
+INSERT INTO `usuarios` (`id_usuarios`, `idrol`, `nombre`, `apellido`, `email`, `username`, `pwd`, `activo`) VALUES
+(1, 0, 'aaaaa', 'aaaaaa', 'castillo_5326@hotmail.com', 'admin', 'admin', 0),
+(2, 0, 'bbbb', 'bbbb', 'bbbb@bbbb.com', 'bb', 'bb', 0),
+(3, 0, 'ccc', 'ccc', 'ccc@ccc.com', 'ccc', 'ccc', 0),
+(4, 0, 'dd', 'dd', 'dd', 'dd', 'dd', 0),
+(8, 0, 'fff', 'fff', 'fff', 'fff', 'd1d7e84d9049900299ee9c0b2c04b11bfa9a0437afc0bf03d8ce0e3fb8523919f13fa3a5130c5ba7987679c6f6945ca87655e746eb5345bdc8131298fa5a9b20', 0),
+(9, 0, 'ggg', 'ggg', 'ggg', 'ggg', 'fb5b2f7f3010f9c4f8d8bdb528c8a3d402f0413bf9e1e35a4fa0ff857015ae269638fbe6911bae14b51f555e27748f499ce6b68d593c4ddd059818d42860099a', 0),
+(10, 0, 'hh', 'hh', 'hh', 'hh', '7de896b588a8efaf14ecf59bcf17e883194ecbc7115e259b435551d69dbaf17741f13aaab0a759567d9b6ff361b5354edb35204d41c651bb944d2d5405e5b1de', 0),
+(11, 0, 'Javier', 'Castillo', 'asd@aasd,com', 'Xneaky', 'd404559f602eab6fd602ac7680dacbfaadd13630335e951f097af3900e9de176b6db28512f2e000b9d04fba5133e8b1c6e8df59db3a8ab9d60be4b97cc9e81db', 0),
+(12, 0, 'xxx', 'xxx', 'xxx', 'xxx', '9057ff1aa9509b2a0af624d687461d2bbeb07e2f37d953b1ce4a9dc921a7f19c45dc35d7c5363b373792add57d0d7dc41596e1c585d6ef7844cdf8ae87af443f', 0),
+(13, 1, '1234', '1234', 'admin@admin.com', '1234', 'admin@admin.com', 1);
 
 --
 -- Indexes for dumped tables
@@ -312,6 +318,7 @@ ALTER TABLE `partidos`
 -- Indexes for table `roles`
 --
 ALTER TABLE `roles`
+  ADD PRIMARY KEY (`id_rol`),
   ADD KEY `id_rol` (`id_rol`);
 
 --
@@ -345,7 +352,7 @@ ALTER TABLE `duelos`
 -- AUTO_INCREMENT for table `jugadores`
 --
 ALTER TABLE `jugadores`
-  MODIFY `codJugadores` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `codJugadores` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 --
 -- AUTO_INCREMENT for table `modulos`
 --
@@ -365,7 +372,7 @@ ALTER TABLE `partidos`
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id_rol` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_rol` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `team`
 --
@@ -380,7 +387,7 @@ ALTER TABLE `torneos`
 -- AUTO_INCREMENT for table `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuarios` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_usuarios` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- Constraints for dumped tables
 --
