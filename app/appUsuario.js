@@ -31,7 +31,7 @@ app.controller('usuarioCtrl', function ($scope, $uibModal, $http) {
     $scope.listarUsuarios = function() {
         $scope.usuarios = [];
         var consulta = {
-            query:"select * from vt_usuarios",
+            query:"select * from usuarios",
             method: "GET"
         }
 
@@ -99,11 +99,12 @@ app.controller('crearUsuarioCtrl', function ($scope, $http, $uibModal, $uibModal
 
     $scope.guardar = function(newUsuario) {
 
-        var stringQuery = "INSERT INTO usuarios (id_rol, nombre_usuario, apellido_usuario, email, pwd_usuario, activo) VALUES " +
+        var stringQuery = "INSERT INTO usuarios (idrol, nombre, apellido, email, username, pwd, activo) VALUES " +
         "('" + newUsuario.id_rol + "'," +
         "'" + newUsuario.nombre_usuario + "'," +
         "'" + newUsuario.apellido_usuario + "'," +
         "'" + newUsuario.email + "'," +
+        "'" + newUsuario.username + "'," +
         "'" + newUsuario.email + "', true)";
 
         var consulta = {
