@@ -6,14 +6,10 @@
       <change type="DELETED" beforePath="$PROJECT_DIR$/sql/torneos.sql" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/appJugador.js" afterPath="$PROJECT_DIR$/app/appJugador.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/appUsuario.js" afterPath="$PROJECT_DIR$/app/appUsuario.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sql/gameshow.sql" afterPath="$PROJECT_DIR$/sql/gameshow.sql" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/jugadores/jugadores.html" afterPath="$PROJECT_DIR$/views/jugadores/jugadores.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/jugadores/modalEditarJugador.html" afterPath="$PROJECT_DIR$/views/jugadores/modalEditarJugador.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/jugadores/modalNuevoJugador.html" afterPath="$PROJECT_DIR$/views/jugadores/modalNuevoJugador.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/usuarios/modalEditarUsuario.html" afterPath="$PROJECT_DIR$/views/usuarios/modalEditarUsuario.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/usuarios/modalNuevoUsuario.html" afterPath="$PROJECT_DIR$/views/usuarios/modalNuevoUsuario.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/usuarios/usuarios.html" afterPath="$PROJECT_DIR$/views/usuarios/usuarios.html" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -223,7 +219,7 @@
       <workItem from="1541047977398" duration="5347000" />
       <workItem from="1541094670443" duration="11042000" />
       <workItem from="1541113167867" duration="2546000" />
-      <workItem from="1541181506862" duration="4303000" />
+      <workItem from="1541181506862" duration="4345000" />
     </task>
     <task id="LOCAL-00001" summary="Agregue brackets a pagina principal">
       <created>1538080715291</created>
@@ -267,11 +263,18 @@
       <option name="project" value="LOCAL" />
       <updated>1541132777208</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="modulo usuarios funcionando">
+      <created>1541187857180</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1541187857180</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="35447000" />
+    <option name="totallyTimeSpent" value="35489000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -336,7 +339,8 @@
     <MESSAGE value="Matenimiento jugadores, agregue brackets al menu" />
     <MESSAGE value="base de datos actualizada" />
     <MESSAGE value="comienzo del login" />
-    <option name="LAST_COMMIT_MESSAGE" value="comienzo del login" />
+    <MESSAGE value="modulo usuarios funcionando" />
+    <option name="LAST_COMMIT_MESSAGE" value="modulo usuarios funcionando" />
     <option name="UPDATE_GROUP_BY_PACKAGES" value="true" />
   </component>
   <component name="XDebuggerManager">

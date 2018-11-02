@@ -80,14 +80,14 @@ app.controller('crearJugadorCtrl', function ($scope, $http, $uibModal, $uibModal
 
     $scope.guardar = function(newJugador) {
 
-        var stringQuery = "INSERT INTO jugadores (nombre_jugador, apellido_jugador, nickname_jugador, email, pwd_jugador, fecha_nacimiento, activo, team_codTeam) VALUES (" +
+        var stringQuery = "INSERT INTO jugadores (nombre_jugador, apellido_jugador, nickname_jugador, email, pwd_jugador, fecha_nacimiento, activo, team_codTeam, telefono_jugador) VALUES (" +
         "'" + newJugador.nombre_jugador + "'," +
         "'" + newJugador.apellido_jugador + "'," +
         "'" + newJugador.nickname_jugador + "'," +
         "'" + newJugador.email + "'," +
         "'" + newJugador.email + "'," +
-        "'" + new Date(newJugador.fecha_nacimiento) + "', true, 0)";
-
+        "'" + new Date(newJugador.fecha_nacimiento) + "', true, 0," +
+            "'" + newJugador.telefono_jugador + "')";
         console.log("stringQuery : " + JSON.stringify(stringQuery));
 
         var consulta = {
@@ -136,6 +136,7 @@ app.controller('editarJugadorCtrl', function ($scope, $http, $uibModal, $uibModa
         "apellido_jugador = '" + editarJugador.apellido_jugador + "', " +
         "nickname_jugador = '" + editarJugador.nickname_jugador + "', " +
         "email = '" + editarJugador.email + "', " +
+        "telefono_jugador = '" + editarJugador.telefono_jugador + "', " +
         "fecha_nacimiento = '" + editarJugador.fecha_nacimiento + "', " +
         "activo = '" + editarJugador.activo + "' " +
         "where codJugadores = " + editarJugador.codJugadores + "";
