@@ -1,9 +1,7 @@
 'use strict';
 var app = angular.module('myApp', ['ngRoute', 'ngAnimate', 'ngSanitize', 'ui.bootstrap']);
 
-app.controller('loginCtrl', function ($scope, $uibModal, $http) {
-    $scope.usuarios = [];
-    $scope.roles = [];
+app.controller('loginCtrl', function ($scope, $uibModal, $http, $window) {
 
     $scope.nuevoUsuario = function(size) {
         $scope.modalInstance = $uibModal.open({
@@ -16,7 +14,26 @@ app.controller('loginCtrl', function ($scope, $uibModal, $http) {
         });
     };
 
+    $scope.loggin = function(user) {
+        var iinn = "select * from usuarios where activo = 1 and email = '" + user.email + "' and pwd = '" + user.pwd + "'"
+        var consulta = {
+            query: iinn,
+            method: "GET"
+        }
 
+        $http.post('apis/porcesaAPI.php', {
+            data: {params:  consulta}
+        }).success(function(data){
+            if (data.length == 0) {
+                alert('Usuario y contraseña incorrecto');
+            } else {
+                //$cookies.username = data;
+                window.location = 'views/torneos/torneos.html';
+            }
+        }).error(function(){
+            alert('Error al intentar enviar el query.');
+        });
+    }
 });
 
 app.controller('crearUsuarioCtrl', function ($scope, $http, $uibModal, $uibModalInstance, $window) {

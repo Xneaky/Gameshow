@@ -102,6 +102,90 @@ app.controller('bracketCtrl', function ($scope, $uibModal, $http) {
         }
     }
 
+    $scope.crearBracketBye2 = function(parametro, itemsArr = [], teamsArr = []) {
+        if (parametro > 4) {
+            if (parametro > 8) {
+                if (parametro > 16) {
+                    if (parametro > 32) {
+                        if (parametro > 64) {
+                            //No se ejecuta nada
+                        } else {
+                            var j = 1;
+                            while (j < 65) {
+                                if(itemsArr.length == 1) {
+                                    itemsArr.push(null);
+                                    teamsArr.push(itemsArr);
+                                    itemsArr = [];
+                                    j++;
+                                } else {
+                                    itemsArr.push(null);
+                                    j++;
+                                }
+                            }
+                            return teamsArr;
+                        }
+                    } else {
+                        var j = 1;
+                        while (j < 33) {
+                            if(itemsArr.length == 1) {
+                                itemsArr.push(null);
+                                teamsArr.push(itemsArr);
+                                itemsArr = [];
+                                j++;
+                            } else {
+                                itemsArr.push(null);
+                                j++;
+                            }
+                        }
+                        return teamsArr;
+                    }
+                } else {
+                    var j = 1;
+                    while (j < 17) {
+                        if(itemsArr.length == 1) {
+                            itemsArr.push(null);
+                            teamsArr.push(itemsArr);
+                            itemsArr = [];
+                            j++;
+                        } else {
+                            itemsArr.push(null);
+                            j++;
+                        }
+                    }
+                    return teamsArr;
+                }
+            } else {
+                var j = 1;
+                while (j < 9) {
+                    if(itemsArr.length == 1) {
+                        itemsArr.push(null);
+                        teamsArr.push(itemsArr);
+                        itemsArr = [];
+                        j++;
+                    } else {
+                        itemsArr.push(null);
+                        j++;
+                    }
+                }
+                return teamsArr;
+            }
+        } else {
+            var j = 1;
+            while (j < 5) {
+                if(itemsArr.length == 1) {
+                    itemsArr.push(null);
+                    teamsArr.push(itemsArr);
+                    itemsArr = [];
+                    j++;
+                } else {
+                    itemsArr.push(null);
+                    j++;
+                }
+            }
+            return teamsArr;
+        }
+    }
+
     function saveFn(data) {
         console.log(data);
     }
@@ -157,7 +241,7 @@ app.controller('bracketCtrl', function ($scope, $uibModal, $http) {
                     });
                 } else {
                     if (data.length == 0) {
-                        var registros = $scope.crearBracketBye(torneo.num_participantes, itemsArr, teamsArr);
+                        var registros = $scope.crearBracketBye2(torneo.num_participantes, itemsArr, teamsArr);
                         var singleEliminations = {
                             "teams": registros,
                             "results": [
