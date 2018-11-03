@@ -14,6 +14,18 @@ app.controller('loginCtrl', function ($scope, $uibModal, $http, $window) {
         });
     };
 
+    var administrarMensajeSweet2 = function(conf) {
+        $window.swal({
+            title: conf.titulo,
+            text: conf.texto,
+            type: conf.tipo,
+            showCancelButton: false
+        },
+        function(isConfirm){
+            //Se cierra automaticamente
+        });
+    };
+
     $scope.loggin = function(user) {
         var iinn = "select * from usuarios where activo = 1 and email = '" + user.email + "' and pwd = '" + user.pwd + "'"
         var consulta = {
@@ -25,7 +37,7 @@ app.controller('loginCtrl', function ($scope, $uibModal, $http, $window) {
             data: {params:  consulta}
         }).success(function(data){
             if (data.length == 0) {
-                alert('Usuario y contraseña incorrecto');
+                administrarMensajeSweet2({titulo:'Usuario y contraseña incorrecto', tipo:'error', texto: ''});
             } else {
                 //$cookies.username = data;
                 window.location = 'views/torneos/torneos.html';
@@ -41,15 +53,15 @@ app.controller('crearUsuarioCtrl', function ($scope, $http, $uibModal, $uibModal
 
     var administrarMensajeSweet = function(conf) {
         $window.swal({
-                title: conf.titulo,
-                text: conf.texto,
-                type: conf.tipo,
-                showCancelButton: false
-            },
-            function(isConfirm){
-                if (isConfirm)
-                    $uibModalInstance.close();
-            });
+            title: conf.titulo,
+            text: conf.texto,
+            type: conf.tipo,
+            showCancelButton: false
+        },
+        function(isConfirm){
+            if (isConfirm)
+                $uibModalInstance.close();
+        });
     };
 
     $scope.guardar = function(newUsuario) {
