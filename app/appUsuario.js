@@ -98,7 +98,7 @@ app.controller('crearUsuarioCtrl', function ($scope, $http, $uibModal, $uibModal
 
     $scope.guardar = function(newUsuario) {
 
-        var stringQuery = "INSERT INTO usuarios (idrol, nombre, apellido, email, username, pwd, activo) VALUES " +
+        var stringQuery = "INSERT INTO usuarios (id_rol, nombre_usuario, apellido_usuario, email, usuario, pwd, activo) VALUES " +
         "('" + newUsuario.id_rol + "'," +
         "'" + newUsuario.nombre_usuario + "'," +
         "'" + newUsuario.apellido_usuario + "'," +
@@ -149,11 +149,12 @@ app.controller('editarUsuarioCtrl', function ($scope, $http, $uibModal, $uibModa
 
     $scope.modificar = function(editarUsuario) {
         var stringQuery = "UPDATE usuarios set  " +
-        "idrol = '" + editarUsuario.id_rol + "', " +
-        "nombre = '" + editarUsuario.nombre_usuario + "', " +
-        "apellido = '" + editarUsuario.apellido_usuario + "', " +
+        "id_rol = '" + editarUsuario.id_rol + "', " +
+        "nombre_usuario = '" + editarUsuario.nombre_usuario + "', " +
+        "apellido_usuario = '" + editarUsuario.apellido_usuario + "', " +
         "email = '" + editarUsuario.email + "', " +
-        "username = '" + editarUsuario.usuario + "' " +
+        "usuario = '" + editarUsuario.usuario + "', " +
+        "activo = '" + editarUsuario.activo + "' " +
         "where id_usuarios = '" + editarUsuario.id_usuarios + "'";
 
         var consulta = {

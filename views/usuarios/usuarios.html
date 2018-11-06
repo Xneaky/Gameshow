@@ -123,10 +123,10 @@
                                         </thead>
                                         <tbody>
                                             <tr ng-repeat="usuario in usuarios | filter: query track by $index" >
-                                                <td class="project-title"><span>{{usuario.idrol}}</span></td>
-                                                <td class="project-title"><span class="pie">{{usuario.nombre}}</span></td>
-                                                <td class="project-title">{{usuario.apellido}}</td>
-                                                <td class="project-title">{{usuario.username}}</td>
+                                                <td class="project-title"><span>{{usuario.id_rol}}</span></td>
+                                                <td class="project-title"><span class="pie">{{usuario.nombre_usuario}}</span></td>
+                                                <td class="project-title">{{usuario.apellido_usuario}}</td>
+                                                <td class="project-title">{{usuario.usuario}}</td>
                                                 <td class="project-title">{{usuario.email}}</td>
                                                 <td class="project-title"><span class="label {{cssEstado(usuario.activo)}}">{{etiquetaEstado(usuario.activo)}}</span></td>
                                                 <td class="text-navy">

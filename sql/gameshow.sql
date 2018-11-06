@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 02, 2018 at 08:42 PM
+-- Generation Time: Nov 06, 2018 at 10:55 PM
 -- Server version: 5.7.20-log
 -- PHP Version: 5.6.23
 
@@ -72,7 +72,7 @@ CREATE TABLE `jugadores` (
 --
 
 INSERT INTO `jugadores` (`codJugadores`, `nombre_jugador`, `apellido_jugador`, `nickname_jugador`, `email`, `pwd_jugador`, `fecha_nacimiento`, `activo`, `team_codTeam`, `telefono_jugador`) VALUES
-(1, 'Cesar ', 'Flamenco', 'asd', 'asd', '', '', 0, 1, 70008000),
+(1, 'Cesar ', 'Flamenco', 'asd', 'asd', '', 'Wed Nov 07 2018 00:00:00 GMT-0600 (Central Standard Time)', 1, 1, 70008000),
 (2, 'Marco', 'De Berlin', '', '', '', '', 0, 2, 12345678),
 (3, 'Sebastian ', 'Urias', '', '', '', '', 0, 3, NULL),
 (4, 'Fidel ', 'Cordova', '', '', '', '', 0, 4, NULL),
@@ -157,12 +157,16 @@ INSERT INTO `participantes` (`codParticipantes`, `torneos_codTorneo`, `team_codT
 
 CREATE TABLE `partidos` (
   `codPartido` int(11) NOT NULL,
-  `equipo_1` varchar(45) DEFAULT NULL,
-  `equipo_2` varchar(45) DEFAULT NULL,
-  `marcador_equipo_1` varchar(45) DEFAULT NULL,
-  `marcador_equipo_2` varchar(45) DEFAULT NULL,
-  `torneos_codTorneo` int(11) NOT NULL
+  `torneos_codTorneo` int(11) NOT NULL,
+  `bracket` longtext
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `partidos`
+--
+
+INSERT INTO `partidos` (`codPartido`, `torneos_codTorneo`, `bracket`) VALUES
+(1, 1, '{"teams":[["The gamers test","VR Team"],["TNC Pro","EHome Team"],["OG RD","Digital Chaos"],["Team Secret","MVP Phoenix"],["MM Team","Dragon Team"],["Team Spirit","Master Team"],["Evil Team","LOL Team"],["BG Boom","QuiPro Team"]],"results":[[[[1,2],[4,3],[6,8],[null,null],[null,null],[null,null],[null,null],[null,null]],[[0,6],[null,null],[null,null],[null,null]],[[null,null],[null,null]],[[null,null]]]]}');
 
 -- --------------------------------------------------------
 
@@ -184,7 +188,8 @@ CREATE TABLE `roles` (
 
 INSERT INTO `roles` (`id_rol`, `nombre_rol`, `modulos`, `descripcion_rol`, `activo`) VALUES
 (1, 'Administrador', '3,2,1', 'Todos los privilegios', b'1'),
-(2, 'Admin', '3,2,1,', 'admin', b'1');
+(2, 'Admin', '3,2,1,', 'admin', b'1'),
+(3, 'Simple', '4', 'Rol para nuevos usuarios', b'1');
 
 -- --------------------------------------------------------
 
@@ -217,7 +222,8 @@ INSERT INTO `team` (`codTeam`, `nombre`) VALUES
 (13, 'Evil Team'),
 (14, 'LOL Team'),
 (15, 'BG Boom'),
-(16, 'QuiPro Team');
+(16, 'QuiPro Team'),
+(17, 'La prueba');
 
 -- --------------------------------------------------------
 
@@ -251,11 +257,11 @@ INSERT INTO `torneos` (`codTorneo`, `Nombre`, `activo`, `tipo_torneo`, `num_part
 
 CREATE TABLE `usuarios` (
   `id_usuarios` int(11) NOT NULL,
-  `idrol` tinyint(1) NOT NULL,
-  `nombre` varchar(100) NOT NULL,
-  `apellido` varchar(100) NOT NULL,
+  `id_rol` tinyint(1) NOT NULL,
+  `nombre_usuario` varchar(100) NOT NULL,
+  `apellido_usuario` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
-  `username` varchar(100) NOT NULL,
+  `usuario` varchar(100) NOT NULL,
   `pwd` varchar(300) NOT NULL,
   `activo` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -264,17 +270,20 @@ CREATE TABLE `usuarios` (
 -- Dumping data for table `usuarios`
 --
 
-INSERT INTO `usuarios` (`id_usuarios`, `idrol`, `nombre`, `apellido`, `email`, `username`, `pwd`, `activo`) VALUES
-(1, 0, 'aaaaa', 'aaaaaa', 'castillo_5326@hotmail.com', 'admin', 'admin', 0),
-(2, 0, 'bbbb', 'bbbb', 'bbbb@bbbb.com', 'bb', 'bb', 0),
+INSERT INTO `usuarios` (`id_usuarios`, `id_rol`, `nombre_usuario`, `apellido_usuario`, `email`, `usuario`, `pwd`, `activo`) VALUES
+(1, 1, 'aaaaa', 'aaaaaa', 'castillo_5326@hotmail.com', 'admin', 'admin', 1),
+(2, 2, 'bbbb', 'bbbb', 'bbbb@bbbb.com', 'bbbb', 'bb', 1),
 (3, 0, 'ccc', 'ccc', 'ccc@ccc.com', 'ccc', 'ccc', 0),
-(4, 0, 'dd', 'dd', 'dd', 'dd', 'dd', 0),
+(4, 0, 'dd', 'dd', 'dd', 'dd', 'dd', 1),
 (8, 0, 'fff', 'fff', 'fff', 'fff', 'd1d7e84d9049900299ee9c0b2c04b11bfa9a0437afc0bf03d8ce0e3fb8523919f13fa3a5130c5ba7987679c6f6945ca87655e746eb5345bdc8131298fa5a9b20', 0),
 (9, 0, 'ggg', 'ggg', 'ggg', 'ggg', 'fb5b2f7f3010f9c4f8d8bdb528c8a3d402f0413bf9e1e35a4fa0ff857015ae269638fbe6911bae14b51f555e27748f499ce6b68d593c4ddd059818d42860099a', 0),
 (10, 0, 'hh', 'hh', 'hh', 'hh', '7de896b588a8efaf14ecf59bcf17e883194ecbc7115e259b435551d69dbaf17741f13aaab0a759567d9b6ff361b5354edb35204d41c651bb944d2d5405e5b1de', 0),
 (11, 0, 'Javier', 'Castillo', 'asd@aasd,com', 'Xneaky', 'd404559f602eab6fd602ac7680dacbfaadd13630335e951f097af3900e9de176b6db28512f2e000b9d04fba5133e8b1c6e8df59db3a8ab9d60be4b97cc9e81db', 0),
 (12, 0, 'xxx', 'xxx', 'xxx', 'xxx', '9057ff1aa9509b2a0af624d687461d2bbeb07e2f37d953b1ce4a9dc921a7f19c45dc35d7c5363b373792add57d0d7dc41596e1c585d6ef7844cdf8ae87af443f', 0),
-(13, 1, '1234', '1234', 'admin@admin.com', '1234', 'admin@admin.com', 1);
+(13, 1, '1234', '1234', 'admin@admin.com', '1234', 'admin@admin.com', 1),
+(16, 3, 'Benito', 'Miranda', 'Miranda@gamil.com', 'Bmiranda', '1234', 1),
+(17, 3, 'admin', 'admin', 'admin', 'admin', 'admin', 1),
+(18, 3, 'admin2', 'admin2', 'admin2', 'admin2', 'admin', 1);
 
 --
 -- Indexes for dumped tables
@@ -362,22 +371,22 @@ ALTER TABLE `modulos`
 -- AUTO_INCREMENT for table `participantes`
 --
 ALTER TABLE `participantes`
-  MODIFY `codParticipantes` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `codParticipantes` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 --
 -- AUTO_INCREMENT for table `partidos`
 --
 ALTER TABLE `partidos`
-  MODIFY `codPartido` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `codPartido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id_rol` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_rol` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `team`
 --
 ALTER TABLE `team`
-  MODIFY `codTeam` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `codTeam` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 --
 -- AUTO_INCREMENT for table `torneos`
 --
@@ -387,7 +396,7 @@ ALTER TABLE `torneos`
 -- AUTO_INCREMENT for table `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuarios` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_usuarios` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 --
 -- Constraints for dumped tables
 --

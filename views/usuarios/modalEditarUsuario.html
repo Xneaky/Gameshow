@@ -24,6 +24,13 @@
         <label>Usuario</label>
         <input type="text" placeholder="Ingrese el Usuario" name="username" class="form-control" ng-model="editarUsuario.usuario">
     </div>
+    <div class="form-group">
+        <label>Estado Usuario</label>
+        <select class="form-control" name="estadoUsuario" ng-model="editarUsuario.activo">
+            <option value="1">Activo</option>
+            <option value="0">Inactivo</option>
+        </select>
+    </div>
 </div>
 <div class="modal-footer">
     <button type="button" class="btn btn-outline btn-default" ng-click="cerrarModal()">Cancelar</button>
