@@ -5149,3 +5149,7 @@ body.skin-3 {
     transform: rotate(360deg);
   }
 }
+
+div.playoff {
+    overflow: auto;
+}
