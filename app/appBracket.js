@@ -1,7 +1,7 @@
 'use strict';
 var app = angular.module('myApp', ['ngRoute', 'ngAnimate', 'ngSanitize', 'ui.bootstrap']);
 
-app.controller('bracketCtrl', function ($scope, $uibModal, $http) {
+app.controller('bracketCtrl', function ($scope, $uibModal, $http, $window) {
     $scope.torneos = [];
 
     $scope.listarTorneos = function() {
@@ -21,6 +21,18 @@ app.controller('bracketCtrl', function ($scope, $uibModal, $http) {
     };
 
     $scope.listarTorneos();
+
+    var administrarMensajeSweet2 = function(conf) {
+        $window.swal({
+            title: conf.titulo,
+            text: conf.texto,
+            type: conf.tipo,
+            showCancelButton: false
+        },
+        function(isConfirm){
+            //Se cierra automaticamente
+        });
+    };
 
     $scope.crearBracketBye = function(parametro, itemsArr = [], teamsArr = []) {
         var i = parametro;
@@ -186,15 +198,67 @@ app.controller('bracketCtrl', function ($scope, $uibModal, $http) {
         }
     }
 
-    function saveFn(data) {
-        console.log(data);
-    }
-
-    function onclick(data) {
-        $('#matchCallback').text("onclick(data: '" + data + "')")
+    function saveFn(data, userData) {
+        //userData aloja la informacion del torneo
+        //data es toda la informacion del bracket
+        $(".block").addClass("loading");
+        var consulta = {
+            query:"select * from partidos where torneos_codTorneo = " + userData.codTorneo + "",
+            method: "GET"
+        }
+        $http.post('../../apis/porcesaAPI.php', {
+            data: {params:  consulta}
+        }).success(function(items){
+            if (items.length == 0) {
+                var stringQuery = "INSERT INTO partidos (torneos_codTorneo, bracket) VALUES (" +
+                "" + userData.codTorneo + "," +
+                "'" + JSON.stringify(data) + "')";
+                var consulta = {
+                   query: stringQuery,
+                   method: "POST"
+                }
+                $http.post('../../apis/porcesaAPI.php', {
+                   data: {params:  consulta}
+                }).success(function(response){
+                   if (response == "1") {
+                       $(".block").removeClass("loading");
+                   } else {
+                       administrarMensajeSweet2({titulo:'Error al enviar params', tipo:'error', texto: ''});
+                       $(".block").removeClass("loading");
+                   }
+                }).error(function(){
+                   administrarMensajeSweet2({titulo:'Error al enviar params', tipo:'error', texto: ''});
+                   $(".block").removeClass("loading");
+                });
+            } else {
+                var stringQuery = "UPDATE partidos set  " + 
+                "bracket = '" + JSON.stringify(data) + "'" +
+                "where torneos_codTorneo = " + userData.codTorneo + "";
+                var consulta = {
+                    query: stringQuery,
+                    method: "POST"
+                }
+                $http.post('../../apis/porcesaAPI.php', {
+                    data: {params:  consulta}
+                }).success(function(response){
+                    if (response == "1") {
+                        $(".block").removeClass("loading");
+                    } else {
+                        administrarMensajeSweet2({titulo:'Error al enviar params', tipo:'error', texto: ''});
+                        $(".block").removeClass("loading");
+                    }
+                }).error(function(){
+                    administrarMensajeSweet2({titulo:'Error al enviar params', tipo:'error', texto: ''});
+                    $(".block").removeClass("loading");
+                });
+            }
+        }).error(function(){
+            alert('Error al intentar enviar el query.');
+        });
     }
 
     $scope.getTorneo = function(torneo) {
+        //Bloque la pagina por los callbacks
         $(".block").addClass("loading");
         if (torneo != null) {
             var teamsArr = [];
@@ -203,44 +267,70 @@ app.controller('bracketCtrl', function ($scope, $uibModal, $http) {
                 query:"SELECT t1.nombre FROM team AS t1 INNER JOIN participantes AS t2 ON t1.codTeam = t2.team_codTeams WHERE t2.torneos_codTorneo = " + parseInt(torneo.codTorneo) + "",
                 method: "GET"
             }
-
+            //Query para traer los participantes, los tomo en cuenta cuando esta tabla ya tenga registros y no tenga resultados
             $http.post('../../apis/porcesaAPI.php', {
                 data: {params:  consulta}
-            }).success(function(data) {
-                if (data.length == 4 || data.length == 8 || data.length == 16 || data.length == 32 || data.length == 64) {
-                    data.forEach(function(item) {
-                        itemsArr.push(item.nombre);
-                        if (itemsArr.length == 2) {
-                            teamsArr.push(itemsArr);
-                            itemsArr = [];
-                        }
-                        if (data.length - 1 == data.indexOf(item)) {
-                            var singleEliminations = {
-                                "teams": teamsArr,
-                                "results": [
-                                    [
-                                        
-                                    ]
-                                ]
-                            }
+            }).success(function(bracket) {
+                if (bracket.length == 4 || bracket.length == 8 || bracket.length == 16 || bracket.length == 32 || bracket.length == 64) {
+                    var consulta = {
+                        query:"select * from partidos where torneos_codTorneo = " + torneo.codTorneo + "",
+                        method: "GET"
+                    }
+                    //Con este query verifico si hay algun bracket con resultados
+                    $http.post('../../apis/porcesaAPI.php', {
+                        data: {params:  consulta}
+                    }).success(function(result){
+                        if (result.length > 0) {
+                            //Si entra aqui es porque ya hay resultados en la tabla partidos
+                            var singleEliminations = JSON.parse(result[0].bracket);
                             $('.playoff').bracket({
                                 init: singleEliminations,
                                 skipConsolationRound: true,
                                 teamWidth: 100,
                                 scoreWidth: 30,
-                                determineWinner: function(match) {
-                                    switch(match.data) { 
-                                        case 1: [match.a, match.b]; // first team is the winner
-                                        case 2: return [match.b, match.a]; // second team is the winner
-                                        default : return []; // no winner yet
-                                    }
-                                }
+                                save: saveFn,
+                                userData: torneo,
+                                disableToolbar: true,
+                                disableTeamEdit: true
                             });
                             $(".block").removeClass("loading");
+                            return false;
+                        } else {
+                            //Caso contrario, armo el bracket con los participantes
+                            bracket.forEach(function(item) {
+                                itemsArr.push(item.nombre);
+                                if (itemsArr.length == 2) {
+                                    teamsArr.push(itemsArr);
+                                    itemsArr = [];
+                                }
+                                if (bracket.length - 1 == bracket.indexOf(item)) {
+                                    var singleEliminations = {
+                                        "teams": teamsArr,
+                                        "results": [
+                                            [
+                                                
+                                            ]
+                                        ]
+                                    }
+                                    $('.playoff').bracket({
+                                        init: singleEliminations,
+                                        skipConsolationRound: true,
+                                        teamWidth: 100,
+                                        scoreWidth: 30,
+                                        save: saveFn,
+                                        userData: torneo,
+                                        disableToolbar: true,
+                                        disableTeamEdit: true
+                                    });
+                                    $(".block").removeClass("loading");
+                                }
+                            });
                         }
+                    }).error(function(){
+                        alert('Error al intentar enviar el query.');
                     });
                 } else {
-                    if (data.length == 0) {
+                    if (bracket.length == 0) {
                         var registros = $scope.crearBracketBye2(torneo.num_participantes, itemsArr, teamsArr);
                         var singleEliminations = {
                             "teams": registros,
@@ -257,14 +347,14 @@ app.controller('bracketCtrl', function ($scope, $uibModal, $http) {
                         });
                         $(".block").removeClass("loading");
                     } else {
-                        data.forEach(function(item) {
+                        bracket.forEach(function(item) {
                             itemsArr.push(item.nombre);
                             if (itemsArr.length == 2) {
                                 teamsArr.push(itemsArr);
                                 itemsArr = [];
                             }
-                            if (data.length - 1 == data.indexOf(item)) {
-                                var registros = $scope.crearBracketBye(data.length, itemsArr, teamsArr);
+                            if (bracket.length - 1 == bracket.indexOf(item)) {
+                                var registros = $scope.crearBracketBye(bracket.length, itemsArr, teamsArr);
                                 var singleEliminations = {
                                     "teams": registros,
                                     "results": [
@@ -281,7 +371,6 @@ app.controller('bracketCtrl', function ($scope, $uibModal, $http) {
                                     disableToolbar: false,
                                     disableTeamEdit: false
                                 });
-                                $(".team.highlight").children().prop('disabled',true);
                                 $(".block").removeClass("loading");
                             }
                         });

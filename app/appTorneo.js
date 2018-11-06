@@ -2,7 +2,6 @@
 var app = angular.module('myApp', ['ngRoute', 'ngAnimate', 'ngSanitize', 'ui.bootstrap']);
 
 app.controller('torneoCtrl', function ($scope, $rootScope, $uibModal, $http) {
-    console.log('Data del user: ' + localStorage.setItem);
 
     $scope.nuevoTorneo = function() {
         $scope.modalInstance = $uibModal.open({
