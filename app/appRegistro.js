@@ -39,8 +39,13 @@ app.controller('loginCtrl', function ($scope, $uibModal, $http, $window) {
             if (data.length == 0) {
                 administrarMensajeSweet2({titulo:'Usuario y contraseña incorrecto', tipo:'error', texto: ''});
             } else {
-                //$cookies.username = data;
-                window.location = 'views/torneos/torneos.html';
+                $http.post('apis/data_session.php', {
+                    sesion: {params:  data}
+                }).success(function(result){
+                    window.location = 'views/torneos/torneos.html';
+                }).error(function(){
+                    alert('Error al intentar enviar el query.');
+                });
             }
         }).error(function(){
             alert('Error al intentar enviar el query.');

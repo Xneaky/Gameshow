@@ -3,6 +3,32 @@ var app = angular.module('myApp', ['ngRoute', 'ngAnimate', 'ngSanitize', 'ui.boo
 
 app.controller('torneoCtrl', function ($scope, $rootScope, $uibModal, $http) {
 
+    //Verificando si ha iniciado sesion
+    $http.post('../../apis/check_session.php', {
+        data: {params:  ''}
+    }).success(function(data){
+        if (!data) {
+            window.location = '../../index.html';
+        } else {
+            $scope.listarTorneos();
+        }
+    }).error(function(){
+        alert('Error al intentar enviar el query.');
+    });
+
+    $scope.destroySession = function  () {
+        //Destruyendo la sesion
+        $http.post('../../apis/destroy_session.php', {
+            data: {params:  ''}
+        }).success(function(data){
+            if (data) {
+                window.location = '../../index.html';
+            }
+        }).error(function(){
+            alert('Error al intentar enviar el query.');
+        });
+    };
+
     $scope.nuevoTorneo = function() {
         $scope.modalInstance = $uibModal.open({
             backdrop: 'static',
@@ -39,8 +65,6 @@ app.controller('torneoCtrl', function ($scope, $rootScope, $uibModal, $http) {
             alert('Error al intentar enviar el query.');
         });
     };
-
-    $scope.listarTorneos();
 
     $scope.cssEstado = function(activo) {
         var css = 'label-danger';
