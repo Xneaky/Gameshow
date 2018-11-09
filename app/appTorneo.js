@@ -39,6 +39,17 @@ app.controller('torneoCtrl', function ($scope, $rootScope, $uibModal, $http) {
         });
     };
 
+    $scope.infoTorneo = function(torneo) {
+        $scope.infoTorneo = angular.copy(torneo);
+        $scope.modalInfoTorneo = $uibModal.open({
+            backdrop: 'static',
+            scope: $scope,
+            keyboard: false,
+            templateUrl: 'modalInfoTorneo.html',
+            controller: 'infoTorneoCtrl'
+        });
+    };
+
     $scope.seleccionarTorneo = function(torneo) {
         $scope.editarTorneo = angular.copy(torneo);
         $scope.modaleditarTorneo = $uibModal.open({
@@ -80,6 +91,66 @@ app.controller('torneoCtrl', function ($scope, $rootScope, $uibModal, $http) {
         return etiqueta;
     };
 });
+
+app.controller('infoTorneoCtrl', function ($scope, $http, $uibModal, $uibModalInstance, $window) {
+
+    var administrarMensajeSweet = function(conf) {
+        $window.swal({
+                title: conf.titulo,
+                text: conf.texto,
+                type: conf.tipo,
+                showCancelButton: false
+            },
+            function(isConfirm){
+                if (isConfirm){
+                    $uibModalInstance.close();
+                }
+            });
+    };
+
+    var administrarMensajeSweet2 = function(conf) {
+        $window.swal({
+                title: conf.titulo,
+                text: conf.texto,
+                type: conf.tipo,
+                showCancelButton: false
+            },
+            function(isConfirm){
+                //Se cierra automaticamente
+            });
+    };
+
+    $scope.registrar = function(infoTorneo) {
+
+        var stringQuery ="INSERT INTO participantes (torneos_codTorneo, team_codTeams) VALUES (" +
+             + infoTorneo.codTorneo + "," +
+            "3)";
+
+        var consulta = {
+            query: stringQuery,
+            method: "POST"
+        }
+        $http.post('../../apis/porcesaAPI.php', {
+            data: {params:  consulta}
+        }).success(function(response){
+            if (response == "1") {
+                $scope.listarTorneos();
+                administrarMensajeSweet({titulo:'Se ha registrado exitosamente', tipo:'success', texto: ''});
+            } else {
+                administrarMensajeSweet({titulo:'Error al actualizar', tipo:'error', texto: ''});
+            }
+        }).error(function(){
+            administrarMensajeSweet({titulo:'Error al enviar params', tipo:'error', texto: ''});
+        });
+    };
+
+    $scope.cerrarModal = function() {
+        $uibModalInstance.close();
+    };
+});
+
+
+
 
 app.controller('crearTorneoCtrl', function ($scope, $http, $uibModal, $uibModalInstance, $window) {
     $scope.newTorneo = {};

@@ -4681,6 +4681,43 @@ body.skin-1 {
 .skin-1 .nav.nav-tabs > li.active {
   background: transparent;
 }
+
+.contenedor{
+  margin: 0
+  padding: 0;
+  position: relative;
+
+
+
+}
+
+.contenedor .box {
+  list-style: none;
+  position: relative;
+  width: 200px;
+  height: 100px;
+  background: #3a4459;
+  float: left;
+  margin: 15px;
+  box-sizing: border-box;
+  overflow: hidden;
+  border-radius: 10px;
+
+}
+
+.contenedor .box .tor {
+  margin: 0;
+  padding: 0;
+  font-size: 2em;
+  color: #23c6c8;
+  text-transform: uppercase;
+  text-align: center;
+  position: relative;
+  top:50%;
+  transform: translateY(-50%);
+}
+
+
 /*
  *
  *   SKIN 2 - INSPINIA - Responsive Admin Theme
@@ -5153,3 +5190,4 @@ body.skin-3 {
 div.playoff {
     overflow: auto;
 }
+

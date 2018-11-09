@@ -67,7 +67,7 @@
                             <span class="m-r-sm text-muted welcome-message">Gameshow.</span>
                         </li>
                         <li>
-                            <a ng-click="destroySession()">
+                            <a href="../../index.html">
                                 <i class="fa fa-sign-out"></i> Cerrar Sesión
                             </a>
                         </li>
@@ -97,7 +97,6 @@
                             <div class="ibox-title">
                                 <h5>Listado de torneos</h5>
                                 <div class="ibox-tools">
-                                    <a href="" class="btn btn-primary btn-xs" ng-click="nuevoTorneo()">Nuevo Torneo</a>
                                 </div>
                             </div>
                             <div class="ibox-content">
@@ -111,26 +110,16 @@
 
                                 <div class="project-list">
                                     <table class="table table-hover">
-                                        <thead>
-                                            <tr>
-                                                <th>Nombre</th>
-                                                <th>Tipo de torneo</th>
-                                                <th>Numero de participantes</th>
-                                                <th>Activo</th>
-                                                <th>Acciones</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr ng-repeat="torneo in torneos| filter: query">
-                                                <td class="project-title"><span class="pie">{{torneo.Nombre}}</span></td>
-                                                <td class="project-title">{{torneo.tipo_torneo}}</td>
-                                                <td class="project-title">{{torneo.num_participantes}}</td>
-                                                <td class="project-title"><span class="label {{cssEstado(torneo.activo)}}">{{etiquetaEstado(torneo.activo)}}</span></td>
-                                                <td class="text-navy">
-                                                    <button type="button" class="btn btn-xs btn-default" ng-click="seleccionarTorneo(torneo)">Editar</button>
-                                                </td>
-                                            </tr>
-                                        </tbody>
+                                        <!--<thead>-->
+                                            <!--<tr>-->
+                                                <!--<th>Nombre</th>-->
+                                            <!--</tr>-->
+                                        <!--</thead>-->
+                                        <div class="contenedor">
+                                            <div class="box" ng-repeat="torneo in torneos| filter: query">
+                                                <div ng-click="infoTorneo(torneo)" class="tor"><span class="pie">{{torneo.Nombre}}</span></div>
+                                            </div>
+                                        </div>
                                     </table>
                                 </div>
                                 </div>
