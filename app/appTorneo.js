@@ -122,11 +122,11 @@ app.controller('infoTorneoCtrl', function ($scope, $http, $uibModal, $uibModalIn
             });
     };
 
-    $scope.registrar = function(infoTorneo) {
+    $scope.registrar = function(infoTorneo, user) {
 
         var stringQuery ="INSERT INTO participantes (torneos_codTorneo, team_codTeams) VALUES (" +
              + infoTorneo.codTorneo + "," +
-            "3)";
+            "" + user.id_usuarios + ")";
 
         var consulta = {
             query: stringQuery,

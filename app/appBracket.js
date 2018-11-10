@@ -278,10 +278,19 @@ app.controller('bracketCtrl', function ($scope, $uibModal, $http, $window) {
         if (torneo != null) {
             var teamsArr = [];
             var itemsArr = [];
-            var consulta = {
-                query:"SELECT t1.nombre FROM team AS t1 INNER JOIN participantes AS t2 ON t1.codTeam = t2.team_codTeams WHERE t2.torneos_codTorneo = " + parseInt(torneo.codTorneo) + "",
-                method: "GET"
+            var consulta;
+            if (torneo.tipo_torneo == 'Equipos') {
+                consulta = {
+                    query:"SELECT t1.nombre FROM team AS t1 INNER JOIN participantes AS t2 ON t1.codTeam = t2.team_codTeams WHERE t2.torneos_codTorneo = " + parseInt(torneo.codTorneo) + "",
+                    method: "GET"
+                }
+            } else {
+                consulta = {
+                    query:"SELECT CONCAT(t1.nombre, ' ', t1.apellido) AS nombre FROM usuarios AS t1 INNER JOIN participantes AS t2 ON t1.id_usuarios = t2.team_codTeams WHERE t2.torneos_codTorneo = " + parseInt(torneo.codTorneo) + "",
+                    method: "GET"
+                }
             }
+
             //Query para traer los participantes, los tomo en cuenta cuando esta tabla ya tenga registros y no tenga resultados
             $http.post('../../apis/porcesaAPI.php', {
                 data: {params:  consulta}

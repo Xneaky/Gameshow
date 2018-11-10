@@ -116,7 +116,7 @@
                                             <!--</tr>-->
                                         <!--</thead>-->
                                         <div class="contenedor">
-                                            <div class="box" ng-repeat="torneo in torneos| filter: query">
+                                            <div class="box" ng-repeat="torneo in torneos | filter: {activo:1} | filter: query">
                                                 <div ng-click="infoTorneo(torneo)" class="tor"><span class="pie">{{torneo.Nombre}}</span></div>
                                             </div>
                                         </div>
