@@ -4,6 +4,21 @@ var app = angular.module('myApp', ['ngRoute', 'ngAnimate', 'ngSanitize', 'ui.boo
 app.controller('bracketCtrl', function ($scope, $uibModal, $http, $window) {
     $scope.torneos = [];
 
+    //Verificando si ha iniciado sesion
+    $http.post('../../apis/check_session.php', {
+        data: {params:  ''}
+    }).success(function(data){
+        if (!data) {
+            window.location = '../../index.html';
+        } else {
+            $scope.permisos = data[0]; 
+            console.log($scope.permisos);
+            $scope.listarTorneos();
+        }
+    }).error(function(){
+        alert('Error al intentar enviar el query.');
+    });
+
     $scope.listarTorneos = function() {
         $scope.torneos = [];
         var consulta = {

@@ -6,6 +6,6 @@
 	
 	session_start();
 	/*session is started if you don't write this line can't use $_Session  global variable*/
-	$_SESSION["newsession"]=$sesion;
-	print json_encode($_SESSION["newsession"]);
+	$_SESSION["wMhLRCf"]=$sesion;
+	print json_encode($_SESSION["wMhLRCf"]);
 ?>

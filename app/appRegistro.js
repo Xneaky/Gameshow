@@ -42,7 +42,11 @@ app.controller('loginCtrl', function ($scope, $uibModal, $http, $window) {
                 $http.post('apis/data_session.php', {
                     sesion: {params:  data}
                 }).success(function(result){
-                    window.location = 'views/torneos/torneos.html';
+                    if (result[0].idrol == 3) {
+                        window.location = 'views/torneos/torneosJugador.html';
+                    } else {
+                        window.location = 'views/torneos/torneos.html';
+                    }
                 }).error(function(){
                     alert('Error al intentar enviar el query.');
                 });

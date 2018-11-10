@@ -10,6 +10,8 @@ app.controller('torneoCtrl', function ($scope, $rootScope, $uibModal, $http) {
         if (!data) {
             window.location = '../../index.html';
         } else {
+            $scope.permisos = data[0]; 
+            console.log($scope.permisos);
             $scope.listarTorneos();
         }
     }).error(function(){
