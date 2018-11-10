@@ -146,6 +146,7 @@ app.controller('infoTorneoCtrl', function ($scope, $http, $uibModal, $uibModalIn
 
     $scope.cerrarModal = function() {
         $uibModalInstance.close();
+        window.location.reload();
     };
 });
 
