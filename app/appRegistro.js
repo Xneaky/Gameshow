@@ -42,7 +42,7 @@ app.controller('loginCtrl', function ($scope, $uibModal, $http, $window) {
                 $http.post('apis/data_session.php', {
                     sesion: {params:  data}
                 }).success(function(result){
-                    if (result[0].idrol == 3) {
+                    if (result[0].id_rol == 3) {
                         window.location = 'views/torneos/torneosJugador.html';
                     } else {
                         window.location = 'views/torneos/torneos.html';
@@ -75,7 +75,7 @@ app.controller('crearUsuarioCtrl', function ($scope, $http, $uibModal, $uibModal
 
     $scope.guardar = function(newUsuario) {
 
-        var stringQuery = "INSERT INTO usuarios (idrol, nombre, apellido, email, username, pwd, activo) VALUES " +
+        var stringQuery = "INSERT INTO usuarios (id_rol, nombre, apellido, email, username, pwd, activo) VALUES " +
             "('3'," +
             "'" + newUsuario.nombre_usuario + "'," +
             "'" + newUsuario.apellido_usuario + "'," +

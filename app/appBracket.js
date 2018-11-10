@@ -286,7 +286,7 @@ app.controller('bracketCtrl', function ($scope, $uibModal, $http, $window) {
                 }
             } else {
                 consulta = {
-                    query:"SELECT CONCAT(t1.nombre, ' ', t1.apellido) AS nombre FROM usuarios AS t1 INNER JOIN participantes AS t2 ON t1.id_usuarios = t2.team_codTeams WHERE t2.torneos_codTorneo = " + parseInt(torneo.codTorneo) + "",
+                    query:"SELECT CONCAT(t1.nombre_usuario, ' ', t1.apellido_usuario) AS nombre FROM usuarios AS t1 INNER JOIN participantes AS t2 ON t1.id_usuarios = t2.team_codTeams WHERE t2.torneos_codTorneo = " + parseInt(torneo.codTorneo) + "",
                     method: "GET"
                 }
             }

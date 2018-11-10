@@ -34,7 +34,7 @@
                             </span>
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                 <span class="clear"><span class="block m-t-xs">
-                                <strong class="font-bold">{{permisos.nombre}} {{permisos.apellido}}</strong>
+                                <strong class="font-bold">{{permisos.nombre_usuario}} {{permisos.apellido_usuario}}</strong>
                                 </span> <span class="text-muted text-xs block"></span></span>
                             </a>
                         </div>
@@ -45,12 +45,12 @@
                     <!-- Menú -->
                     <li>
                         <a href="brackets.html"><i class="fa fa-gamepad"></i><span class="nav-label">Brackets</span></a>
-                        <a href="../torneos/torneos.html" ng-if="permisos.idrol == 1"><i class="fa fa-desktop"></i><span class="nav-label">Torneos</span></a>
+                        <a href="../torneos/torneos.html" ng-if="permisos.id_rol == 1"><i class="fa fa-desktop"></i><span class="nav-label">Torneos</span></a>
                         <a href="../torneos/torneosJugador.html"><i class="fa fa-desktop"></i><span class="nav-label">TorneosJ</span></a>
-                        <a href="../jugadores/jugadores.html" ng-if="permisos.idrol == 1"><i class="fa fa-users"></i><span class="nav-label">Jugadores</span></a>
-                        <a href="../modulos/modulos.html" ng-if="permisos.idrol == 1"><i class="fa fa-eye"></i> <span class="nav-label">Modulos</span> </a>
-                        <a href="../roles/roles.html" ng-if="permisos.idrol == 1"><i class="fa fa-chain"></i><span class="nav-label">Roles</span></a>
-                        <a href="../usuarios/usuarios.html" ng-if="permisos.idrol == 1"><i class="fa fa-key"></i><span class="nav-label">Usuarios</span></a>
+                        <a href="../jugadores/jugadores.html" ng-if="permisos.id_rol == 1"><i class="fa fa-users"></i><span class="nav-label">Jugadores</span></a>
+                        <a href="../modulos/modulos.html" ng-if="permisos.id_rol == 1"><i class="fa fa-eye"></i> <span class="nav-label">Modulos</span> </a>
+                        <a href="../roles/roles.html" ng-if="permisos.id_rol == 1"><i class="fa fa-chain"></i><span class="nav-label">Roles</span></a>
+                        <a href="../usuarios/usuarios.html" ng-if="permisos.id_rol == 1"><i class="fa fa-key"></i><span class="nav-label">Usuarios</span></a>
                     </li>
                     <!-- END Menú -->
                 </ul>
