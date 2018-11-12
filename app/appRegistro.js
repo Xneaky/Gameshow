@@ -3,6 +3,8 @@ var app = angular.module('myApp', ['ngRoute', 'ngAnimate', 'ngSanitize', 'ui.boo
 
 app.controller('loginCtrl', function ($scope, $uibModal, $http, $window) {
 
+    $scope.loginData = {};
+
     $scope.nuevoUsuario = function(size) {
         $scope.modalInstance = $uibModal.open({
             backdrop: 'static',
@@ -26,30 +28,50 @@ app.controller('loginCtrl', function ($scope, $uibModal, $http, $window) {
         });
     };
 
+    /*
     $scope.loggin = function(user) {
-        var iinn = "select * from usuarios where activo = 1 and email = '" + user.email + "' and pwd = '" + user.pwd + "'"
+
         var consulta = {
-            query: iinn,
-            method: "GET"
+            query: "select * from usuarios where activo = 1 and email = '" + user.email + "' and pwd = '" + user.pwd + "'",
+            method: "Security"
         }
 
-        $http.post('apis/porcesaAPI.php', {
+        console.log("query : " + JSON.stringify(consulta));
+
+        $http.post('apis/security.php', {
+            data: {params:  consulta}
+        }).success(function(data){
+            console.log("data : " + JSON.stringify(data));
+            
+            if (data.length == 0) {
+                administrarMensajeSweet2({titulo:'Usuario y contraseña incorrecto', tipo:'error', texto: ''});
+            } else {
+                //$cookies.username = data;
+                //window.location = 'views/torneos/torneos.html';
+                window.location = 'views/index.html';
+            }
+            
+        }).error(function(){
+            alert('Error al intentar enviar el query.');
+        });
+    }
+    */
+    $scope.loggin = function(user) {
+
+        var consulta = {
+            query: "select * from usuarios where activo = 1 and email = '" + user.email + "' and pwd = '" + user.pwd + "'",
+            method: "Security"
+        }
+
+        console.log("consulta: " + JSON.stringify(consulta));
+
+        $http.post('apis/security.php', {
             data: {params:  consulta}
         }).success(function(data){
             if (data.length == 0) {
                 administrarMensajeSweet2({titulo:'Usuario y contraseña incorrecto', tipo:'error', texto: ''});
             } else {
-                $http.post('apis/data_session.php', {
-                    sesion: {params:  data}
-                }).success(function(result){
-                    if (result[0].id_rol == 3) {
-                        window.location = 'views/torneos/torneosJugador.html';
-                    } else {
-                        window.location = 'views/torneos/torneos.html';
-                    }
-                }).error(function(){
-                    alert('Error al intentar enviar el query.');
-                });
+                window.location = 'views/index.php';
             }
         }).error(function(){
             alert('Error al intentar enviar el query.');
@@ -75,7 +97,7 @@ app.controller('crearUsuarioCtrl', function ($scope, $http, $uibModal, $uibModal
 
     $scope.guardar = function(newUsuario) {
 
-        var stringQuery = "INSERT INTO usuarios (id_rol, nombre, apellido, email, username, pwd, activo) VALUES " +
+        var stringQuery = "INSERT INTO usuarios (idrol, nombre, apellido, email, username, pwd, activo) VALUES " +
             "('3'," +
             "'" + newUsuario.nombre_usuario + "'," +
             "'" + newUsuario.apellido_usuario + "'," +

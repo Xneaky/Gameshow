@@ -1,23 +1,7 @@
 'use strict';
-var app = angular.module('myApp', ['ngRoute', 'ngAnimate', 'ngSanitize', 'ui.bootstrap']);
 
-app.controller('bracketCtrl', function ($scope, $uibModal, $http, $window) {
+var bracketCtrl = function($rootScope, $scope, $uibModal, $http) {
     $scope.torneos = [];
-
-    //Verificando si ha iniciado sesion
-    $http.post('../../apis/check_session.php', {
-        data: {params:  ''}
-    }).success(function(data){
-        if (!data) {
-            window.location = '../../index.html';
-        } else {
-            $scope.permisos = data[0]; 
-            console.log($scope.permisos);
-            $scope.listarTorneos();
-        }
-    }).error(function(){
-        alert('Error al intentar enviar el query.');
-    });
 
     $scope.listarTorneos = function() {
         $scope.torneos = [];
@@ -26,7 +10,7 @@ app.controller('bracketCtrl', function ($scope, $uibModal, $http, $window) {
             method: "GET"
         }
 
-        $http.post('../../apis/porcesaAPI.php', {
+        $http.post('../apis/porcesaAPI.php', {
             data: {params:  consulta}
         }).success(function(data){
             $scope.torneos = data;
@@ -221,7 +205,7 @@ app.controller('bracketCtrl', function ($scope, $uibModal, $http, $window) {
             query:"select * from partidos where torneos_codTorneo = " + userData.codTorneo + "",
             method: "GET"
         }
-        $http.post('../../apis/porcesaAPI.php', {
+        $http.post('../apis/porcesaAPI.php', {
             data: {params:  consulta}
         }).success(function(items){
             if (items.length == 0) {
@@ -232,7 +216,7 @@ app.controller('bracketCtrl', function ($scope, $uibModal, $http, $window) {
                    query: stringQuery,
                    method: "POST"
                 }
-                $http.post('../../apis/porcesaAPI.php', {
+                $http.post('../apis/porcesaAPI.php', {
                    data: {params:  consulta}
                 }).success(function(response){
                    if (response == "1") {
@@ -253,7 +237,7 @@ app.controller('bracketCtrl', function ($scope, $uibModal, $http, $window) {
                     query: stringQuery,
                     method: "POST"
                 }
-                $http.post('../../apis/porcesaAPI.php', {
+                $http.post('../apis/porcesaAPI.php', {
                     data: {params:  consulta}
                 }).success(function(response){
                     if (response == "1") {
@@ -292,7 +276,7 @@ app.controller('bracketCtrl', function ($scope, $uibModal, $http, $window) {
             }
 
             //Query para traer los participantes, los tomo en cuenta cuando esta tabla ya tenga registros y no tenga resultados
-            $http.post('../../apis/porcesaAPI.php', {
+            $http.post('../apis/porcesaAPI.php', {
                 data: {params:  consulta}
             }).success(function(bracket) {
                 if (bracket.length == 4 || bracket.length == 8 || bracket.length == 16 || bracket.length == 32 || bracket.length == 64) {
@@ -301,7 +285,7 @@ app.controller('bracketCtrl', function ($scope, $uibModal, $http, $window) {
                         method: "GET"
                     }
                     //Con este query verifico si hay algun bracket con resultados
-                    $http.post('../../apis/porcesaAPI.php', {
+                    $http.post('../apis/porcesaAPI.php', {
                         data: {params:  consulta}
                     }).success(function(result){
                         if (result.length > 0) {
@@ -408,8 +392,10 @@ app.controller('bracketCtrl', function ($scope, $uibModal, $http, $window) {
             $(".block").removeClass("loading");
         }
     }
-});
+};
 
+bracketCtrl.$inject = ['$rootScope', '$scope', '$uibModal', '$http'];
 
 angular
     .module('myApp')
+    .controller('bracketCtrl', bracketCtrl);

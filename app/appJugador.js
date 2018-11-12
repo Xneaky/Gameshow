@@ -1,17 +1,15 @@
 'use strict';
-var app = angular.module('myApp', ['ngRoute', 'ngAnimate', 'ngSanitize', 'ui.bootstrap']);
 
-app.controller('jugadorCtrl', function ($scope, $uibModal, $http) {
+var jugadorCtrl = function($rootScope, $scope, $uibModal, $http) {
     $scope.jugadores = [];
 
     $scope.nuevoJugador = function() {
-        console.log('entrando');
         $scope.modalInstance = $uibModal.open({
             backdrop: 'static',
             scope: $scope,
             keyboard: false,
-            templateUrl: 'modalNuevoJugador.html',
-            controller: 'crearJugadorCtrl'
+            templateUrl: 'jugadores/modalNuevoJugador.html',
+            controller: crearJugadorCtrl
         });
     };
 
@@ -21,8 +19,8 @@ app.controller('jugadorCtrl', function ($scope, $uibModal, $http) {
             backdrop: 'static',
             scope: $scope,
             keyboard: false,
-            templateUrl: 'modalEditarJugador.html',
-            controller: 'editarJugadorCtrl'
+            templateUrl: 'jugadores/modalEditarJugador.html',
+            controller: editarJugadorCtrl
         });
     };
 
@@ -33,7 +31,7 @@ app.controller('jugadorCtrl', function ($scope, $uibModal, $http) {
             method: "GET"
         }
 
-        $http.post('../../apis/porcesaAPI.php', {
+        $http.post('../apis/porcesaAPI.php', {
             data: {params:  consulta}
         }).success(function(data){
             $scope.jugadores = data;
@@ -57,11 +55,11 @@ app.controller('jugadorCtrl', function ($scope, $uibModal, $http) {
             etiqueta = 'Activo'
         return etiqueta;
     };
+};
 
-    console.log("jugadores");
-});
+jugadorCtrl.$inject = ['$rootScope', '$scope', '$uibModal', '$http'];
 
-app.controller('crearJugadorCtrl', function ($scope, $http, $uibModal, $uibModalInstance, $window) {
+var crearJugadorCtrl = function($rootScope, $scope, $uibModal, $http, $window) {
     $scope.newJugador = {};
 
     var administrarMensajeSweet = function(conf) {
@@ -73,7 +71,7 @@ app.controller('crearJugadorCtrl', function ($scope, $http, $uibModal, $uibModal
         },
         function(isConfirm){
             if (isConfirm){
-               $uibModalInstance.close();
+               $scope.modalInstance.close();
             }
         });
     };
@@ -94,7 +92,7 @@ app.controller('crearJugadorCtrl', function ($scope, $http, $uibModal, $uibModal
             query: stringQuery,
             method: "POST"
         }
-        $http.post('../../apis/porcesaAPI.php', {
+        $http.post('../apis/porcesaAPI.php', {
             data: {params:  consulta}
         }).success(function(response){
             if (response == "1") {
@@ -110,12 +108,13 @@ app.controller('crearJugadorCtrl', function ($scope, $http, $uibModal, $uibModal
 
 
     $scope.cerrarModal = function() {
-        $uibModalInstance.close();
+        $scope.modalInstance.close();
     };
-});
+};
 
-app.controller('editarJugadorCtrl', function ($scope, $http, $uibModal, $uibModalInstance, $window) {
+crearJugadorCtrl.$inject = ['$rootScope', '$scope', '$uibModal', '$http', '$window'];
 
+var editarJugadorCtrl = function($rootScope, $scope, $uibModal, $http, $window) {
     var administrarMensajeSweet = function(conf) {
         $window.swal({
             title: conf.titulo,
@@ -125,7 +124,7 @@ app.controller('editarJugadorCtrl', function ($scope, $http, $uibModal, $uibModa
         },
         function(isConfirm){
             if (isConfirm){
-                $uibModalInstance.close();
+                $scope.modaleditarJugador.close();
             }
         });
     };
@@ -144,7 +143,7 @@ app.controller('editarJugadorCtrl', function ($scope, $http, $uibModal, $uibModa
             query: stringQuery,
             method: "POST"
         }
-        $http.post('../../apis/porcesaAPI.php', {
+        $http.post('../apis/porcesaAPI.php', {
             data: {params:  consulta}
         }).success(function(response){
             console.log('stringQuery:' + JSON.stringify(stringQuery));
@@ -160,9 +159,14 @@ app.controller('editarJugadorCtrl', function ($scope, $http, $uibModal, $uibModa
     };
 
     $scope.cerrarModal = function() {
-        $uibModalInstance.close();
+        $scope.modaleditarJugador.close();
     };
-});
+};
+
+editarJugadorCtrl.$inject = ['$rootScope', '$scope', '$uibModal', '$http', '$window'];
 
 angular
     .module('myApp')
+    .controller('jugadorCtrl', jugadorCtrl)
+    .controller('crearJugadorCtrl', crearJugadorCtrl)
+    .controller('editarJugadorCtrl', editarJugadorCtrl);

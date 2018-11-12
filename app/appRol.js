@@ -1,7 +1,6 @@
 'use strict';
-var app = angular.module('myApp', ['ngRoute', 'ngAnimate', 'ngSanitize', 'ui.bootstrap']);
 
-app.controller('rolCtrl', function ($scope, $uibModal, $http) {
+var rolCtrl = function($rootScope, $scope, $uibModal, $http) {
     $scope.roles = [];
     $scope.modulos = [];
 
@@ -10,8 +9,8 @@ app.controller('rolCtrl', function ($scope, $uibModal, $http) {
             backdrop: 'static',
             scope: $scope,
             keyboard: false,
-            templateUrl: 'modalNuevoRol.html',
-            controller: 'crearRolCtrl',
+            templateUrl: 'roles/modalNuevoRol.html',
+            controller: crearRolCtrl,
             size: size
         });
     };
@@ -24,8 +23,8 @@ app.controller('rolCtrl', function ($scope, $uibModal, $http) {
             backdrop: 'static',
             scope: $scope,
             keyboard: false,
-            templateUrl: 'modalEditarRol.html',
-            controller: 'editarRolCtrl'
+            templateUrl: 'roles/modalEditarRol.html',
+            controller: editarRolCtrl
         });
     };
 
@@ -36,7 +35,7 @@ app.controller('rolCtrl', function ($scope, $uibModal, $http) {
             method: "GET"
         }
 
-        $http.post('../../apis/porcesaAPI.php', {
+        $http.post('../apis/porcesaAPI.php', {
             data: {params:  consulta}
         }).success(function(data){
             $scope.roles = data;
@@ -54,7 +53,7 @@ app.controller('rolCtrl', function ($scope, $uibModal, $http) {
             method: "GET"
         }
 
-        $http.post('../../apis/porcesaAPI.php', {
+        $http.post('../apis/porcesaAPI.php', {
             data: {params:  consulta}
         }).success(function(data){
             $scope.modulos = data;
@@ -78,9 +77,11 @@ app.controller('rolCtrl', function ($scope, $uibModal, $http) {
             etiqueta = 'Activo'
         return etiqueta;
     };
-});
+};
 
-app.controller('crearRolCtrl', function ($scope, $http, $uibModal, $uibModalInstance, $window) {
+rolCtrl.$inject = ['$rootScope', '$scope', '$uibModal', '$http'];
+
+var crearRolCtrl = function($rootScope, $scope, $uibModal, $http, $window) {
     $scope.newRol = {};
 
     var administrarMensajeSweet = function(conf) {
@@ -92,7 +93,7 @@ app.controller('crearRolCtrl', function ($scope, $http, $uibModal, $uibModalInst
         },
         function(isConfirm){
             if (isConfirm){
-               $uibModalInstance.close();
+               $scope.modalInstance.close();
             }
         });
     };
@@ -108,7 +109,7 @@ app.controller('crearRolCtrl', function ($scope, $http, $uibModal, $uibModalInst
             query: stringQuery,
             method: "POST"
         }
-        $http.post('../../apis/porcesaAPI.php', {
+        $http.post('../apis/porcesaAPI.php', {
             data: {params:  consulta}
         }).success(function(response){
             if (response == "1") {
@@ -123,12 +124,13 @@ app.controller('crearRolCtrl', function ($scope, $http, $uibModal, $uibModalInst
     };
 
     $scope.cerrarModal = function() {
-        $uibModalInstance.close();
+        $scope.modalInstance.close();
     };
-});
+};
 
-app.controller('editarRolCtrl', function ($scope, $http, $uibModal, $uibModalInstance, $window) {
+crearRolCtrl.$inject = ['$rootScope', '$scope', '$uibModal', '$http', '$window'];
 
+var editarRolCtrl = function($rootScope, $scope, $uibModal, $http, $window) {
     var administrarMensajeSweet = function(conf) {
         $window.swal({
             title: conf.titulo,
@@ -138,7 +140,7 @@ app.controller('editarRolCtrl', function ($scope, $http, $uibModal, $uibModalIns
         },
         function(isConfirm){
             if (isConfirm){
-                $uibModalInstance.close();
+                $scope.modalEditarRol.close();
             }
         });
     };
@@ -154,7 +156,7 @@ app.controller('editarRolCtrl', function ($scope, $http, $uibModal, $uibModalIns
             query: stringQuery,
             method: "POST"
         }
-        $http.post('../../apis/porcesaAPI.php', {
+        $http.post('../apis/porcesaAPI.php', {
             data: {params:  consulta}
         }).success(function(response){
             console.log('stringQuery:' + JSON.stringify(stringQuery));
@@ -170,10 +172,15 @@ app.controller('editarRolCtrl', function ($scope, $http, $uibModal, $uibModalIns
     };
 
     $scope.cerrarModal = function() {
-        $uibModalInstance.close();
+        $scope.modalEditarRol.close();
     };
-});
+};
 
-app.directive('menuApp', function($parse) {
+editarRolCtrl.$inject = ['$rootScope', '$scope', '$uibModal', '$http', '$window'];
 
-});
+angular
+    .module('myApp')
+    .controller('rolCtrl', rolCtrl)
+    .controller('crearRolCtrl', crearRolCtrl)
+    .controller('editarRolCtrl', editarRolCtrl);
+

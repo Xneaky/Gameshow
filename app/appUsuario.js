@@ -1,7 +1,6 @@
 'use strict';
-var app = angular.module('myApp', ['ngRoute', 'ngAnimate', 'ngSanitize', 'ui.bootstrap']);
 
-app.controller('usuarioCtrl', function ($scope, $uibModal, $http) {
+var usuarioCtrl = function($rootScope, $scope, $uibModal, $http) {
     $scope.usuarios = [];
     $scope.roles = [];
 
@@ -10,8 +9,8 @@ app.controller('usuarioCtrl', function ($scope, $uibModal, $http) {
             backdrop: 'static',
             scope: $scope,
             keyboard: false,
-            templateUrl: 'modalNuevoUsuario.html',
-            controller: 'crearUsuarioCtrl',
+            templateUrl: '../views/usuarios/modalNuevoUsuario.html',
+            controller: crearUsuarioCtrl,
             size: size
         });
     };
@@ -22,8 +21,8 @@ app.controller('usuarioCtrl', function ($scope, $uibModal, $http) {
             backdrop: 'static',
             scope: $scope,
             keyboard: false,
-            templateUrl: 'modalEditarUsuario.html',
-            controller: 'editarUsuarioCtrl'
+            templateUrl: '../views/usuarios/modalEditarUsuario.html',
+            controller: editarUsuarioCtrl
         });
     };
 
@@ -34,9 +33,10 @@ app.controller('usuarioCtrl', function ($scope, $uibModal, $http) {
             method: "GET"
         }
 
-        $http.post('../../apis/porcesaAPI.php', {
+        $http.post('../apis/porcesaAPI.php', {
             data: {params:  consulta}
         }).success(function(data){
+            console.log(JSON.stringify(data));
             $scope.usuarios = data
         }).error(function(){
             alert('Error al intentar enviar el query.');
@@ -52,12 +52,10 @@ app.controller('usuarioCtrl', function ($scope, $uibModal, $http) {
             method: "GET"
         }
 
-        $http.post('../../apis/porcesaAPI.php', {
+        $http.post('../apis/porcesaAPI.php', {
             data: {params:  consulta}
         }).success(function(data){
-            console.log('data:' + JSON.stringify(data));
             $scope.roles = data;
-            console.log('$scope.roles:' + $scope.roles.length);
         }).error(function(){
             alert('Error al intentar enviar el query.');
         });
@@ -78,9 +76,11 @@ app.controller('usuarioCtrl', function ($scope, $uibModal, $http) {
             etiqueta = 'Activo'
         return etiqueta;
     };
-});
+};
 
-app.controller('crearUsuarioCtrl', function ($scope, $http, $uibModal, $uibModalInstance, $window) {
+usuarioCtrl.$inject = ['$rootScope', '$scope', '$uibModal', '$http'];
+
+var crearUsuarioCtrl = function($rootScope, $scope, $uibModal, $http, $window) {
     $scope.newUsuario = {};
 
     var administrarMensajeSweet = function(conf) {
@@ -92,7 +92,7 @@ app.controller('crearUsuarioCtrl', function ($scope, $http, $uibModal, $uibModal
         },
         function(isConfirm){
             if (isConfirm)
-               $uibModalInstance.close();
+               $scope.modalInstance.close();
         });
     };
 
@@ -111,7 +111,7 @@ app.controller('crearUsuarioCtrl', function ($scope, $http, $uibModal, $uibModal
             method: "POST"
         }
 
-        $http.post('../../apis/porcesaAPI.php', {
+        $http.post('../apis/porcesaAPI.php', {
             data: {params:  consulta}
         }).success(function(response){
             if (response == "1") {
@@ -127,12 +127,13 @@ app.controller('crearUsuarioCtrl', function ($scope, $http, $uibModal, $uibModal
     };
 
     $scope.cerrarModal = function() {
-        $uibModalInstance.close();
+        $scope.modalInstance.close();
     };
-});
+};
 
-app.controller('editarUsuarioCtrl', function ($scope, $http, $uibModal, $uibModalInstance, $window) {
+crearUsuarioCtrl.$inject = ['$rootScope', '$scope', '$uibModal', '$http', '$window'];
 
+var editarUsuarioCtrl = function($rootScope, $scope, $uibModal, $http, $window) {
     var administrarMensajeSweet = function(conf) {
         $window.swal({
             title: conf.titulo,
@@ -142,7 +143,7 @@ app.controller('editarUsuarioCtrl', function ($scope, $http, $uibModal, $uibModa
         },
         function(isConfirm){
             if (isConfirm){
-                $uibModalInstance.close();
+                $scope.modalEditarUsuario.close();
             }
         });
     };
@@ -162,7 +163,7 @@ app.controller('editarUsuarioCtrl', function ($scope, $http, $uibModal, $uibModa
             method: "POST"
         }
 
-        $http.post('../../apis/porcesaAPI.php', {
+        $http.post('../apis/porcesaAPI.php', {
             data: {params:  consulta}
         }).success(function(response){
             console.log('stringQuery:' + JSON.stringify(stringQuery));
@@ -178,10 +179,14 @@ app.controller('editarUsuarioCtrl', function ($scope, $http, $uibModal, $uibModa
     };
 
     $scope.cerrarModal = function() {
-        $uibModalInstance.close();
+        $scope.modalEditarUsuario.close();
     };
-});
+};
 
-app.directive('menuApp', function($parse) {
+editarUsuarioCtrl.$inject = ['$rootScope', '$scope', '$uibModal', '$http', '$window'];
 
-});
+angular
+    .module('myApp')
+    .controller('usuarioCtrl', usuarioCtrl)
+    .controller('crearUsuarioCtrl', crearUsuarioCtrl)
+    .controller('editarUsuarioCtrl', editarUsuarioCtrl);
