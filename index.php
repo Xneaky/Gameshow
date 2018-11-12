@@ -1,3 +1,7 @@
+<?php
+    session_start();
+    session_destroy(); 
+?>
 <!DOCTYPE html>
 <html ng-app="myApp" ng-app lang="en">
 
@@ -5,6 +9,9 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <!-- Clean Cache -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" /><meta http-equiv="Pragma" content="no-cache" /><meta http-equiv="Expires" content="0" />
+
 
     <title>Gameshow</title>
 
@@ -26,7 +33,6 @@
     <div class="middle-box text-center loginscreen  animated fadeInDown">
         <div>
             <h3>Bienvenido a Gameshow</h3>
-                <!--Continually expanded and constantly improved Inspinia Admin Them (IN+)-->
             <p></p>
             <p>Favor ingrese su usuario y password</p>
             <form method="post" class="m-t" role="form">

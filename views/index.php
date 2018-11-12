@@ -1,0 +1,134 @@
+<?php
+    session_start();
+    
+    if(!isset($_SESSION["userId"])){
+        header("Location: ../index.php");
+    }
+?>
+<!DOCTYPE html>
+<html ng-app="myApp" ng-app lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Gameshow</title>
+
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../font-awesome/css/font-awesome.css" rel="stylesheet">
+
+    <link href="../css/animate.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
+    <link href="../css/jquery.bracket.min.css" rel="stylesheet">
+
+    <!-- Sweetalert CSS-->
+    <link rel="stylesheet" href="../css/sweetalert.css">
+
+</head>
+
+<body ng-controller="mainCtrl">
+
+    <div id="wrapper">
+
+        <nav class="navbar-default navbar-static-side" role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav" id="side-menu">
+                    <li class="nav-header">
+                        <div class="dropdown profile-element">
+                            <span>
+                                <img alt="image" class="img-circle" src="../img/profile_small.jpg" />
+                            </span>
+                            <a data-toggle="dropdown" class="dropdown-toggle">
+                                <span class="clear"><span class="block m-t-xs">
+                                <strong class="font-bold">{{securityDataUser.nombre_usuario}} {{securityDataUser.apellido_usuario}}</strong>
+                            </a>
+                        </div>
+                        <div class="logo-element">
+                            GS
+                        </div>
+                    </li>
+                    <!-- Menú -->
+                    <li>
+                        <a href="#brackets"><i class="fa fa-gamepad"></i><span class="nav-label">Brackets</span></a>
+                        <a href="#/"><i class="fa fa-desktop"></i><span class="nav-label">Torneos</span></a>
+                        <a href="#/torneosj"><i class="fa fa-desktop"></i><span class="nav-label">Torneos Jugadores</span></a>
+                        <a href="#jugadores"><i class="fa fa-users"></i><span class="nav-label">Jugadores</span></a>   
+                        <a href="#modulos"><i class="fa fa-eye"></i> <span class="nav-label">Modulos</span> </a>
+                        <a href="#roles"><i class="fa fa-chain"></i><span class="nav-label">Roles</span></a>
+                        <a href="#usuarios"><i class="fa fa-key"></i><span class="nav-label">Usuarios</span></a>
+                    </li>
+                    <!-- END Menú -->
+                </ul>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="gray-bg">
+            <div class="row border-bottom">
+                <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+                    <div class="navbar-header">
+                        <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+                    </div>
+                    <ul class="nav navbar-top-links navbar-right">
+                        <li>
+                            <span class="m-r-sm text-muted welcome-message">Gameshow.</span>
+                        </li>
+                        <li>
+                            <a ng-click="cerrarSession()">
+                                <i class="fa fa-sign-out"></i> Cerrar Sesión
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <!-- angular templating -->
+            <!-- this is where content will be injected -->
+            <div ng-view></div>
+            <div class="footer">
+
+                <div>
+                    <strong>Gameshow</strong> Company &copy; 2018
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Mainly scripts -->
+    <script src="../js/jquery-2.1.1.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="../js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+    <!-- Custom and plugin javascript -->
+    <script src="../js/inspinia.js"></script>
+    <script src="../js/plugins/pace/pace.min.js"></script>
+
+    <!-- Scripts de AngularJS-->
+    <script src="../js/angular.js"></script>
+    <script src="../js/angular-animate.js"></script>
+    <script src="../js/angular-route.min.js"></script>
+    <script src="../js/angular-sanitize.js"></script>
+    <script src="../js/ui-bootstrap-tpls-2.1.4.js"></script>
+    <script src="../js/jquery.bracket.min.js"></script>
+    <!--<script src="app/menuDirective.js"></script>-->
+    <script src="app.js"></script>
+    <script src="controller.js"></script>
+    <script src="config.js"></script>
+    <script src="directive.js"></script>
+
+    <!--- Controladores -->
+    <script src="../app/appUsuario.js"></script>
+    <script src="../app/appTorneo.js"></script>
+    <script src="../app/appRol.js"></script>
+    <script src="../app/appModulo.js"></script>
+    <script src="../app/appJugador.js"></script>
+    <script src="../app/appBracket.js"></script>
+
+    <!-- Page-Level Scripts -->
+    <!-- Sweetalert JS-->
+    <script src="../js/sweetalert-dev.js"></script>
+
+</body>
+
+</html>
