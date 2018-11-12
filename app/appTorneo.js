@@ -121,11 +121,12 @@ var crearTorneoCtrl = function($rootScope, $scope, $uibModal, $http, $window) {
             administrarMensajeSweet2({titulo:'Ingrese numero de participantes', tipo:'error', texto: ''});
             return false;
         }
-        var stringQuery = "INSERT INTO torneos (Nombre, activo, tipo_torneo, num_participantes) VALUES (" +
+        var stringQuery = "INSERT INTO torneos (Nombre, activo, tipo_torneo, num_participantes, descripcion) VALUES (" +
         "'" + newTorneo.Nombre + "'," +
         "true," +
         "'" + newTorneo.tipo_torneo + "'," +
-        "" + newTorneo.num_participantes + ")";
+        "" + newTorneo.num_participantes + ", " +
+        "'" + newTorneo.descripcion + "')";
 
         var consulta = {
            query: stringQuery,
@@ -205,7 +206,8 @@ var editarTorneoCtrl = function($rootScope, $scope, $uibModal, $http, $window) {
         "Nombre = '" + editarTorneo.Nombre + "', " +
         "tipo_torneo = '" + editarTorneo.tipo_torneo + "', " +
         "num_participantes = '" + editarTorneo.num_participantes + "', " +
-        "activo = '" + editarTorneo.activo + "' " +
+        "activo = '" + editarTorneo.activo + "', " +
+        "descripcion = '" + editarTorneo.descripcion + "' " +
         "where codTorneo = " + editarTorneo.codTorneo + "";
         var consulta = {
             query: stringQuery,
