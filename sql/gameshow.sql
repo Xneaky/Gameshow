@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 12, 2018 at 11:26 PM
+-- Generation Time: Nov 13, 2018 at 03:48 AM
 -- Server version: 5.7.20-log
 -- PHP Version: 5.6.23
 
@@ -19,21 +19,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `gameshow2`
 --
-
--- --------------------------------------------------------
-
---
--- Table structure for table `duelos`
---
-
-CREATE TABLE `duelos` (
-  `id_duelo` int(11) NOT NULL,
-  `equipo_1` varchar(100) NOT NULL,
-  `equipo_2` varchar(100) NOT NULL,
-  `torneo` varchar(100) NOT NULL,
-  `gol_equipo_1` int(11) NOT NULL,
-  `gol_equipo_2` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -66,6 +51,13 @@ CREATE TABLE `jugadores` (
   `direccion` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `jugadores`
+--
+
+INSERT INTO `jugadores` (`codJugadores`, `nombre_jugador`, `apellido_jugador`, `nickname_jugador`, `email`, `fecha_nacimiento`, `activo`, `telefono_jugador`, `pais_jugador`, `direccion`) VALUES
+(1, 'Javier', 'Castillo', 'Xneaky', 'admin', '11/06/1990', 1, 12345678, 'El Salvador', 'Algo algo');
+
 -- --------------------------------------------------------
 
 --
@@ -87,10 +79,9 @@ CREATE TABLE `jugadores_team` (
 CREATE TABLE `modulos` (
   `id_modulo` int(11) NOT NULL,
   `nombre_modulo` varchar(50) NOT NULL,
-  `descripcion_modulo` varchar(250) NOT NULL,
-  `activo` bit(1) NOT NULL,
-  `roles_id_rol` int(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `descripcion_modulo` varchar(300) NOT NULL,
+  `activo` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -128,7 +119,28 @@ CREATE TABLE `roles` (
   `modulos` varchar(80) NOT NULL,
   `descripcion_rol` varchar(250) NOT NULL,
   `activo` bit(1) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `roles`
+--
+
+INSERT INTO `roles` (`id_rol`, `nombre_rol`, `modulos`, `descripcion_rol`, `activo`) VALUES
+(1, 'Administrador', 'todos', 'Administrador', b'1'),
+(2, 'Especial', 'Algunos', 'Ayudante del administrador', b'1'),
+(3, 'Simple', 'pocos', 'Jugador o visitante', b'1');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `roles_modulos`
+--
+
+CREATE TABLE `roles_modulos` (
+  `id_roles_modulos` int(11) NOT NULL,
+  `roles_id_rol` int(11) NOT NULL,
+  `modulos_id_modulo` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -168,19 +180,20 @@ CREATE TABLE `usuarios` (
   `usuario` varchar(100) NOT NULL,
   `pwd` varchar(300) NOT NULL,
   `activo` tinyint(1) NOT NULL,
-  `roles_id_rol` int(11) NOT NULL,
-  `jugadores_codJugadores` int(11) NOT NULL
+  `jugadores_codJugadores` int(11) NOT NULL,
+  `rol_id_rol` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `usuarios`
+--
+
+INSERT INTO `usuarios` (`id_usuarios`, `usuario`, `pwd`, `activo`, `jugadores_codJugadores`, `rol_id_rol`) VALUES
+(1, 'Xneaky', 'admin', 1, 1, 1);
 
 --
 -- Indexes for dumped tables
 --
-
---
--- Indexes for table `duelos`
---
-ALTER TABLE `duelos`
-  ADD PRIMARY KEY (`id_duelo`);
 
 --
 -- Indexes for table `juego`
@@ -206,9 +219,7 @@ ALTER TABLE `jugadores_team`
 -- Indexes for table `modulos`
 --
 ALTER TABLE `modulos`
-  ADD PRIMARY KEY (`id_modulo`,`roles_id_rol`),
-  ADD KEY `id_modulo` (`id_modulo`),
-  ADD KEY `fk_modulos_roles1_idx` (`roles_id_rol`);
+  ADD PRIMARY KEY (`id_modulo`);
 
 --
 -- Indexes for table `participantes`
@@ -232,6 +243,14 @@ ALTER TABLE `roles`
   ADD KEY `id_rol` (`id_rol`);
 
 --
+-- Indexes for table `roles_modulos`
+--
+ALTER TABLE `roles_modulos`
+  ADD PRIMARY KEY (`id_roles_modulos`,`roles_id_rol`,`modulos_id_modulo`),
+  ADD KEY `fk_roles_has_modulos_modulos1_idx` (`modulos_id_modulo`),
+  ADD KEY `fk_roles_has_modulos_roles1_idx` (`roles_id_rol`);
+
+--
 -- Indexes for table `team`
 --
 ALTER TABLE `team`
@@ -247,19 +266,14 @@ ALTER TABLE `torneos`
 -- Indexes for table `usuarios`
 --
 ALTER TABLE `usuarios`
-  ADD PRIMARY KEY (`id_usuarios`,`roles_id_rol`,`jugadores_codJugadores`),
-  ADD KEY `fk_usuarios_roles1_idx` (`roles_id_rol`),
-  ADD KEY `fk_usuarios_jugadores1_idx` (`jugadores_codJugadores`);
+  ADD PRIMARY KEY (`id_usuarios`,`jugadores_codJugadores`,`rol_id_rol`),
+  ADD KEY `fk_usuarios_jugadores1_idx` (`jugadores_codJugadores`),
+  ADD KEY `fk_usuarios_roles1_idx` (`rol_id_rol`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
---
--- AUTO_INCREMENT for table `duelos`
---
-ALTER TABLE `duelos`
-  MODIFY `id_duelo` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `juego`
 --
@@ -269,7 +283,7 @@ ALTER TABLE `juego`
 -- AUTO_INCREMENT for table `jugadores`
 --
 ALTER TABLE `jugadores`
-  MODIFY `codJugadores` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `codJugadores` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `jugadores_team`
 --
@@ -294,7 +308,12 @@ ALTER TABLE `partidos`
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id_rol` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_rol` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `roles_modulos`
+--
+ALTER TABLE `roles_modulos`
+  MODIFY `id_roles_modulos` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `team`
 --
@@ -309,7 +328,7 @@ ALTER TABLE `torneos`
 -- AUTO_INCREMENT for table `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuarios` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_usuarios` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- Constraints for dumped tables
 --
@@ -334,11 +353,18 @@ ALTER TABLE `partidos`
   ADD CONSTRAINT `fk_partidos_torneos1` FOREIGN KEY (`torneos_codTorneo`) REFERENCES `torneos` (`codTorneo`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
+-- Constraints for table `roles_modulos`
+--
+ALTER TABLE `roles_modulos`
+  ADD CONSTRAINT `fk_roles_has_modulos_modulos1` FOREIGN KEY (`modulos_id_modulo`) REFERENCES `modulos` (`id_modulo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_roles_has_modulos_roles1` FOREIGN KEY (`roles_id_rol`) REFERENCES `roles` (`id_rol`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
 -- Constraints for table `usuarios`
 --
 ALTER TABLE `usuarios`
   ADD CONSTRAINT `fk_usuarios_jugadores1` FOREIGN KEY (`jugadores_codJugadores`) REFERENCES `jugadores` (`codJugadores`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_usuarios_roles1` FOREIGN KEY (`roles_id_rol`) REFERENCES `roles` (`id_rol`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_usuarios_rol1_idx` FOREIGN KEY (`rol_id_rol`) REFERENCES `roles` (`id_rol`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
