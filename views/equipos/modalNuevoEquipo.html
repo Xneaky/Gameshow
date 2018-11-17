@@ -1,16 +1,10 @@
 <div class="modal-header">
-  <h1>Nuevo Usuario</h1>
+  <h1>Nuevo Equipo</h1>
 </div>'
 <div class="modal-body">
         <div class="form-group">
             <label>Seleccione el ról</label>
             <select class="form-control" name="rol" ng-model="newUsuario.id_rol" ng-options="rol.id_rol as rol.nombre_rol for rol in roles | orderBy:'nombre_rol'">
-                <option value="">seleccione</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label>Seleccione el jugador</label>
-            <select class="form-control" name="jugador" ng-model="newUsuario.jugadores_codJugadores" ng-options="jugador.codJugadores as jugador.nombre_jugador + '-' + jugador.apellido_jugador for jugador in jugadores | orderBy:'nombre_jugador'">
                 <option value="">seleccione</option>
             </select>
         </div>

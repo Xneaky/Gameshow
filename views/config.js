@@ -3,6 +3,8 @@
 var configState = function($routeProvider) {
     // Set default state
     $routeProvider
+    .otherwise({ redirectTo: '/torneos' })
+
     .when('/usuarios', {
         templateUrl : 'usuarios/usuarios.html',
         data: {
@@ -24,7 +26,7 @@ var configState = function($routeProvider) {
         }
     })
 
-    .when('/', {
+    .when('/torneos', {
         templateUrl : 'torneos/torneos.html',
         data: {
             pageTitle: 'Torneos'
@@ -50,11 +52,37 @@ var configState = function($routeProvider) {
         data: {
             pageTitle: 'Torneos Jugador'
         }
-    });
+    })
+
+    .when('/equipos', {
+        templateUrl : 'equipos/equipos.html',
+        data: {
+            pageTitle: 'Equipos'
+        }
+    })
 };
 
 configState.$inject = ['$routeProvider'];
 
 angular
     .module('myApp')
-    .config(configState);
+    .config(configState)
+    .run([
+        '$rootScope','$location',
+        function($rootScope, $location) {
+            $rootScope.$on('$routeChangeStart', function(event, next, current) {
+                setTimeout(function() {
+                    if ($rootScope.securityDataUser) {
+                        if ($rootScope.securityDataUser.modulos && $rootScope.securityDataUser.routers.length > 0) {
+                            if ($rootScope.securityDataUser.routers.indexOf(next.originalPath) === -1) {
+                                if (current && current.originalPath)
+                                    $location.path(current.originalPath);
+                                else
+                                    $location.path($rootScope.securityDataUser.routers[0]);
+                            }
+                        }
+                    }
+                }, 5);
+            });
+        }
+    ]);

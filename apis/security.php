@@ -19,7 +19,7 @@
 				session_start();
 				while($row = mysqli_fetch_assoc($result)) {
 					$arr[] = $row;
-					$_SESSION["userId"] = $row['id_usuarios'];
+					$_SESSION["userId"] = $row['id_usuario'];
 					//header('location: ../views/index.php'); 
 				}
 			}

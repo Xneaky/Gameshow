@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 13, 2018 at 03:48 AM
+-- Generation Time: Nov 06, 2018 at 10:55 PM
 -- Server version: 5.7.20-log
 -- PHP Version: 5.6.23
 
@@ -17,20 +17,36 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `gameshow2`
+-- Database: `gameshow`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `juego`
+-- Table structure for table `duelos`
 --
 
-CREATE TABLE `juego` (
-  `id_juego` int(11) NOT NULL,
-  `nombre_juego` varchar(100) NOT NULL,
-  `activo` tinyint(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE `duelos` (
+  `id_duelo` int(11) NOT NULL,
+  `equipo_1` varchar(100) NOT NULL,
+  `equipo_2` varchar(100) NOT NULL,
+  `torneo` varchar(100) NOT NULL,
+  `gol_equipo_1` int(11) NOT NULL,
+  `gol_equipo_2` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `duelos`
+--
+
+INSERT INTO `duelos` (`id_duelo`, `equipo_1`, `equipo_2`, `torneo`, `gol_equipo_1`, `gol_equipo_2`) VALUES
+(1, 'Barcelona', 'Getafe', 'Liga', 3, 1),
+(2, 'Alianza', 'Atletico Madrid', 'Liga', 2, 0),
+(3, 'Real Madrid', 'Leganes', 'Liga', 2, 0),
+(4, 'FAS', 'Real Sociedad', 'Liga', 4, 3),
+(5, 'Barcelona', 'Alianza', 'Liga', 2, 1),
+(6, 'Real Madrid', 'FAS', 'Liga', 2, 1),
+(7, 'Barcelona', 'Real Madrid', 'Liga', 10, 0);
 
 -- --------------------------------------------------------
 
@@ -44,31 +60,37 @@ CREATE TABLE `jugadores` (
   `apellido_jugador` varchar(45) NOT NULL,
   `nickname_jugador` varchar(45) NOT NULL,
   `email` varchar(45) NOT NULL,
+  `pwd_jugador` varchar(200) NOT NULL,
   `fecha_nacimiento` varchar(200) NOT NULL,
   `activo` tinyint(1) NOT NULL,
-  `telefono_jugador` int(8) DEFAULT NULL,
-  `pais_jugador` varchar(45) NOT NULL,
-  `direccion` varchar(45) NOT NULL
+  `team_codTeam` int(11) NOT NULL,
+  `telefono_jugador` int(8) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `jugadores`
 --
 
-INSERT INTO `jugadores` (`codJugadores`, `nombre_jugador`, `apellido_jugador`, `nickname_jugador`, `email`, `fecha_nacimiento`, `activo`, `telefono_jugador`, `pais_jugador`, `direccion`) VALUES
-(1, 'Javier', 'Castillo', 'Xneaky', 'admin', '11/06/1990', 1, 12345678, 'El Salvador', 'Algo algo');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `jugadores_team`
---
-
-CREATE TABLE `jugadores_team` (
-  `idjugadores_team` int(11) NOT NULL,
-  `jugadores_codJugadores` int(11) NOT NULL,
-  `team_codTeam` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+INSERT INTO `jugadores` (`codJugadores`, `nombre_jugador`, `apellido_jugador`, `nickname_jugador`, `email`, `pwd_jugador`, `fecha_nacimiento`, `activo`, `team_codTeam`, `telefono_jugador`) VALUES
+(1, 'Cesar ', 'Flamenco', 'asd', 'asd', '', 'Wed Nov 07 2018 00:00:00 GMT-0600 (Central Standard Time)', 1, 1, 70008000),
+(2, 'Marco', 'De Berlin', '', '', '', '', 0, 2, 12345678),
+(3, 'Sebastian ', 'Urias', '', '', '', '', 0, 3, NULL),
+(4, 'Fidel ', 'Cordova', '', '', '', '', 0, 4, NULL),
+(5, 'Manuel ', 'Flores', '', '', '', '', 0, 5, NULL),
+(6, 'Felipe', 'Cruz', '', '', '', '', 0, 6, NULL),
+(7, 'Julio', 'Maximo', '', '', '', '', 0, 7, NULL),
+(8, 'Paulino', 'James', '', '', '', '', 0, 8, NULL),
+(9, 'Roberto', 'Palermo', '', '', '', '', 0, 9, NULL),
+(10, 'Miguel ', 'Antonio', '', '', '', '', 0, 10, NULL),
+(11, 'Barlomeo', 'Rodriguez', '', '', '', '', 0, 11, NULL),
+(12, 'Hector', 'Mendoza', '', '', '', '', 0, 12, NULL),
+(13, 'Cristian ', 'Gomez ', '', '', '', '', 0, 13, NULL),
+(14, 'Omar', 'Angulo', '', '', '', '', 0, 14, NULL),
+(15, 'Anthony', 'De la O', '', '', '', '', 0, 15, NULL),
+(16, 'Franco', 'Escamilla', '', '', '', '', 0, 16, NULL),
+(17, 'asd', 'asd', 'das', 'das', 'das', 'Wed Oct 31 2018 00:00:00 GMT-0600 (Central Standard Time)', 1, 0, NULL),
+(18, '123', '123', '123', '123', 'email', 'Tue Jan 08 2019 00:00:00 GMT-0600 (Central Standard Time)', 1, 0, NULL),
+(19, 'David', 'prueba2', 'prueba2', 'prueba@prueba.com', 'prueba@prueba.com', 'Sun Nov 11 2018 00:00:00 GMT-0600 (Central Standard Time)', 1, 0, 88887777);
 
 -- --------------------------------------------------------
 
@@ -79,9 +101,19 @@ CREATE TABLE `jugadores_team` (
 CREATE TABLE `modulos` (
   `id_modulo` int(11) NOT NULL,
   `nombre_modulo` varchar(50) NOT NULL,
-  `descripcion_modulo` varchar(300) NOT NULL,
-  `activo` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `descripcion_modulo` varchar(250) NOT NULL,
+  `activo` bit(1) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `modulos`
+--
+
+INSERT INTO `modulos` (`id_modulo`, `nombre_modulo`, `descripcion_modulo`, `activo`) VALUES
+(1, 'Usuarios', 'Administracion de Usuarios', b'1'),
+(2, 'Roles', 'Administracion de Roles', b'1'),
+(3, 'Permisos', 'Administracion de Permisos', b'1'),
+(4, 'Jugadores', 'Administracion de Jugadores', b'1');
 
 -- --------------------------------------------------------
 
@@ -95,6 +127,28 @@ CREATE TABLE `participantes` (
   `team_codTeams` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `participantes`
+--
+
+INSERT INTO `participantes` (`codParticipantes`, `torneos_codTorneo`, `team_codTeams`) VALUES
+(1, 1, 1),
+(2, 1, 2),
+(3, 1, 3),
+(4, 1, 4),
+(5, 1, 5),
+(6, 1, 6),
+(7, 1, 7),
+(8, 1, 8),
+(9, 1, 9),
+(10, 1, 10),
+(11, 1, 11),
+(12, 1, 12),
+(13, 1, 13),
+(14, 1, 14),
+(15, 1, 15),
+(16, 1, 16);
+
 -- --------------------------------------------------------
 
 --
@@ -106,6 +160,13 @@ CREATE TABLE `partidos` (
   `torneos_codTorneo` int(11) NOT NULL,
   `bracket` longtext
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `partidos`
+--
+
+INSERT INTO `partidos` (`codPartido`, `torneos_codTorneo`, `bracket`) VALUES
+(1, 1, '{"teams":[["The gamers test","VR Team"],["TNC Pro","EHome Team"],["OG RD","Digital Chaos"],["Team Secret","MVP Phoenix"],["MM Team","Dragon Team"],["Team Spirit","Master Team"],["Evil Team","LOL Team"],["BG Boom","QuiPro Team"]],"results":[[[[1,2],[4,3],[6,8],[null,null],[null,null],[null,null],[null,null],[null,null]],[[0,6],[null,null],[null,null],[null,null]],[[null,null],[null,null]],[[null,null]]]]}');
 
 -- --------------------------------------------------------
 
@@ -119,28 +180,16 @@ CREATE TABLE `roles` (
   `modulos` varchar(80) NOT NULL,
   `descripcion_rol` varchar(250) NOT NULL,
   `activo` bit(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `roles`
 --
 
 INSERT INTO `roles` (`id_rol`, `nombre_rol`, `modulos`, `descripcion_rol`, `activo`) VALUES
-(1, 'Administrador', 'todos', 'Administrador', b'1'),
-(2, 'Especial', 'Algunos', 'Ayudante del administrador', b'1'),
-(3, 'Simple', 'pocos', 'Jugador o visitante', b'1');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `roles_modulos`
---
-
-CREATE TABLE `roles_modulos` (
-  `id_roles_modulos` int(11) NOT NULL,
-  `roles_id_rol` int(11) NOT NULL,
-  `modulos_id_modulo` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+(1, 'Administrador', '3,2,1', 'Todos los privilegios', b'1'),
+(2, 'Admin', '3,2,1,', 'admin', b'1'),
+(3, 'Simple', '4', 'Rol para nuevos usuarios', b'1');
 
 -- --------------------------------------------------------
 
@@ -150,10 +199,31 @@ CREATE TABLE `roles_modulos` (
 
 CREATE TABLE `team` (
   `codTeam` int(11) NOT NULL,
-  `nombre` varchar(45) NOT NULL,
-  `activo` tinyint(4) NOT NULL,
-  `id_capitan` int(11) DEFAULT NULL
+  `nombre` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `team`
+--
+
+INSERT INTO `team` (`codTeam`, `nombre`) VALUES
+(1, 'The gamers test'),
+(2, 'VR Team'),
+(3, 'TNC Pro'),
+(4, 'EHome Team'),
+(5, 'OG RD'),
+(6, 'Digital Chaos'),
+(7, 'Team Secret'),
+(8, 'MVP Phoenix'),
+(9, 'MM Team'),
+(10, 'Dragon Team'),
+(11, 'Team Spirit'),
+(12, 'Master Team'),
+(13, 'Evil Team'),
+(14, 'LOL Team'),
+(15, 'BG Boom'),
+(16, 'QuiPro Team'),
+(17, 'La prueba');
 
 -- --------------------------------------------------------
 
@@ -169,6 +239,16 @@ CREATE TABLE `torneos` (
   `num_participantes` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `torneos`
+--
+
+INSERT INTO `torneos` (`codTorneo`, `Nombre`, `activo`, `tipo_torneo`, `num_participantes`) VALUES
+(1, 'Goldgames ', 1, 'Equipos', 16),
+(3, 'DeadMatch', 0, 'Solitario', 64),
+(4, 'Testing', 1, 'Equipos', 25),
+(5, 'Alfin', 0, 'Equipos', 18);
+
 -- --------------------------------------------------------
 
 --
@@ -177,56 +257,64 @@ CREATE TABLE `torneos` (
 
 CREATE TABLE `usuarios` (
   `id_usuarios` int(11) NOT NULL,
+  `id_rol` tinyint(1) NOT NULL,
+  `nombre_usuario` varchar(100) NOT NULL,
+  `apellido_usuario` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
   `usuario` varchar(100) NOT NULL,
   `pwd` varchar(300) NOT NULL,
-  `activo` tinyint(1) NOT NULL,
-  `jugadores_codJugadores` int(11) NOT NULL,
-  `rol_id_rol` int(11) NOT NULL
+  `activo` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `usuarios`
 --
 
-INSERT INTO `usuarios` (`id_usuarios`, `usuario`, `pwd`, `activo`, `jugadores_codJugadores`, `rol_id_rol`) VALUES
-(1, 'Xneaky', 'admin', 1, 1, 1);
+INSERT INTO `usuarios` (`id_usuarios`, `id_rol`, `nombre_usuario`, `apellido_usuario`, `email`, `usuario`, `pwd`, `activo`) VALUES
+(1, 1, 'aaaaa', 'aaaaaa', 'castillo_5326@hotmail.com', 'admin', 'admin', 1),
+(2, 2, 'bbbb', 'bbbb', 'bbbb@bbbb.com', 'bbbb', 'bb', 1),
+(3, 0, 'ccc', 'ccc', 'ccc@ccc.com', 'ccc', 'ccc', 0),
+(4, 0, 'dd', 'dd', 'dd', 'dd', 'dd', 1),
+(8, 0, 'fff', 'fff', 'fff', 'fff', 'd1d7e84d9049900299ee9c0b2c04b11bfa9a0437afc0bf03d8ce0e3fb8523919f13fa3a5130c5ba7987679c6f6945ca87655e746eb5345bdc8131298fa5a9b20', 0),
+(9, 0, 'ggg', 'ggg', 'ggg', 'ggg', 'fb5b2f7f3010f9c4f8d8bdb528c8a3d402f0413bf9e1e35a4fa0ff857015ae269638fbe6911bae14b51f555e27748f499ce6b68d593c4ddd059818d42860099a', 0),
+(10, 0, 'hh', 'hh', 'hh', 'hh', '7de896b588a8efaf14ecf59bcf17e883194ecbc7115e259b435551d69dbaf17741f13aaab0a759567d9b6ff361b5354edb35204d41c651bb944d2d5405e5b1de', 0),
+(11, 0, 'Javier', 'Castillo', 'asd@aasd,com', 'Xneaky', 'd404559f602eab6fd602ac7680dacbfaadd13630335e951f097af3900e9de176b6db28512f2e000b9d04fba5133e8b1c6e8df59db3a8ab9d60be4b97cc9e81db', 0),
+(12, 0, 'xxx', 'xxx', 'xxx', 'xxx', '9057ff1aa9509b2a0af624d687461d2bbeb07e2f37d953b1ce4a9dc921a7f19c45dc35d7c5363b373792add57d0d7dc41596e1c585d6ef7844cdf8ae87af443f', 0),
+(13, 1, '1234', '1234', 'admin@admin.com', '1234', 'admin@admin.com', 1),
+(16, 3, 'Benito', 'Miranda', 'Miranda@gamil.com', 'Bmiranda', '1234', 1),
+(17, 3, 'admin', 'admin', 'admin', 'admin', 'admin', 1),
+(18, 3, 'admin2', 'admin2', 'admin2', 'admin2', 'admin', 1);
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `juego`
+-- Indexes for table `duelos`
 --
-ALTER TABLE `juego`
-  ADD PRIMARY KEY (`id_juego`);
+ALTER TABLE `duelos`
+  ADD PRIMARY KEY (`id_duelo`);
 
 --
 -- Indexes for table `jugadores`
 --
 ALTER TABLE `jugadores`
-  ADD PRIMARY KEY (`codJugadores`);
-
---
--- Indexes for table `jugadores_team`
---
-ALTER TABLE `jugadores_team`
-  ADD PRIMARY KEY (`idjugadores_team`,`jugadores_codJugadores`,`team_codTeam`),
-  ADD KEY `fk_jugadores_team_jugadores1_idx` (`jugadores_codJugadores`),
-  ADD KEY `fk_jugadores_team_team1_idx` (`team_codTeam`);
+  ADD PRIMARY KEY (`codJugadores`,`team_codTeam`),
+  ADD KEY `fk_jugadores_team1_idx` (`team_codTeam`);
 
 --
 -- Indexes for table `modulos`
 --
 ALTER TABLE `modulos`
-  ADD PRIMARY KEY (`id_modulo`);
+  ADD KEY `id_modulo` (`id_modulo`);
 
 --
 -- Indexes for table `participantes`
 --
 ALTER TABLE `participantes`
   ADD PRIMARY KEY (`codParticipantes`,`torneos_codTorneo`,`team_codTeams`),
-  ADD KEY `fk_participantes_torneos_idx` (`torneos_codTorneo`);
+  ADD KEY `fk_participantes_torneos_idx` (`torneos_codTorneo`),
+  ADD KEY `fk_jugadores_team1_idx` (`team_codTeams`);
 
 --
 -- Indexes for table `partidos`
@@ -241,14 +329,6 @@ ALTER TABLE `partidos`
 ALTER TABLE `roles`
   ADD PRIMARY KEY (`id_rol`),
   ADD KEY `id_rol` (`id_rol`);
-
---
--- Indexes for table `roles_modulos`
---
-ALTER TABLE `roles_modulos`
-  ADD PRIMARY KEY (`id_roles_modulos`,`roles_id_rol`,`modulos_id_modulo`),
-  ADD KEY `fk_roles_has_modulos_modulos1_idx` (`modulos_id_modulo`),
-  ADD KEY `fk_roles_has_modulos_roles1_idx` (`roles_id_rol`);
 
 --
 -- Indexes for table `team`
@@ -266,84 +346,67 @@ ALTER TABLE `torneos`
 -- Indexes for table `usuarios`
 --
 ALTER TABLE `usuarios`
-  ADD PRIMARY KEY (`id_usuarios`,`jugadores_codJugadores`,`rol_id_rol`),
-  ADD KEY `fk_usuarios_jugadores1_idx` (`jugadores_codJugadores`),
-  ADD KEY `fk_usuarios_roles1_idx` (`rol_id_rol`);
+  ADD PRIMARY KEY (`id_usuarios`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT for table `juego`
+-- AUTO_INCREMENT for table `duelos`
 --
-ALTER TABLE `juego`
-  MODIFY `id_juego` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `duelos`
+  MODIFY `id_duelo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `jugadores`
 --
 ALTER TABLE `jugadores`
-  MODIFY `codJugadores` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT for table `jugadores_team`
---
-ALTER TABLE `jugadores_team`
-  MODIFY `idjugadores_team` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `codJugadores` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 --
 -- AUTO_INCREMENT for table `modulos`
 --
 ALTER TABLE `modulos`
-  MODIFY `id_modulo` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_modulo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `participantes`
 --
 ALTER TABLE `participantes`
-  MODIFY `codParticipantes` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `codParticipantes` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 --
 -- AUTO_INCREMENT for table `partidos`
 --
 ALTER TABLE `partidos`
-  MODIFY `codPartido` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `codPartido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
   MODIFY `id_rol` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
--- AUTO_INCREMENT for table `roles_modulos`
---
-ALTER TABLE `roles_modulos`
-  MODIFY `id_roles_modulos` int(11) NOT NULL AUTO_INCREMENT;
---
 -- AUTO_INCREMENT for table `team`
 --
 ALTER TABLE `team`
-  MODIFY `codTeam` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `codTeam` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 --
 -- AUTO_INCREMENT for table `torneos`
 --
 ALTER TABLE `torneos`
-  MODIFY `codTorneo` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `codTorneo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuarios` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_usuarios` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 --
 -- Constraints for dumped tables
 --
 
 --
--- Constraints for table `jugadores_team`
---
-ALTER TABLE `jugadores_team`
-  ADD CONSTRAINT `fk_jugadores_team_jugadores1` FOREIGN KEY (`jugadores_codJugadores`) REFERENCES `jugadores` (`codJugadores`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_jugadores_team_team1` FOREIGN KEY (`team_codTeam`) REFERENCES `team` (`codTeam`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
 -- Constraints for table `participantes`
 --
 ALTER TABLE `participantes`
+  ADD CONSTRAINT `fk_jugadores_team1_idx` FOREIGN KEY (`team_codTeams`) REFERENCES `team` (`codTeam`),
+  ADD CONSTRAINT `fk_participantes_jugadores1` FOREIGN KEY (`team_codTeams`) REFERENCES `jugadores` (`codJugadores`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_participantes_torneos` FOREIGN KEY (`torneos_codTorneo`) REFERENCES `torneos` (`codTorneo`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
@@ -351,20 +414,6 @@ ALTER TABLE `participantes`
 --
 ALTER TABLE `partidos`
   ADD CONSTRAINT `fk_partidos_torneos1` FOREIGN KEY (`torneos_codTorneo`) REFERENCES `torneos` (`codTorneo`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Constraints for table `roles_modulos`
---
-ALTER TABLE `roles_modulos`
-  ADD CONSTRAINT `fk_roles_has_modulos_modulos1` FOREIGN KEY (`modulos_id_modulo`) REFERENCES `modulos` (`id_modulo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_roles_has_modulos_roles1` FOREIGN KEY (`roles_id_rol`) REFERENCES `roles` (`id_rol`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Constraints for table `usuarios`
---
-ALTER TABLE `usuarios`
-  ADD CONSTRAINT `fk_usuarios_jugadores1` FOREIGN KEY (`jugadores_codJugadores`) REFERENCES `jugadores` (`codJugadores`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_usuarios_rol1_idx` FOREIGN KEY (`rol_id_rol`) REFERENCES `roles` (`id_rol`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

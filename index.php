@@ -37,7 +37,7 @@
             <p>Favor ingrese su usuario y password</p>
             <form method="post" class="m-t" role="form">
                 <div class="form-group">
-                    <input type="text" name="email" ng-model="loginData.email" class="form-control" placeholder="Email">
+                    <input type="text" name="email" ng-model="loginData.email" class="form-control" placeholder="Usuario">
                 </div>
                 <div class="form-group">
                     <input type="password" name="pwd" ng-model="loginData.pwd" class="form-control" placeholder="Password">

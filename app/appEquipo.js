@@ -1,36 +1,35 @@
 'use strict';
+//LoadModule rewrite_module modules/mod_rewrite.so
 
-var usuarioCtrl = function($rootScope, $scope, $uibModal, $http) {
-    $scope.usuarios = [];
-    $scope.roles = [];
-    $scope.jugadores = [];
+var equipoCtrl = function($rootScope, $scope, $uibModal, $http) {
+    $scope.equipos = [];
 
-    $scope.nuevoUsuario = function(size) {
+    $scope.nuevoEquipo = function(size) {
         $scope.modalInstance = $uibModal.open({
             backdrop: 'static',
             scope: $scope,
             keyboard: false,
-            templateUrl: '../views/usuarios/modalNuevoUsuario.html',
-            controller: crearUsuarioCtrl,
+            templateUrl: '../views/equipos/modalNuevoEquipo.html',
+            controller: crearEquipoCtrl,
             size: size
         });
     };
 
-    $scope.seleccionarUsuario = function(usuario) {
-        $scope.editarUsuario = angular.copy(usuario);
-        $scope.modalEditarUsuario = $uibModal.open({
+    $scope.seleccionarEquipo = function(equipo) {
+        $scope.editarEquipo = angular.copy(equipo);
+        $scope.modalEditarEquipo = $uibModal.open({
             backdrop: 'static',
             scope: $scope,
             keyboard: false,
-            templateUrl: '../views/usuarios/modalEditarUsuario.html',
-            controller: editarUsuarioCtrl
+            templateUrl: '../views/equipos/modalEditarEquipo.html',
+            controller: editarEquipoCtrl
         });
     };
 
-    $scope.listarUsuarios = function() {
-        $scope.usuarios = [];
+    $scope.listarEquipos = function() {
+        $scope.equipos = [];
         var consulta = {
-            query:"select * from usuarios",
+            query:"select * from equipos",
             method: "GET"
         }
 
@@ -38,50 +37,13 @@ var usuarioCtrl = function($rootScope, $scope, $uibModal, $http) {
             data: {params:  consulta}
         }).success(function(data){
             console.log(JSON.stringify(data));
-            $scope.usuarios = data
+            $scope.equipos = data
         }).error(function(){
             alert('Error al intentar enviar el query.');
         });
     };
 
-    $scope.listarUsuarios();
-
-    $scope.listarRoles = function() {
-        $scope.roles = [];
-        var consulta = {
-            query:"select * from roles",
-            method: "GET"
-        }
-
-        $http.post('../apis/porcesaAPI.php', {
-            data: {params:  consulta}
-        }).success(function(data){
-            $scope.roles = data;
-        }).error(function(){
-            alert('Error al intentar enviar el query.');
-        });
-    };
-
-    $scope.listarRoles();
-
-    $scope.listarJugadores = function() {
-        $scope.jugadores = [];
-        var consulta = {
-            query:"select nombre_jugador, apellido_jugador from jugadores where activo = 1",
-            method: "GET"
-        }
-
-        $http.post('../apis/porcesaAPI.php', {
-            data: {params:  consulta}
-        }).success(function(data){
-            console.log('jugadores : ' + JSON.stringify(data));
-            $scope.jugadores = data;
-        }).error(function(){
-            alert('Error al intentar enviar el query.');
-        });
-    };
-
-    $scope.listarJugadores();
+   // $scope.listarEquipos();
 
     $scope.cssEstado = function(activo) {
         var css = 'label-danger';
@@ -98,10 +60,10 @@ var usuarioCtrl = function($rootScope, $scope, $uibModal, $http) {
     };
 };
 
-usuarioCtrl.$inject = ['$rootScope', '$scope', '$uibModal', '$http'];
+equipoCtrl.$inject = ['$rootScope', '$scope', '$uibModal', '$http'];
 
-var crearUsuarioCtrl = function($rootScope, $scope, $uibModal, $http, $window) {
-    $scope.newUsuario = {};
+var crearEquipoCtrl = function($rootScope, $scope, $uibModal, $http, $window) {
+    $scope.newEquipo = {};
 
     var administrarMensajeSweet = function(conf) {
         $window.swal({
@@ -116,7 +78,7 @@ var crearUsuarioCtrl = function($rootScope, $scope, $uibModal, $http, $window) {
         });
     };
 
-    $scope.guardar = function(newUsuario) {
+    $scope.guardar = function(newEquipo) {
 
         var stringQuery = "INSERT INTO usuarios (id_rol, nombre_usuario, apellido_usuario, email, pwd_usuario, activo) VALUES " +
         "('" + newUsuario.id_rol + "'," +
@@ -134,15 +96,15 @@ var crearUsuarioCtrl = function($rootScope, $scope, $uibModal, $http, $window) {
             data: {params:  consulta}
         }).success(function(response){
             if (response == "1") {
-                $scope.listarUsuarios();
-                administrarMensajeSweet({titulo:'Usuario ingresado', tipo:'success', texto: ''});
+                $scope.listarEquipos();
+                administrarMensajeSweet({titulo:'Equipo ingresado', tipo:'success', texto: ''});
             } else {
                 administrarMensajeSweet({titulo:'Error al ingresar', tipo:'error', texto: ''});
             }
         }).error(function(){
             administrarMensajeSweet({titulo:'Error al enviar params', tipo:'error', texto: ''});
         });
-        
+
     };
 
     $scope.cerrarModal = function() {
@@ -150,9 +112,9 @@ var crearUsuarioCtrl = function($rootScope, $scope, $uibModal, $http, $window) {
     };
 };
 
-crearUsuarioCtrl.$inject = ['$rootScope', '$scope', '$uibModal', '$http', '$window'];
+crearEquipoCtrl.$inject = ['$rootScope', '$scope', '$uibModal', '$http', '$window'];
 
-var editarUsuarioCtrl = function($rootScope, $scope, $uibModal, $http, $window) {
+var editarEquipoCtrl = function($rootScope, $scope, $uibModal, $http, $window) {
     var administrarMensajeSweet = function(conf) {
         $window.swal({
             title: conf.titulo,
@@ -162,12 +124,12 @@ var editarUsuarioCtrl = function($rootScope, $scope, $uibModal, $http, $window) 
         },
         function(isConfirm){
             if (isConfirm){
-                $scope.modalEditarUsuario.close();
+                $scope.modalEditarEquipo.close();
             }
         });
     };
 
-    $scope.modificar = function(editarUsuario) {
+    $scope.modificar = function(editarEquipo) {
         var stringQuery = "UPDATE usuarios set  " +
         "id_rol = '" + editarUsuario.id_rol + "', " +
         "nombre_usuario = '" + editarUsuario.nombre_usuario + "', " +
@@ -184,10 +146,9 @@ var editarUsuarioCtrl = function($rootScope, $scope, $uibModal, $http, $window) 
         $http.post('../apis/porcesaAPI.php', {
             data: {params:  consulta}
         }).success(function(response){
-            console.log('stringQuery:' + JSON.stringify(stringQuery));
             if (response == "1") {
-                $scope.listarUsuarios();
-                administrarMensajeSweet({titulo:'Usuario actualizado', tipo:'success', texto: ''});
+                $scope.listarEquipos();
+                administrarMensajeSweet({titulo:'Equipo actualizado', tipo:'success', texto: ''});
             } else {
                 administrarMensajeSweet({titulo:'Error al actualizar', tipo:'error', texto: ''});
             }
@@ -197,14 +158,14 @@ var editarUsuarioCtrl = function($rootScope, $scope, $uibModal, $http, $window) 
     };
 
     $scope.cerrarModal = function() {
-        $scope.modalEditarUsuario.close();
+        $scope.modalEditarEquipo.close();
     };
 };
 
-editarUsuarioCtrl.$inject = ['$rootScope', '$scope', '$uibModal', '$http', '$window'];
+editarEquipoCtrl.$inject = ['$rootScope', '$scope', '$uibModal', '$http', '$window'];
 
 angular
     .module('myApp')
-    .controller('usuarioCtrl', usuarioCtrl)
-    .controller('crearUsuarioCtrl', crearUsuarioCtrl)
-    .controller('editarUsuarioCtrl', editarUsuarioCtrl);
+    .controller('equipoCtrl', equipoCtrl)
+    .controller('crearEquipoCtrl', crearEquipoCtrl)
+    .controller('editarEquipoCtrl', editarEquipoCtrl);

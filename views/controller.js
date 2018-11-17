@@ -2,7 +2,18 @@
 
 var mainCtrl = function($rootScope, $scope, $http) {
     
-    $rootScope.securityDataUser = {};
+    $rootScope.securityDataUser = {routers:[]};
+
+    var configRouters = ['/brackets', '/equipos', '/torneos', '/torneosj', '/jugadores', '/modulos', '/roles', '/usuarios'];
+    var acessRouters = [];
+
+    var asignarPermisosRutas = function(modulos) {
+        modulos.forEach(function(obj) {
+            acessRouters.push(configRouters[obj-1]);
+        });
+
+        $rootScope.securityDataUser.routers = acessRouters;
+    }
 
     var consulta = {
         method: "customDataUser"
@@ -12,6 +23,7 @@ var mainCtrl = function($rootScope, $scope, $http) {
         data: {params:  consulta}
     }).success(function(data){
         $rootScope.securityDataUser = data[0];
+        asignarPermisosRutas($rootScope.securityDataUser.modulos.split(",").sort());
     }).error(function(){
         alert('Error al intentar enviar el query.');
     });
@@ -20,7 +32,6 @@ var mainCtrl = function($rootScope, $scope, $http) {
         $http.post('../apis/logout.php', {
             data: {params:  consulta}
         }).success(function(data){
-            console.log("data: " + JSON.stringify(data));
             window.location = '../index.php';
         }).error(function(){
             alert('Error al intentar enviar el query.');
