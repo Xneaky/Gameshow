@@ -41,23 +41,22 @@
                             </span>
                             <a data-toggle="dropdown" class="dropdown-toggle">
                                 <span class="clear"><span class="block m-t-xs">
-                                <strong class="font-bold">{{securityDataUser.nombre_usuario}} {{securityDataUser.apellido_usuario}}</strong>
+                                <strong class="font-bold">{{securityDataUser.usuario}}</strong>
+                                </span>
+                                    <span class="text-muted text-xs block">{{securityDataUser.nombre_rol}} <b class="caret"></b></span>
+                                </span>
                             </a>
+                            <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                                <li><a ui-sref="profile">Perfil</a></li>
+                                <li><a ng-click="cerrarSession()">Cerrar Sesión</a></li>
+                            </ul>
                         </div>
                         <div class="logo-element">
                             GS
                         </div>
                     </li>
                     <!-- Menú -->
-                    <li>
-                        <a href="#brackets"><i class="fa fa-gamepad"></i><span class="nav-label">Brackets</span></a>
-                        <a href="#/"><i class="fa fa-desktop"></i><span class="nav-label">Torneos</span></a>
-                        <a href="#/torneosj"><i class="fa fa-desktop"></i><span class="nav-label">Torneos Jugadores</span></a>
-                        <a href="#jugadores"><i class="fa fa-users"></i><span class="nav-label">Jugadores</span></a>   
-                        <a href="#modulos"><i class="fa fa-eye"></i> <span class="nav-label">Modulos</span> </a>
-                        <a href="#roles"><i class="fa fa-chain"></i><span class="nav-label">Roles</span></a>
-                        <a href="#usuarios"><i class="fa fa-key"></i><span class="nav-label">Usuarios</span></a>
-                    </li>
+                    <li menu-game-show></li>
                     <!-- END Menú -->
                 </ul>
             </div>
@@ -124,6 +123,7 @@
     <script src="../app/appModulo.js"></script>
     <script src="../app/appJugador.js"></script>
     <script src="../app/appBracket.js"></script>
+    <script src="../app/appEquipo.js"></script>
 
     <!-- Page-Level Scripts -->
     <!-- Sweetalert JS-->

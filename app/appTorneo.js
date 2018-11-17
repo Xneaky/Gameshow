@@ -135,6 +135,7 @@ var crearTorneoCtrl = function($rootScope, $scope, $uibModal, $http, $window) {
         $http.post('../apis/porcesaAPI.php', {
            data: {params:  consulta}
         }).success(function(response){
+            console.log("consulta :" + JSON.stringify(consulta));
            if (response == "1") {
                $scope.listarTorneos();
                administrarMensajeSweet({titulo:'Torneo ingresado', tipo:'success', texto: ''});

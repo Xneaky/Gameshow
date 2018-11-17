@@ -16,9 +16,8 @@ var rolCtrl = function($rootScope, $scope, $uibModal, $http) {
     };
 
     $scope.seleccionarRol = function(rol) {
-        console.log("rol : " + JSON.stringify(rol));
         $scope.editarRol = angular.copy(rol);
-        $scope.editarRol.modulos = ["4","3"];
+        $scope.editarRol.modulos = $scope.editarRol .modulos.split(",");
         $scope.modalEditarRol = $uibModal.open({
             backdrop: 'static',
             scope: $scope,

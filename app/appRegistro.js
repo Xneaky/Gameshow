@@ -59,15 +59,14 @@ app.controller('loginCtrl', function ($scope, $uibModal, $http, $window) {
     $scope.loggin = function(user) {
 
         var consulta = {
-            query: "select * from usuarios where activo = 1 and email = '" + user.email + "' and pwd = '" + user.pwd + "'",
+            query: "select * from usuarios where activo = 1 and usuario = '" + user.email + "' and pwd = '" + user.pwd + "'",
             method: "Security"
         }
-
-        console.log("consulta: " + JSON.stringify(consulta));
 
         $http.post('apis/security.php', {
             data: {params:  consulta}
         }).success(function(data){
+            console.log("data : " + data.length);
             if (data.length == 0) {
                 administrarMensajeSweet2({titulo:'Usuario y contraseña incorrecto', tipo:'error', texto: ''});
             } else {
