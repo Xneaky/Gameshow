@@ -2,7 +2,7 @@
 
 var bracketCtrl = function($rootScope, $scope, $uibModal, $http) {
     $scope.torneos = [];
-
+    $(".label.editable :input").attr("disabled", true);
     $scope.listarTorneos = function() {
         $scope.torneos = [];
         var consulta = {
@@ -293,13 +293,12 @@ var bracketCtrl = function($rootScope, $scope, $uibModal, $http) {
                             var singleEliminations = JSON.parse(result[0].bracket);
                             $('.playoff').bracket({
                                 init: singleEliminations,
-                                skipConsolationRound: true,
                                 teamWidth: 100,
                                 scoreWidth: 30,
                                 save: saveFn,
                                 userData: torneo,
-                                disableToolbar: true,
-                                disableTeamEdit: true
+                                disableToolbar: false,
+                                disableTeamEdit: false
                             });
                             $(".block").removeClass("loading");
                             return false;
@@ -327,8 +326,8 @@ var bracketCtrl = function($rootScope, $scope, $uibModal, $http) {
                                         scoreWidth: 30,
                                         save: saveFn,
                                         userData: torneo,
-                                        disableToolbar: true,
-                                        disableTeamEdit: true
+                                        disableToolbar: false,
+                                        disableTeamEdit: false
                                     });
                                     $(".block").removeClass("loading");
                                 }
@@ -351,7 +350,11 @@ var bracketCtrl = function($rootScope, $scope, $uibModal, $http) {
                         $('.playoff').bracket({
                             init: singleEliminations,
                             teamWidth: 100,
-                            scoreWidth: 30
+                            scoreWidth: 30,
+                            save: saveFn,
+                            userData: torneo,
+                            disableToolbar: false,
+                            disableTeamEdit: false
                         });
                         $(".block").removeClass("loading");
                     } else {
