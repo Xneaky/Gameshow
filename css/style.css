@@ -5185,3 +5185,7 @@ body.skin-3 {
   top:50%;
   transform: translateY(-50%);
 }
+
+.playoff {
+  overflow: auto;
+}

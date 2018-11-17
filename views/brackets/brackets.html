@@ -22,9 +22,6 @@
                     <h5>Brackets de los torneos</h5>
                 </div>
                 <div class="ibox-content">
-                    <div class="playoff">
-                    </div>
-
                     <div class="project-list">
                         <label>Seleccione el torneo</label>
                         <select class="form-control" name="torneos" ng-model="newTorneo" ng-options="torneo as torneo.Nombre for torneo in torneos | orderBy:'Nombre'" ng-change="getTorneo(newTorneo)">
@@ -34,5 +31,8 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <div class="playoff">
     </div>
 </div>
