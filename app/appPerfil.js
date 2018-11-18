@@ -46,6 +46,41 @@ var editarPerfilCtrl = function($rootScope, $scope, $uibModal, $http, $window) {
     };
 
     $scope.modificar = function(editarPerfil) {
+        if (!editarPerfil.nombre_jugador) {
+            administrarMensajeSweet2({titulo:'El nombre no puede quedar vacio', tipo:'error', texto: ''});
+            return false;
+        }
+        if (!editarPerfil.apellido_jugador) {
+            administrarMensajeSweet2({titulo:'El apellido no puede quedar vacio', tipo:'error', texto: ''});
+            return false;
+        }
+        if (!editarPerfil.nickname_jugador) {
+            administrarMensajeSweet2({titulo:'El nickname no puede quedar vacio', tipo:'error', texto: ''});
+            return false;
+        }
+        if (!editarPerfil.email) {
+            administrarMensajeSweet2({titulo:'El correo electronico no puede quedar vacio', tipo:'error', texto: ''});
+            return false;
+        }
+        if (!editarPerfil.telefono_jugador) {
+            administrarMensajeSweet2({titulo:'El numero de telefono no puede quedar vacio', tipo:'error', texto: ''});
+            return false;
+        }
+        if (isNaN(editarPerfil.telefono_jugador)) {
+            administrarMensajeSweet2({titulo:'Ingrese un numero de telefono valido', tipo:'error', texto: ''});
+            return false;
+        }
+        if (!editarPerfil.fecha_nacimiento) {
+            administrarMensajeSweet2({titulo:'La fecha de nacimiento no puede quedar vacio', tipo:'error', texto: ''});
+            return false;
+        }
+        if (!editarPerfil.pais_jugador) {
+            administrarMensajeSweet2({titulo:'El campo pais  no puede quedar vacio', tipo:'error', texto: ''});
+            return false;
+        }
+
+
+
         var stringQuery = "UPDATE jugadores set  " +
             "nombre_jugador = '" + editarPerfil.nombre_jugador + "', " +
             "apellido_jugador = '" + editarPerfil.apellido_jugador + "', " +
