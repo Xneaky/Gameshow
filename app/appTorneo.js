@@ -236,7 +236,6 @@ var editarTorneoCtrl = function($rootScope, $scope, $uibModal, $http, $window) {
 editarTorneoCtrl.$inject = ['$rootScope', '$scope', '$uibModal', '$http', '$window'];
 
 var infoTorneoCtrl = function($rootScope, $scope, $uibModal, $http, $window) {
-    console.log('Informacion ' + JSON.stringify($rootScope.securityDataUser));
     var administrarMensajeSweet = function(conf) {
         $window.swal({
             title: conf.titulo,

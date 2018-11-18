@@ -1,8 +1,6 @@
 'use strict';
 
 var perfilCtrl = function($rootScope, $scope, $uibModal, $http) {
-    $scope.roles = [];
-    $scope.modulos = [];
 
     $scope.seleccionarPerfil = function(perfil) {
         $scope.editarPerfil = angular.copy(perfil);
@@ -48,13 +46,16 @@ var editarPerfilCtrl = function($rootScope, $scope, $uibModal, $http, $window) {
     };
 
     $scope.modificar = function(editarPerfil) {
-        var stringQuery = "UPDATE torneos set  " +
-            "Nombre = '" + editarTorneo.Nombre + "', " +
-            "tipo_torneo = '" + editarTorneo.tipo_torneo + "', " +
-            "num_participantes = '" + editarTorneo.num_participantes + "', " +
-            "activo = '" + editarTorneo.activo + "', " +
-            "descripcion = '" + editarTorneo.descripcion + "' " +
-            "where codTorneo = " + editarTorneo.codTorneo + "";
+        var stringQuery = "UPDATE jugadores set  " +
+            "nombre_jugador = '" + editarPerfil.nombre_jugador + "', " +
+            "apellido_jugador = '" + editarPerfil.apellido_jugador + "', " +
+            "nickname_jugador = '" + editarPerfil.nickname_jugador + "', " +
+            "email = '" + editarPerfil.email + "', " +
+            "telefono_jugador = '" + editarPerfil.telefono_jugador + "', " +
+            "fecha_nacimiento = '" + editarPerfil.fecha_nacimiento + "', " +
+            "pais_jugador = '" + editarPerfil.pais_jugador + "', " +
+            "direccion = '" + editarPerfil.direccion + "' " +
+            "where codJugadores = " + editarPerfil.jugadores_codJugadores + "";
         var consulta = {
             query: stringQuery,
             method: "POST"
@@ -62,9 +63,9 @@ var editarPerfilCtrl = function($rootScope, $scope, $uibModal, $http, $window) {
         $http.post('../apis/porcesaAPI.php', {
             data: {params:  consulta}
         }).success(function(response){
+            console.log("consulta :" + JSON.stringify(consulta));
             if (response == "1") {
-                $scope.listarTorneos();
-                administrarMensajeSweet({titulo:'Torneo actualizado', tipo:'success', texto: ''});
+                administrarMensajeSweet({titulo:'Perfil actualizado', tipo:'success', texto: ''});
             } else {
                 administrarMensajeSweet({titulo:'Error al actualizar', tipo:'error', texto: ''});
             }
@@ -75,6 +76,7 @@ var editarPerfilCtrl = function($rootScope, $scope, $uibModal, $http, $window) {
 
     $scope.cerrarModal = function() {
         $scope.modaleditarPerfil.close();
+        window.location.reload();
     };
 };
 
