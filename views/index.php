@@ -124,6 +124,7 @@
     <script src="../app/appJugador.js"></script>
     <script src="../app/appBracket.js"></script>
     <script src="../app/appEquipo.js"></script>
+    <script src="../app/appPerfil.js"></script>
 
     <!-- Page-Level Scripts -->
     <!-- Sweetalert JS-->

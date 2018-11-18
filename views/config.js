@@ -20,7 +20,7 @@ var configState = function($routeProvider) {
     })
 
     .when('/jugadores', {
-        templateUrl : 'jugadores/jugadores.html',
+        templateUrl : 'perfil/perfil.html',
         data: {
             pageTitle: 'Jugadores'
         }
