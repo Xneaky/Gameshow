@@ -23,6 +23,7 @@ var mainCtrl = function($rootScope, $scope, $http) {
         data: {params:  consulta}
     }).success(function(data){
         $rootScope.securityDataUser = data[0];
+        console.log("$rootScope.securityDataUser : " + JSON.stringify($rootScope.securityDataUser));
         asignarPermisosRutas($rootScope.securityDataUser.modulos.split(",").sort());
     }).error(function(){
         alert('Error al intentar enviar el query.');

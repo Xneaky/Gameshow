@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 17-11-2018 a las 22:01:43
+-- Tiempo de generación: 19-11-2018 a las 02:34:25
 -- Versión del servidor: 5.5.24-log
 -- Versión de PHP: 5.4.3
 
@@ -73,7 +73,15 @@ CREATE TABLE IF NOT EXISTS `jugadores_team` (
   PRIMARY KEY (`idjugadores_team`,`jugadores_codJugadores`,`team_codTeam`),
   KEY `fk_jugadores_team_jugadores1_idx` (`jugadores_codJugadores`),
   KEY `fk_jugadores_team_team1_idx` (`team_codTeam`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+
+--
+-- Volcado de datos para la tabla `jugadores_team`
+--
+
+INSERT INTO `jugadores_team` (`idjugadores_team`, `jugadores_codJugadores`, `team_codTeam`) VALUES
+(2, 1, 1),
+(3, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -98,10 +106,10 @@ INSERT INTO `modulos` (`id_modulo`, `nombre_modulo`, `descripcion_modulo`, `acti
 (2, 'Equipos', 'Administracion de Equipos', 1),
 (3, 'Torneos', 'Administracion de Torneos', 1),
 (4, 'Torneos Jugadores', 'Administracion de Torneos Jugadores', 1),
-(5, 'Jugadores', 'Administración de Jugadores', 1),
-(6, 'Modulos', 'Administración de Modulos', 1),
-(7, 'Roles', 'Administración de Roles', 1),
-(8, 'Usuarios', 'Administración de Usuarios', 1);
+(5, 'Jugadores', 'Administracion de Jugadores', 1),
+(6, 'Modulos', 'Administracion de Modulos', 1),
+(7, 'Roles', 'Administracion de Roles', 1),
+(8, 'Usuarios', 'Administracion de Usuarios', 1);
 
 -- --------------------------------------------------------
 
@@ -168,7 +176,14 @@ CREATE TABLE IF NOT EXISTS `team` (
   `activo` tinyint(4) NOT NULL,
   `id_capitan` int(11) DEFAULT NULL,
   PRIMARY KEY (`codTeam`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+--
+-- Volcado de datos para la tabla `team`
+--
+
+INSERT INTO `team` (`codTeam`, `nombre`, `activo`, `id_capitan`) VALUES
+(1, 'Barcelona FC', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -221,6 +236,17 @@ INSERT INTO `usuarios` (`id_usuario`, `usuario`, `pwd`, `activo`, `jugadores_cod
 -- --------------------------------------------------------
 
 --
+-- Estructura Stand-in para la vista `vt_jugadores_team`
+--
+CREATE TABLE IF NOT EXISTS `vt_jugadores_team` (
+`nombre_jugador` varchar(45)
+,`apellido_jugador` varchar(45)
+,`nickname_jugador` varchar(45)
+,`team_codTeam` int(11)
+);
+-- --------------------------------------------------------
+
+--
 -- Estructura Stand-in para la vista `vt_usuarios_roles_jugadores`
 --
 CREATE TABLE IF NOT EXISTS `vt_usuarios_roles_jugadores` (
@@ -233,7 +259,25 @@ CREATE TABLE IF NOT EXISTS `vt_usuarios_roles_jugadores` (
 ,`nombre_rol` varchar(50)
 ,`modulos` varchar(80)
 ,`rolActivo` bit(1)
+,`nombre_jugador` varchar(45)
+,`apellido_jugador` varchar(45)
+,`nickname_jugador` varchar(45)
+,`email` varchar(45)
+,`fecha_nacimiento` varchar(200)
+,`jugadorActivo` tinyint(1)
+,`telefono_jugador` int(8)
+,`pais_jugador` varchar(45)
+,`direccion` varchar(45)
 );
+-- --------------------------------------------------------
+
+--
+-- Estructura para la vista `vt_jugadores_team`
+--
+DROP TABLE IF EXISTS `vt_jugadores_team`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vt_jugadores_team` AS select `j`.`nombre_jugador` AS `nombre_jugador`,`j`.`apellido_jugador` AS `apellido_jugador`,`j`.`nickname_jugador` AS `nickname_jugador`,`jt`.`team_codTeam` AS `team_codTeam` from ((`jugadores` `j` join `jugadores_team` `jt` on((`j`.`codJugadores` = `jt`.`jugadores_codJugadores`))) join `team` `t` on((`t`.`codTeam` = `jt`.`team_codTeam`)));
+
 -- --------------------------------------------------------
 
 --
@@ -241,7 +285,7 @@ CREATE TABLE IF NOT EXISTS `vt_usuarios_roles_jugadores` (
 --
 DROP TABLE IF EXISTS `vt_usuarios_roles_jugadores`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vt_usuarios_roles_jugadores` AS select `u`.`id_usuario` AS `id_usuario`,`u`.`usuario` AS `usuario`,`u`.`pwd` AS `pwd`,`u`.`activo` AS `usuarioActivo`,`u`.`jugadores_codJugadores` AS `jugadores_codJugadores`,`r`.`id_rol` AS `id_rol`,`r`.`nombre_rol` AS `nombre_rol`,`r`.`modulos` AS `modulos`,`r`.`activo` AS `rolActivo` from ((`usuarios` `u` join `roles` `r` on((`u`.`id_rol` = `r`.`id_rol`))) join `jugadores` `j` on((`j`.`codJugadores` = `u`.`jugadores_codJugadores`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vt_usuarios_roles_jugadores` AS select `u`.`id_usuario` AS `id_usuario`,`u`.`usuario` AS `usuario`,`u`.`pwd` AS `pwd`,`u`.`activo` AS `usuarioActivo`,`u`.`jugadores_codJugadores` AS `jugadores_codJugadores`,`r`.`id_rol` AS `id_rol`,`r`.`nombre_rol` AS `nombre_rol`,`r`.`modulos` AS `modulos`,`r`.`activo` AS `rolActivo`,`j`.`nombre_jugador` AS `nombre_jugador`,`j`.`apellido_jugador` AS `apellido_jugador`,`j`.`nickname_jugador` AS `nickname_jugador`,`j`.`email` AS `email`,`j`.`fecha_nacimiento` AS `fecha_nacimiento`,`j`.`activo` AS `jugadorActivo`,`j`.`telefono_jugador` AS `telefono_jugador`,`j`.`pais_jugador` AS `pais_jugador`,`j`.`direccion` AS `direccion` from ((`usuarios` `u` join `roles` `r` on((`u`.`id_rol` = `r`.`id_rol`))) join `jugadores` `j` on((`j`.`codJugadores` = `u`.`jugadores_codJugadores`)));
 
 --
 -- Restricciones para tablas volcadas

@@ -38,7 +38,6 @@
                             <thead>
                                 <tr>
                                     <th>Ról</th>
-                                    <th>Modulos</th>
                                     <th>Descripción</th>
                                     <th>Estado</th>
                                     <th>Acciones</th>
@@ -47,11 +46,11 @@
                             <tbody>
                                 <tr ng-repeat="rol in roles| filter: query">
                                     <td class="project-title"><span class="pie">{{rol.nombre_rol}}</span></td>
-                                    <td class="project-title">{{rol.modulos}}</td>
                                     <td class="project-title">{{rol.descripcion_rol}}</td>
                                     <td class="project-title"><span class="label {{cssEstado(rol.activo)}}">{{etiquetaEstado(rol.activo)}}</span></td>
                                     <td class="text-navy">
                                         <button type="button" class="btn btn-xs btn-default" ng-click="seleccionarRol(rol)">Editar</button>
+                                        <button type="button" class="btn btn-xs btn-default" ng-click="verPermisosModulos(rol)">Ver</button>
                                     </td>
                                 </tr>
                             </tbody>

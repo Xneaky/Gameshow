@@ -45,6 +45,25 @@ var rolCtrl = function($rootScope, $scope, $uibModal, $http) {
 
     $scope.listarRoles();
 
+    $scope.verPermisosModulos = function(rol) {
+        var ListModulos = ['Brackets', 'Equipos', 'Torneos', 'Torneos Jugadores', 'Jugadores', 'Modulos', 'Roles', 'Usuarios'];
+        $scope.modulosPermisos = [];
+
+        var modulos = rol.modulos.split(",").sort();
+        modulos.forEach(function(obj) {
+            $scope.modulosPermisos.push(ListModulos[obj-1]);
+        });
+
+        $scope.modalVerPermisos = $uibModal.open({
+            backdrop: 'static',
+            scope: $scope,
+            keyboard: false,
+            templateUrl: 'roles/modalVerRolPermisos.html',
+            controller: rolCtrl
+        });
+
+    };
+
     $scope.listarModulos = function() {
         $scope.modulos = [];
         var consulta = {
@@ -75,6 +94,10 @@ var rolCtrl = function($rootScope, $scope, $uibModal, $http) {
         if (activo) 
             etiqueta = 'Activo'
         return etiqueta;
+    };
+
+    $scope.cerrarModal = function() {
+        $scope.modalVerPermisos.close();
     };
 };
 
