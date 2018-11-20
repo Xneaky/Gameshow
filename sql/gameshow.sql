@@ -1,46 +1,70 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.1
+-- version 4.5.1
 -- http://www.phpmyadmin.net
 --
--- Servidor: localhost
--- Tiempo de generación: 19-11-2018 a las 02:34:25
--- Versión del servidor: 5.5.24-log
--- Versión de PHP: 5.4.3
+-- Host: 127.0.0.1
+-- Generation Time: Nov 20, 2018 at 04:40 AM
+-- Server version: 5.7.20-log
+-- PHP Version: 5.6.23
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `gameshow`
+-- Database: `gameshow`
 --
+
+DELIMITER $$
+--
+-- Procedures
+--
+CREATE DEFINER=`root`@`localhost` PROCEDURE `InsertarUsuario` (IN `usern` VARCHAR(50), IN `usera` VARCHAR(50), IN `usernick` VARCHAR(50), IN `usere` VARCHAR(50), IN `userfn` VARCHAR(300), IN `useract` TINYINT(1), IN `usertel` INT(8), IN `userp` VARCHAR(50), IN `userdir` VARCHAR(300), IN `useru` VARCHAR(50), IN `userpwd` VARCHAR(300), IN `userrol` TINYINT(1))  BEGIN
+DECLARE exit handler FOR sqlexception
+BEGIN
+	ROLLBACK;
+END;
+
+START TRANSACTION;
+
+INSERT into  jugadores(codJugadores, nombre_jugador, apellido_jugador, nickname_jugador,email, fecha_nacimiento,activo,telefono_jugador,pais_jugador,direccion)
+VALUES (NULL, usern,usera,usernick,usere,userfn,useract,usertel,userp,userdir);
+
+SELECT @idjugador:=MAX(codJugadores) FROM jugadores;
+
+INSERT INTO usuarios(id_usuario,usuario,pwd,activo,jugadores_codJugadores,id_rol)
+VALUES (NULL,useru,userpwd,useract,@idjugador,userrol);
+
+COMMIT;
+END$$
+
+DELIMITER ;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `juego`
+-- Table structure for table `juego`
 --
 
-CREATE TABLE IF NOT EXISTS `juego` (
-  `id_juego` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `juego` (
+  `id_juego` int(11) NOT NULL,
   `nombre_juego` varchar(100) NOT NULL,
-  `activo` tinyint(4) NOT NULL,
-  PRIMARY KEY (`id_juego`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `activo` tinyint(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `jugadores`
+-- Table structure for table `jugadores`
 --
 
-CREATE TABLE IF NOT EXISTS `jugadores` (
-  `codJugadores` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `jugadores` (
+  `codJugadores` int(11) NOT NULL,
   `nombre_jugador` varchar(45) NOT NULL,
   `apellido_jugador` varchar(45) NOT NULL,
   `nickname_jugador` varchar(45) NOT NULL,
@@ -49,12 +73,11 @@ CREATE TABLE IF NOT EXISTS `jugadores` (
   `activo` tinyint(1) NOT NULL,
   `telefono_jugador` int(8) DEFAULT NULL,
   `pais_jugador` varchar(45) NOT NULL,
-  `direccion` varchar(45) NOT NULL,
-  PRIMARY KEY (`codJugadores`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+  `direccion` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Volcado de datos para la tabla `jugadores`
+-- Dumping data for table `jugadores`
 --
 
 INSERT INTO `jugadores` (`codJugadores`, `nombre_jugador`, `apellido_jugador`, `nickname_jugador`, `email`, `fecha_nacimiento`, `activo`, `telefono_jugador`, `pais_jugador`, `direccion`) VALUES
@@ -63,20 +86,17 @@ INSERT INTO `jugadores` (`codJugadores`, `nombre_jugador`, `apellido_jugador`, `
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `jugadores_team`
+-- Table structure for table `jugadores_team`
 --
 
-CREATE TABLE IF NOT EXISTS `jugadores_team` (
-  `idjugadores_team` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `jugadores_team` (
+  `idjugadores_team` int(11) NOT NULL,
   `jugadores_codJugadores` int(11) NOT NULL,
-  `team_codTeam` int(11) NOT NULL,
-  PRIMARY KEY (`idjugadores_team`,`jugadores_codJugadores`,`team_codTeam`),
-  KEY `fk_jugadores_team_jugadores1_idx` (`jugadores_codJugadores`),
-  KEY `fk_jugadores_team_team1_idx` (`team_codTeam`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+  `team_codTeam` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Volcado de datos para la tabla `jugadores_team`
+-- Dumping data for table `jugadores_team`
 --
 
 INSERT INTO `jugadores_team` (`idjugadores_team`, `jugadores_codJugadores`, `team_codTeam`) VALUES
@@ -86,19 +106,18 @@ INSERT INTO `jugadores_team` (`idjugadores_team`, `jugadores_codJugadores`, `tea
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `modulos`
+-- Table structure for table `modulos`
 --
 
-CREATE TABLE IF NOT EXISTS `modulos` (
-  `id_modulo` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `modulos` (
+  `id_modulo` int(11) NOT NULL,
   `nombre_modulo` varchar(50) NOT NULL,
   `descripcion_modulo` varchar(300) NOT NULL,
-  `activo` tinyint(1) NOT NULL,
-  PRIMARY KEY (`id_modulo`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
+  `activo` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Volcado de datos para la tabla `modulos`
+-- Dumping data for table `modulos`
 --
 
 INSERT INTO `modulos` (`id_modulo`, `nombre_modulo`, `descripcion_modulo`, `activo`) VALUES
@@ -114,49 +133,43 @@ INSERT INTO `modulos` (`id_modulo`, `nombre_modulo`, `descripcion_modulo`, `acti
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `participantes`
+-- Table structure for table `participantes`
 --
 
-CREATE TABLE IF NOT EXISTS `participantes` (
-  `codParticipantes` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `participantes` (
+  `codParticipantes` int(11) NOT NULL,
   `torneos_codTorneo` int(11) NOT NULL,
-  `team_codTeams` int(11) NOT NULL,
-  PRIMARY KEY (`codParticipantes`,`torneos_codTorneo`,`team_codTeams`),
-  KEY `fk_participantes_torneos_idx` (`torneos_codTorneo`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `team_codTeams` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `partidos`
+-- Table structure for table `partidos`
 --
 
-CREATE TABLE IF NOT EXISTS `partidos` (
-  `codPartido` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `partidos` (
+  `codPartido` int(11) NOT NULL,
   `torneos_codTorneo` int(11) NOT NULL,
-  `bracket` longtext,
-  PRIMARY KEY (`codPartido`,`torneos_codTorneo`),
-  KEY `fk_partidos_torneos1_idx` (`torneos_codTorneo`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `bracket` longtext
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `roles`
+-- Table structure for table `roles`
 --
 
-CREATE TABLE IF NOT EXISTS `roles` (
-  `id_rol` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `roles` (
+  `id_rol` int(11) NOT NULL,
   `nombre_rol` varchar(50) NOT NULL,
   `modulos` varchar(80) NOT NULL,
   `descripcion_rol` varchar(250) NOT NULL,
-  `activo` bit(1) NOT NULL,
-  PRIMARY KEY (`id_rol`),
-  KEY `id_rol` (`id_rol`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+  `activo` bit(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Volcado de datos para la tabla `roles`
+-- Dumping data for table `roles`
 --
 
 INSERT INTO `roles` (`id_rol`, `nombre_rol`, `modulos`, `descripcion_rol`, `activo`) VALUES
@@ -167,19 +180,18 @@ INSERT INTO `roles` (`id_rol`, `nombre_rol`, `modulos`, `descripcion_rol`, `acti
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `team`
+-- Table structure for table `team`
 --
 
-CREATE TABLE IF NOT EXISTS `team` (
-  `codTeam` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `team` (
+  `codTeam` int(11) NOT NULL,
   `nombre` varchar(45) NOT NULL,
   `activo` tinyint(4) NOT NULL,
-  `id_capitan` int(11) DEFAULT NULL,
-  PRIMARY KEY (`codTeam`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+  `id_capitan` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Volcado de datos para la tabla `team`
+-- Dumping data for table `team`
 --
 
 INSERT INTO `team` (`codTeam`, `nombre`, `activo`, `id_capitan`) VALUES
@@ -188,21 +200,20 @@ INSERT INTO `team` (`codTeam`, `nombre`, `activo`, `id_capitan`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `torneos`
+-- Table structure for table `torneos`
 --
 
-CREATE TABLE IF NOT EXISTS `torneos` (
-  `codTorneo` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `torneos` (
+  `codTorneo` int(11) NOT NULL,
   `Nombre` varchar(45) NOT NULL,
   `activo` tinyint(1) NOT NULL,
   `tipo_torneo` varchar(25) NOT NULL,
   `num_participantes` int(11) NOT NULL,
-  `descripcion` varchar(300) NOT NULL,
-  PRIMARY KEY (`codTorneo`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+  `descripcion` varchar(300) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Volcado de datos para la tabla `torneos`
+-- Dumping data for table `torneos`
 --
 
 INSERT INTO `torneos` (`codTorneo`, `Nombre`, `activo`, `tipo_torneo`, `num_participantes`, `descripcion`) VALUES
@@ -211,23 +222,20 @@ INSERT INTO `torneos` (`codTorneo`, `Nombre`, `activo`, `tipo_torneo`, `num_part
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `usuarios`
+-- Table structure for table `usuarios`
 --
 
-CREATE TABLE IF NOT EXISTS `usuarios` (
-  `id_usuario` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `usuarios` (
+  `id_usuario` int(11) NOT NULL,
   `usuario` varchar(100) NOT NULL,
   `pwd` varchar(300) NOT NULL,
   `activo` tinyint(1) NOT NULL,
   `jugadores_codJugadores` int(11) NOT NULL,
-  `id_rol` int(11) NOT NULL,
-  PRIMARY KEY (`id_usuario`,`jugadores_codJugadores`,`id_rol`),
-  KEY `fk_usuarios_jugadores1_idx` (`jugadores_codJugadores`),
-  KEY `fk_usuarios_roles1_idx` (`id_rol`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+  `id_rol` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Volcado de datos para la tabla `usuarios`
+-- Dumping data for table `usuarios`
 --
 
 INSERT INTO `usuarios` (`id_usuario`, `usuario`, `pwd`, `activo`, `jugadores_codJugadores`, `id_rol`) VALUES
@@ -236,20 +244,21 @@ INSERT INTO `usuarios` (`id_usuario`, `usuario`, `pwd`, `activo`, `jugadores_cod
 -- --------------------------------------------------------
 
 --
--- Estructura Stand-in para la vista `vt_jugadores_team`
+-- Stand-in structure for view `vt_jugadores_team`
 --
-CREATE TABLE IF NOT EXISTS `vt_jugadores_team` (
+CREATE TABLE `vt_jugadores_team` (
 `nombre_jugador` varchar(45)
 ,`apellido_jugador` varchar(45)
 ,`nickname_jugador` varchar(45)
 ,`team_codTeam` int(11)
 );
+
 -- --------------------------------------------------------
 
 --
--- Estructura Stand-in para la vista `vt_usuarios_roles_jugadores`
+-- Stand-in structure for view `vt_usuarios_roles_jugadores`
 --
-CREATE TABLE IF NOT EXISTS `vt_usuarios_roles_jugadores` (
+CREATE TABLE `vt_usuarios_roles_jugadores` (
 `id_usuario` int(11)
 ,`usuario` varchar(100)
 ,`pwd` varchar(300)
@@ -269,49 +278,175 @@ CREATE TABLE IF NOT EXISTS `vt_usuarios_roles_jugadores` (
 ,`pais_jugador` varchar(45)
 ,`direccion` varchar(45)
 );
+
 -- --------------------------------------------------------
 
 --
--- Estructura para la vista `vt_jugadores_team`
+-- Structure for view `vt_jugadores_team`
 --
 DROP TABLE IF EXISTS `vt_jugadores_team`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vt_jugadores_team` AS select `j`.`nombre_jugador` AS `nombre_jugador`,`j`.`apellido_jugador` AS `apellido_jugador`,`j`.`nickname_jugador` AS `nickname_jugador`,`jt`.`team_codTeam` AS `team_codTeam` from ((`jugadores` `j` join `jugadores_team` `jt` on((`j`.`codJugadores` = `jt`.`jugadores_codJugadores`))) join `team` `t` on((`t`.`codTeam` = `jt`.`team_codTeam`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vt_jugadores_team`  AS  select `j`.`nombre_jugador` AS `nombre_jugador`,`j`.`apellido_jugador` AS `apellido_jugador`,`j`.`nickname_jugador` AS `nickname_jugador`,`jt`.`team_codTeam` AS `team_codTeam` from ((`jugadores` `j` join `jugadores_team` `jt` on((`j`.`codJugadores` = `jt`.`jugadores_codJugadores`))) join `team` `t` on((`t`.`codTeam` = `jt`.`team_codTeam`))) ;
 
 -- --------------------------------------------------------
 
 --
--- Estructura para la vista `vt_usuarios_roles_jugadores`
+-- Structure for view `vt_usuarios_roles_jugadores`
 --
 DROP TABLE IF EXISTS `vt_usuarios_roles_jugadores`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vt_usuarios_roles_jugadores` AS select `u`.`id_usuario` AS `id_usuario`,`u`.`usuario` AS `usuario`,`u`.`pwd` AS `pwd`,`u`.`activo` AS `usuarioActivo`,`u`.`jugadores_codJugadores` AS `jugadores_codJugadores`,`r`.`id_rol` AS `id_rol`,`r`.`nombre_rol` AS `nombre_rol`,`r`.`modulos` AS `modulos`,`r`.`activo` AS `rolActivo`,`j`.`nombre_jugador` AS `nombre_jugador`,`j`.`apellido_jugador` AS `apellido_jugador`,`j`.`nickname_jugador` AS `nickname_jugador`,`j`.`email` AS `email`,`j`.`fecha_nacimiento` AS `fecha_nacimiento`,`j`.`activo` AS `jugadorActivo`,`j`.`telefono_jugador` AS `telefono_jugador`,`j`.`pais_jugador` AS `pais_jugador`,`j`.`direccion` AS `direccion` from ((`usuarios` `u` join `roles` `r` on((`u`.`id_rol` = `r`.`id_rol`))) join `jugadores` `j` on((`j`.`codJugadores` = `u`.`jugadores_codJugadores`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vt_usuarios_roles_jugadores`  AS  select `u`.`id_usuario` AS `id_usuario`,`u`.`usuario` AS `usuario`,`u`.`pwd` AS `pwd`,`u`.`activo` AS `usuarioActivo`,`u`.`jugadores_codJugadores` AS `jugadores_codJugadores`,`r`.`id_rol` AS `id_rol`,`r`.`nombre_rol` AS `nombre_rol`,`r`.`modulos` AS `modulos`,`r`.`activo` AS `rolActivo`,`j`.`nombre_jugador` AS `nombre_jugador`,`j`.`apellido_jugador` AS `apellido_jugador`,`j`.`nickname_jugador` AS `nickname_jugador`,`j`.`email` AS `email`,`j`.`fecha_nacimiento` AS `fecha_nacimiento`,`j`.`activo` AS `jugadorActivo`,`j`.`telefono_jugador` AS `telefono_jugador`,`j`.`pais_jugador` AS `pais_jugador`,`j`.`direccion` AS `direccion` from ((`usuarios` `u` join `roles` `r` on((`u`.`id_rol` = `r`.`id_rol`))) join `jugadores` `j` on((`j`.`codJugadores` = `u`.`jugadores_codJugadores`))) ;
 
 --
--- Restricciones para tablas volcadas
+-- Indexes for dumped tables
 --
 
 --
--- Filtros para la tabla `jugadores_team`
+-- Indexes for table `juego`
+--
+ALTER TABLE `juego`
+  ADD PRIMARY KEY (`id_juego`);
+
+--
+-- Indexes for table `jugadores`
+--
+ALTER TABLE `jugadores`
+  ADD PRIMARY KEY (`codJugadores`);
+
+--
+-- Indexes for table `jugadores_team`
+--
+ALTER TABLE `jugadores_team`
+  ADD PRIMARY KEY (`idjugadores_team`,`jugadores_codJugadores`,`team_codTeam`),
+  ADD KEY `fk_jugadores_team_jugadores1_idx` (`jugadores_codJugadores`),
+  ADD KEY `fk_jugadores_team_team1_idx` (`team_codTeam`);
+
+--
+-- Indexes for table `modulos`
+--
+ALTER TABLE `modulos`
+  ADD PRIMARY KEY (`id_modulo`);
+
+--
+-- Indexes for table `participantes`
+--
+ALTER TABLE `participantes`
+  ADD PRIMARY KEY (`codParticipantes`,`torneos_codTorneo`,`team_codTeams`),
+  ADD KEY `fk_participantes_torneos_idx` (`torneos_codTorneo`);
+
+--
+-- Indexes for table `partidos`
+--
+ALTER TABLE `partidos`
+  ADD PRIMARY KEY (`codPartido`,`torneos_codTorneo`),
+  ADD KEY `fk_partidos_torneos1_idx` (`torneos_codTorneo`);
+
+--
+-- Indexes for table `roles`
+--
+ALTER TABLE `roles`
+  ADD PRIMARY KEY (`id_rol`),
+  ADD KEY `id_rol` (`id_rol`);
+
+--
+-- Indexes for table `team`
+--
+ALTER TABLE `team`
+  ADD PRIMARY KEY (`codTeam`);
+
+--
+-- Indexes for table `torneos`
+--
+ALTER TABLE `torneos`
+  ADD PRIMARY KEY (`codTorneo`);
+
+--
+-- Indexes for table `usuarios`
+--
+ALTER TABLE `usuarios`
+  ADD PRIMARY KEY (`id_usuario`,`jugadores_codJugadores`,`id_rol`),
+  ADD KEY `fk_usuarios_jugadores1_idx` (`jugadores_codJugadores`),
+  ADD KEY `fk_usuarios_roles1_idx` (`id_rol`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `juego`
+--
+ALTER TABLE `juego`
+  MODIFY `id_juego` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `jugadores`
+--
+ALTER TABLE `jugadores`
+  MODIFY `codJugadores` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `jugadores_team`
+--
+ALTER TABLE `jugadores_team`
+  MODIFY `idjugadores_team` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `modulos`
+--
+ALTER TABLE `modulos`
+  MODIFY `id_modulo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+--
+-- AUTO_INCREMENT for table `participantes`
+--
+ALTER TABLE `participantes`
+  MODIFY `codParticipantes` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `partidos`
+--
+ALTER TABLE `partidos`
+  MODIFY `codPartido` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `roles`
+--
+ALTER TABLE `roles`
+  MODIFY `id_rol` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `team`
+--
+ALTER TABLE `team`
+  MODIFY `codTeam` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `torneos`
+--
+ALTER TABLE `torneos`
+  MODIFY `codTorneo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `usuarios`
+--
+ALTER TABLE `usuarios`
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `jugadores_team`
 --
 ALTER TABLE `jugadores_team`
   ADD CONSTRAINT `fk_jugadores_team_jugadores1` FOREIGN KEY (`jugadores_codJugadores`) REFERENCES `jugadores` (`codJugadores`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_jugadores_team_team1` FOREIGN KEY (`team_codTeam`) REFERENCES `team` (`codTeam`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Filtros para la tabla `participantes`
+-- Constraints for table `participantes`
 --
 ALTER TABLE `participantes`
   ADD CONSTRAINT `fk_participantes_torneos` FOREIGN KEY (`torneos_codTorneo`) REFERENCES `torneos` (`codTorneo`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Filtros para la tabla `partidos`
+-- Constraints for table `partidos`
 --
 ALTER TABLE `partidos`
   ADD CONSTRAINT `fk_partidos_torneos1` FOREIGN KEY (`torneos_codTorneo`) REFERENCES `torneos` (`codTorneo`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Filtros para la tabla `usuarios`
+-- Constraints for table `usuarios`
 --
 ALTER TABLE `usuarios`
   ADD CONSTRAINT `fk_usuarios_jugadores1` FOREIGN KEY (`jugadores_codJugadores`) REFERENCES `jugadores` (`codJugadores`) ON DELETE NO ACTION ON UPDATE NO ACTION,
