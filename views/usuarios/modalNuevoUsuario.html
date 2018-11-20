@@ -9,22 +9,40 @@
             </select>
         </div>
         <div class="form-group">
-            <label>Seleccione el jugador</label>
-            <select class="form-control" name="jugador" ng-model="newUsuario.jugadores_codJugadores" ng-options="jugador.codJugadores as jugador.nombre_jugador + '-' + jugador.apellido_jugador for jugador in jugadores | orderBy:'nombre_jugador'">
-                <option value="">seleccione</option>
-            </select>
+            <label>Usuario</label>
+            <input type="text" placeholder="Ingrese el usuario nuevo" name="usuario" class="form-control" ng-model="newUsuario.usuario">
         </div>
         <div class="form-group">
             <label>Nombres</label>
-            <input type="text" placeholder="Ingrese nombre" name="nombre_usuario" class="form-control" ng-model="newUsuario.nombre_usuario">
+            <input type="text" placeholder="Ingrese nombre" name="nombre_jugador" class="form-control" ng-model="newUsuario.nombre_jugador">
         </div>
         <div class="form-group">
             <label>Apellidos</label>
-            <input type="text" placeholder="Ingrese apellido" name="apellido_usuario" class="form-control" ng-model="newUsuario.apellido_usuario">
+            <input type="text" placeholder="Ingrese apellido" name="apellido_jugador" class="form-control" ng-model="newUsuario.apellido_jugador">
+        </div>
+        <div class="form-group">
+            <label>Nickname</label>
+            <input type="text" placeholder="Ingrese nickname" name="nickname_jugador" class="form-control" ng-model="newUsuario.nickname_jugador">
         </div>
         <div class="form-group">
             <label>Email</label>
-            <input type="text" placeholder="Ingrese su correo electronico" name="email" class="form-control" ng-model="newUsuario.email">
+            <input type="text" placeholder="Ingrese el Email" name="email" class="form-control" ng-model="newUsuario.email">
+        </div>
+        <div class="form-group">
+            <label>Numero de Telefono</label>
+            <input type="text" placeholder="Ingrese su numero de contacto" name="telefono_jugador" class="form-control" ng-model="newUsuario.telefono_jugador">
+        </div>
+        <div class="form-group">
+            <label>Nacionalidad</label>
+            <input type="text" placeholder="Ingrese nickname" name="pais_jugador" class="form-control" ng-model="newUsuario.pais_jugador">
+        </div>
+        <div class="form-group">
+            <label>Direccion</label>
+            <input type="text" placeholder="Ingrese nickname" name="direccion_jugador" class="form-control" ng-model="newUsuario.direccion_jugador">
+        </div>
+        <div class="form-group">
+            <label>Fecha Nacimiento</label>
+            <input type="date"  name="fecha_nacimiento" class="form-control" ng-model="newUsuario.fecha_nacimiento">
         </div>
 </div>
 <div class="modal-footer">

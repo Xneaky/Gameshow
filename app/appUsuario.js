@@ -118,12 +118,19 @@ var crearUsuarioCtrl = function($rootScope, $scope, $uibModal, $http, $window) {
 
     $scope.guardar = function(newUsuario) {
 
-        var stringQuery = "INSERT INTO usuarios (id_rol, nombre_usuario, apellido_usuario, email, pwd_usuario, activo) VALUES " +
-        "('" + newUsuario.id_rol + "'," +
-        "'" + newUsuario.nombre_usuario + "'," +
-        "'" + newUsuario.apellido_usuario + "'," +
+        var stringQuery = "call InsertarUsuario ("+
+        "'" + newUsuario.nombre_jugador + "'," +
+        "'" + newUsuario.apellido_jugador + "'," +
+        "'" + newUsuario.nickname_jugador + "'," +
         "'" + newUsuario.email + "'," +
-        "'" + newUsuario.email + "', true)";
+        "'" + newUsuario.fecha_nacimiento + "'," +
+        "1," +
+        "" + newUsuario.telefono_jugador + "," +
+        "'" + newUsuario.pais_jugador + "'," +
+        "'" + newUsuario.direccion_jugador + "'," +
+        "'" + newUsuario.usuario + "'," +
+        "'" + newUsuario.email + "'," +
+        "" + newUsuario.id_rol + ")";
 
         var consulta = {
             query: stringQuery,
@@ -133,6 +140,7 @@ var crearUsuarioCtrl = function($rootScope, $scope, $uibModal, $http, $window) {
         $http.post('../apis/porcesaAPI.php', {
             data: {params:  consulta}
         }).success(function(response){
+            console.log("consulta :" + JSON.stringify(consulta));
             if (response == "1") {
                 $scope.listarUsuarios();
                 administrarMensajeSweet({titulo:'Usuario ingresado', tipo:'success', texto: ''});
