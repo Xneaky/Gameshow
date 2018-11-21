@@ -2,7 +2,6 @@
 
 var bracketCtrl = function($rootScope, $scope, $uibModal, $http) {
     $scope.torneos = [];
-    $(".label.editable :input").attr("disabled", true);
     $scope.listarTorneos = function() {
         $scope.torneos = [];
         var consulta = {
@@ -260,6 +259,8 @@ var bracketCtrl = function($rootScope, $scope, $uibModal, $http) {
         //Bloque la pagina por los callbacks
         $(".block").addClass("loading");
         if (torneo != null) {
+            $(".playoff").empty();
+            $(".playoffround").empty();
             var teamsArr = [];
             var itemsArr = [];
             var consulta;
@@ -270,7 +271,7 @@ var bracketCtrl = function($rootScope, $scope, $uibModal, $http) {
                 }
             } else {
                 consulta = {
-                    query:"SELECT CONCAT(t1.nombre_usuario, ' ', t1.apellido_usuario) AS nombre FROM usuarios AS t1 INNER JOIN participantes AS t2 ON t1.id_usuarios = t2.team_codTeams WHERE t2.torneos_codTorneo = " + parseInt(torneo.codTorneo) + "",
+                    query:"SELECT nickname_jugador as nombre FROM jugadores AS t1 INNER JOIN participantes AS t2 ON t1.codJugadores = t2.team_codTeams WHERE t2.torneos_codTorneo = " + parseInt(torneo.codTorneo) + "",
                     method: "GET"
                 }
             }
@@ -289,8 +290,123 @@ var bracketCtrl = function($rootScope, $scope, $uibModal, $http) {
                         data: {params:  consulta}
                     }).success(function(result){
                         if (result.length > 0) {
-                            //Si entra aqui es porque ya hay resultados en la tabla partidos
-                            var singleEliminations = JSON.parse(result[0].bracket);
+                            if (torneo.round_robin == 1) {
+                                //Si entra aqui es porque hay resultados en partidos y es round robin
+                                    $('.playoffround').group({
+                                        init: groupData,
+                                        save: function(state) {
+                                            console.log(state);
+                                            // Reconstruct read-only version by initializing it with received state
+                                        }
+                                    })
+                                    $(".block").removeClass("loading");
+                                    return false;
+                            } else {
+                                //Si entra aqui es porque ya hay resultados en la tabla partidos y es bracket
+                                var singleEliminations = JSON.parse(result[0].bracket);
+                                $('.playoff').bracket({
+                                    init: singleEliminations,
+                                    teamWidth: 100,
+                                    scoreWidth: 30,
+                                    save: saveFn,
+                                    userData: torneo,
+                                    disableToolbar: false,
+                                    disableTeamEdit: false
+                                });
+                                $(".block").removeClass("loading");
+                                return false;
+                            }
+                        } else {
+                            if (torneo.round_robin == 1) {
+                                var conteo = 0;
+                                var round = {
+                                    id: 0, 
+                                    name: "###"
+                                };
+                                var equipos = [];
+                                bracket.forEach(function(itemRobin) {
+                                    round.id = conteo++;
+                                    round.name = itemRobin.nombre;
+                                    equipos.push(round);
+                                    if (bracket.length - 1 == bracket.indexOf(itemRobin)) {
+                                        var groupData = {
+                                            teams: equipos,
+                                            matches: []
+                                        }
+
+                                        $('.playoffround').group({
+                                            init: groupData,
+                                            save: function(state) {
+                                                console.log(state);
+                                                // Reconstruct read-only version by initializing it with received state
+                                            }
+                                        })
+                                        $(".block").removeClass("loading");
+                                        return false;
+                                    }
+                                })
+                            } else {
+                                //Caso contrario, armo el bracket con los participantes
+                                bracket.forEach(function(item) {
+                                    itemsArr.push(item.nombre);
+                                    if (itemsArr.length == 2) {
+                                        teamsArr.push(itemsArr);
+                                        itemsArr = [];
+                                    }
+                                    if (bracket.length - 1 == bracket.indexOf(item)) {
+                                        var singleEliminations = {
+                                            "teams": teamsArr,
+                                            "results": [
+                                                [
+                                                    
+                                                ]
+                                            ]
+                                        }
+                                        $('.playoff').bracket({
+                                            init: singleEliminations,
+                                            skipConsolationRound: true,
+                                            teamWidth: 100,
+                                            scoreWidth: 30,
+                                            save: saveFn,
+                                            userData: torneo,
+                                            disableToolbar: false,
+                                            disableTeamEdit: false
+                                        });
+                                        $(".block").removeClass("loading");
+                                    }
+                                });
+                            }
+                        }
+                    }).error(function(){
+                        alert('Error al intentar enviar el query.');
+                    });
+                } else {
+                    if (bracket.length == 0) {
+                        if (torneo.round_robin == 1) {
+                            var groupData = {
+                                teams: [],
+                                matches: []
+                            }
+
+                            $('.playoffround').group({
+                                init: groupData
+                                //save: function(state) {
+                                //    console.log(state);
+                                //    // Reconstruct read-only version by initializing it with received state
+                                //}
+                            })
+                            $(".block").removeClass("loading");
+                            return false;
+                        } else {
+                            var registros = $scope.crearBracketBye2(torneo.num_participantes, itemsArr, teamsArr);
+                            var singleEliminations = {
+                                "teams": registros,
+                                "results": [
+                                    [
+                                        
+                                    ]
+                                ]
+                            }
                             $('.playoff').bracket({
                                 init: singleEliminations,
                                 teamWidth: 100,
@@ -301,9 +417,37 @@ var bracketCtrl = function($rootScope, $scope, $uibModal, $http) {
                                 disableTeamEdit: false
                             });
                             $(".block").removeClass("loading");
-                            return false;
-                        } else {
-                            //Caso contrario, armo el bracket con los participantes
+                        }
+                    } else {
+                        if (torneo.round_robin == 1) {
+                            var conteo = 0;
+                            var round = {
+                                id: 0, 
+                                name: "###"
+                            };
+                            var equipos = [];
+                            bracket.forEach(function(itemRobin) {
+                                round.id = conteo++;
+                                round.name = itemRobin.nombre;
+                                equipos.push(round);
+                                if (bracket.length - 1 == bracket.indexOf(itemRobin)) {
+                                    var groupData = {
+                                        teams: equipos,
+                                        matches: []
+                                    }
+
+                                    $('.playoffround').group({
+                                        init: groupData,
+                                        save: function(state) {
+                                            console.log(state);
+                                            // Reconstruct read-only version by initializing it with received state
+                                        }
+                                    })
+                                    $(".block").removeClass("loading");
+                                    return false;
+                                }
+                            })
+                        } else {                        
                             bracket.forEach(function(item) {
                                 itemsArr.push(item.nombre);
                                 if (itemsArr.length == 2) {
@@ -311,8 +455,9 @@ var bracketCtrl = function($rootScope, $scope, $uibModal, $http) {
                                     itemsArr = [];
                                 }
                                 if (bracket.length - 1 == bracket.indexOf(item)) {
+                                    var registros = $scope.crearBracketBye(bracket.length, itemsArr, teamsArr);
                                     var singleEliminations = {
-                                        "teams": teamsArr,
+                                        "teams": registros,
                                         "results": [
                                             [
                                                 
@@ -321,11 +466,9 @@ var bracketCtrl = function($rootScope, $scope, $uibModal, $http) {
                                     }
                                     $('.playoff').bracket({
                                         init: singleEliminations,
-                                        skipConsolationRound: true,
                                         teamWidth: 100,
                                         scoreWidth: 30,
                                         save: saveFn,
-                                        userData: torneo,
                                         disableToolbar: false,
                                         disableTeamEdit: false
                                     });
@@ -333,58 +476,6 @@ var bracketCtrl = function($rootScope, $scope, $uibModal, $http) {
                                 }
                             });
                         }
-                    }).error(function(){
-                        alert('Error al intentar enviar el query.');
-                    });
-                } else {
-                    if (bracket.length == 0) {
-                        var registros = $scope.crearBracketBye2(torneo.num_participantes, itemsArr, teamsArr);
-                        var singleEliminations = {
-                            "teams": registros,
-                            "results": [
-                                [
-                                    
-                                ]
-                            ]
-                        }
-                        $('.playoff').bracket({
-                            init: singleEliminations,
-                            teamWidth: 100,
-                            scoreWidth: 30,
-                            save: saveFn,
-                            userData: torneo,
-                            disableToolbar: false,
-                            disableTeamEdit: false
-                        });
-                        $(".block").removeClass("loading");
-                    } else {
-                        bracket.forEach(function(item) {
-                            itemsArr.push(item.nombre);
-                            if (itemsArr.length == 2) {
-                                teamsArr.push(itemsArr);
-                                itemsArr = [];
-                            }
-                            if (bracket.length - 1 == bracket.indexOf(item)) {
-                                var registros = $scope.crearBracketBye(bracket.length, itemsArr, teamsArr);
-                                var singleEliminations = {
-                                    "teams": registros,
-                                    "results": [
-                                        [
-                                            
-                                        ]
-                                    ]
-                                }
-                                $('.playoff').bracket({
-                                    init: singleEliminations,
-                                    teamWidth: 100,
-                                    scoreWidth: 30,
-                                    save: saveFn,
-                                    disableToolbar: false,
-                                    disableTeamEdit: false
-                                });
-                                $(".block").removeClass("loading");
-                            }
-                        });
                     }
                 }
             }).error(function(){
@@ -392,6 +483,7 @@ var bracketCtrl = function($rootScope, $scope, $uibModal, $http) {
             });
         } else {
             $(".playoff").empty();
+            $(".playoffround").empty();
             $(".block").removeClass("loading");
         }
     }
