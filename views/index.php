@@ -21,6 +21,7 @@
     <link href="../css/animate.css" rel="stylesheet">
     <link href="../css/style.css" rel="stylesheet">
     <link href="../css/jquery.bracket.min.css" rel="stylesheet">
+    <link href="../css/jquery.group.min.css" rel="stylesheet">
 
     <!-- Sweetalert CSS-->
     <link rel="stylesheet" href="../css/sweetalert.css">
@@ -110,6 +111,11 @@
     <script src="../js/angular-sanitize.js"></script>
     <script src="../js/ui-bootstrap-tpls-2.1.4.js"></script>
     <script src="../js/jquery.bracket.min.js"></script>
+    <script src="../js/Bacon-1ab32ffb.min.js"></script>
+    <script src="../js/lodash-2.2.1.min.js"></script>
+    <script src="../js/live.js"></script>
+    <script src="../js/handlebars.js"></script>
+    <script src="../js/jquery.group.min.js"></script>
     <!--<script src="app/menuDirective.js"></script>-->
     <script src="app.js"></script>
     <script src="controller.js"></script>
