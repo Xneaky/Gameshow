@@ -42,7 +42,7 @@ app.controller('loginCtrl', function ($scope, $uibModal, $http, $window) {
             data: {params:  consulta}
         }).success(function(data){
             console.log("data : " + JSON.stringify(data));
-            
+
             if (data.length == 0) {
                 administrarMensajeSweet2({titulo:'Usuario y contraseña incorrecto', tipo:'error', texto: ''});
             } else {
@@ -50,7 +50,7 @@ app.controller('loginCtrl', function ($scope, $uibModal, $http, $window) {
                 //window.location = 'views/torneos/torneos.html';
                 window.location = 'views/index.html';
             }
-            
+
         }).error(function(){
             alert('Error al intentar enviar el query.');
         });
@@ -94,15 +94,36 @@ app.controller('crearUsuarioCtrl', function ($scope, $http, $uibModal, $uibModal
         });
     };
 
-    $scope.guardar = function(newUsuario) {
+    var administrarMensajeSweet2 = function(conf) {
+        $window.swal({
+                title: conf.titulo,
+                text: conf.texto,
+                type: conf.tipo,
+                showCancelButton: false
+            },
+            function(isConfirm){
+                //Se cierra automaticamente
+            });
+    };
 
-        var stringQuery = "INSERT INTO usuarios (idrol, nombre, apellido, email, username, pwd, activo) VALUES " +
-            "('3'," +
-            "'" + newUsuario.nombre_usuario + "'," +
-            "'" + newUsuario.apellido_usuario + "'," +
+    $scope.guardar = function(newUsuario) {
+        if (newUsuario.pwd != newUsuario.pwd2) {
+            administrarMensajeSweet2({titulo:'Las contraseñas no son iguales', tipo:'error', texto: ''});
+            return false;
+        }
+        var stringQuery = "call InsertarUsuario ("+
+            "'" + newUsuario.nombre_jugador + "'," +
+            "'" + newUsuario.apellido_jugador + "'," +
+            "'" + newUsuario.nickname_jugador + "'," +
             "'" + newUsuario.email + "'," +
-            "'" + newUsuario.username + "'," +
-            "'" + newUsuario.pwd + "', true)";
+            "'" + newUsuario.fecha_nacimiento + "'," +
+            "1," +
+            "" + newUsuario.telefono_jugador + "," +
+            "'" + newUsuario.pais_jugador + "'," +
+            "'" + newUsuario.direccion + "'," +
+            "'" + newUsuario.usuario + "'," +
+            "'" + newUsuario.pwd + "'," +
+            "" + "3)";
 
         var consulta = {
             query: stringQuery,
