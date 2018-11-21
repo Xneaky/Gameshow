@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 21, 2018 at 06:00 AM
+-- Generation Time: Nov 21, 2018 at 07:12 AM
 -- Server version: 5.7.20-log
 -- PHP Version: 5.6.23
 
@@ -97,7 +97,8 @@ INSERT INTO `jugadores` (`codJugadores`, `nombre_jugador`, `apellido_jugador`, `
 (1, 'Javier', 'Castillo', 'Xneaky', 'admin@admin.com', 'Wed Nov 07 2018 00:00:00 GMT-0600 (Central Standard Time)', 1, 12345678, 'El Salvador', 'Algo algo'),
 (2, 'caleb', 'caleb', 'caleb0304', 'caleb@caleb.com', '11/6/1990', 1, 12345678, 'El Salvador', 'algun lugar'),
 (3, 'Raulo', 'Batrelen', 'Blazeit', 'Blaze@blaze.com', 'Tue Nov 13 2018 00:00:00 GMT-0600 (Central Standard Time)', 1, 11112222, 'El Salvador', 'por ahi algun lugar'),
-(4, 'Kevin', 'Sandoval', 'Kain', 'kain@gmail.com', 'Wed Nov 14 2018 00:00:00 GMT-0600 (Central Standard Time)', 1, 22222222, 'El Salvador', 'por ahi');
+(4, 'Kevin', 'Sandoval', 'Kain', 'kain@gmail.com', 'Wed Nov 14 2018 00:00:00 GMT-0600 (Central Standard Time)', 1, 22222222, 'El Salvador', 'por ahi'),
+(5, 'asd', 'asd', 'asd', 'castillo_5326@hotmail.com', 'Tue Nov 20 2018 00:00:00 GMT-0600 (Central Standard Time)', 1, 77463553, 'El Salvador', 'santa tecla el salvador');
 
 -- --------------------------------------------------------
 
@@ -182,7 +183,7 @@ CREATE TABLE `roles` (
   `nombre_rol` varchar(50) NOT NULL,
   `modulos` varchar(80) NOT NULL,
   `descripcion_rol` varchar(250) NOT NULL,
-  `activo` bit(1) NOT NULL
+  `activo` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -190,9 +191,9 @@ CREATE TABLE `roles` (
 --
 
 INSERT INTO `roles` (`id_rol`, `nombre_rol`, `modulos`, `descripcion_rol`, `activo`) VALUES
-(1, 'Administrador', '1,2,5,6,7,3,4,8,9', 'Administrador', b'1'),
-(2, 'Especial', '1,3', 'Ayudante del administrador', b'1'),
-(3, 'Simple', '2,5', 'Jugador o visitante', b'1');
+(1, 'Administrador', '1,2,5,6,7,3,4,8,9', 'Administrador', 1),
+(2, 'Especial', '1,3,4,9', 'Ayudante del administrador', 1),
+(3, 'Simple', '2,5', 'Jugador o visitante', 1);
 
 -- --------------------------------------------------------
 
@@ -262,7 +263,8 @@ INSERT INTO `usuarios` (`id_usuario`, `usuario`, `pwd`, `activo`, `jugadores_cod
 (1, 'Xneaky', 'admin', 1, 1, 1),
 (2, 'Jhonny', 'jhonny', 1, 2, 2),
 (3, 'Blazeit420', 'Blaze@blaze.com', 1, 3, 1),
-(4, 'Kain', '1234', 1, 4, 3);
+(4, 'Kain', '1234', 1, 4, 3),
+(5, 'asd', 'aqwsde', 1, 5, 3);
 
 -- --------------------------------------------------------
 
@@ -290,7 +292,7 @@ CREATE TABLE `vt_usuarios_roles_jugadores` (
 ,`id_rol` int(11)
 ,`nombre_rol` varchar(50)
 ,`modulos` varchar(80)
-,`rolActivo` bit(1)
+,`rolActivo` tinyint(1)
 ,`nombre_jugador` varchar(45)
 ,`apellido_jugador` varchar(45)
 ,`nickname_jugador` varchar(45)
@@ -405,7 +407,7 @@ ALTER TABLE `juego`
 -- AUTO_INCREMENT for table `jugadores`
 --
 ALTER TABLE `jugadores`
-  MODIFY `codJugadores` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `codJugadores` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `jugadores_team`
 --
@@ -445,7 +447,7 @@ ALTER TABLE `torneos`
 -- AUTO_INCREMENT for table `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- Constraints for dumped tables
 --
