@@ -38,22 +38,26 @@
                             <thead>
                                 <tr>
                                     <th>Ról</th>
+                                    <th>Usuario</th>
                                     <th>Nombres</th>
                                     <th>Apellidos</th>
+                                    <th>Pais</th>
                                     <th>Email</th>
                                     <th>Estado</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="usuario in usuarios | filter: query track by $index" >
-                                    <td class="project-title"><span>{{usuario.nombre_rol}}</span></td>
-                                    <td class="project-title"><span class="pie">{{usuario.nombre_usuario}}</span></td>
-                                    <td class="project-title">{{usuario.apellido_usuario}}</td>
-                                    <td class="project-title">{{usuario.email}}</td>
-                                    <td class="project-title"><span class="label {{cssEstado(usuario.activo)}}">{{etiquetaEstado(usuario.activo)}}</span></td>
+                                <tr ng-repeat="jugador in jugadores | filter: query track by $index">
+                                    <td class="project-title"><span>{{jugador.id_rol}}</span></td>
+                                    <td class="project-title"><span class="pie">{{jugador.usuario}}</span></td>
+                                    <td class="project-title"><span class="pie">{{jugador.nombre_jugador}}</span></td>
+                                    <td class="project-title">{{jugador.apellido_jugador}}</td>
+                                    <td class="project-title">{{jugador.pais_jugador}}</td>
+                                    <td class="project-title">{{jugador.email}}</td>
+                                    <td class="project-title"><span class="label {{cssEstado(jugador.activo)}}">{{etiquetaEstado(jugador.activo)}}</span></td>
                                     <td class="text-navy">
-                                        <button type="button" class="btn btn-xs btn-default" ng-click="seleccionarUsuario(usuario)">Editar</button>
+                                        <button type="button" class="btn btn-xs btn-default" ng-click="seleccionarUsuario(jugador)">Editar</button>
                                     </td>
                                 </tr>
                             </tbody>

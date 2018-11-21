@@ -16,8 +16,8 @@ var usuarioCtrl = function($rootScope, $scope, $uibModal, $http) {
         });
     };
 
-    $scope.seleccionarUsuario = function(usuario) {
-        $scope.editarUsuario = angular.copy(usuario);
+    $scope.seleccionarUsuario = function(jugador) {
+        $scope.editarUsuario = angular.copy(jugador);
         $scope.modalEditarUsuario = $uibModal.open({
             backdrop: 'static',
             scope: $scope,
@@ -30,7 +30,7 @@ var usuarioCtrl = function($rootScope, $scope, $uibModal, $http) {
     $scope.listarUsuarios = function() {
         $scope.usuarios = [];
         var consulta = {
-            query:"select * from usuarios",
+            query:"SELECT u.*, j.nombre_jugador, j.apellido_jugador,j.nickname_jugador,j.email,j.fecha_nacimiento, j.pais_jugador, j.telefono_jugador, j.direccion from usuarios u left join jugadores j on u.jugadores_codJugadores = j.codJugadores",
             method: "GET"
         }
 
@@ -67,7 +67,7 @@ var usuarioCtrl = function($rootScope, $scope, $uibModal, $http) {
     $scope.listarJugadores = function() {
         $scope.jugadores = [];
         var consulta = {
-            query:"select nombre_jugador, apellido_jugador from jugadores where activo = 1",
+            query:"SELECT u.*, j.nombre_jugador, j.apellido_jugador,j.nickname_jugador,j.email,j.fecha_nacimiento, j.pais_jugador, j.telefono_jugador, j.direccion from usuarios u left join jugadores j on u.jugadores_codJugadores = j.codJugadores",
             method: "GET"
         }
 
@@ -127,7 +127,7 @@ var crearUsuarioCtrl = function($rootScope, $scope, $uibModal, $http, $window) {
         "1," +
         "" + newUsuario.telefono_jugador + "," +
         "'" + newUsuario.pais_jugador + "'," +
-        "'" + newUsuario.direccion_jugador + "'," +
+        "'" + newUsuario.direccion + "'," +
         "'" + newUsuario.usuario + "'," +
         "'" + newUsuario.email + "'," +
         "" + newUsuario.id_rol + ")";
@@ -176,26 +176,52 @@ var editarUsuarioCtrl = function($rootScope, $scope, $uibModal, $http, $window) 
     };
 
     $scope.modificar = function(editarUsuario) {
-        var stringQuery = "UPDATE usuarios set  " +
+        var stringQuery2 = "UPDATE usuarios set  " +
         "id_rol = '" + editarUsuario.id_rol + "', " +
-        "nombre_usuario = '" + editarUsuario.nombre_usuario + "', " +
-        "apellido_usuario = '" + editarUsuario.apellido_usuario + "', " +
-        "email = '" + editarUsuario.email + "', " +
+        "usuario = '" + editarUsuario.usuario + "', " +
         "activo = '" + editarUsuario.activo + "' " +
         "where id_usuario = '" + editarUsuario.id_usuario + "'";
 
         var consulta = {
-            query: stringQuery,
+            query: stringQuery2,
             method: "POST"
         }
 
         $http.post('../apis/porcesaAPI.php', {
             data: {params:  consulta}
         }).success(function(response){
-            console.log('stringQuery:' + JSON.stringify(stringQuery));
+            console.log('stringQuery:' + JSON.stringify(stringQuery2));
             if (response == "1") {
-                $scope.listarUsuarios();
-                administrarMensajeSweet({titulo:'Usuario actualizado', tipo:'success', texto: ''});
+                var stringQuery = "UPDATE jugadores set  " +
+                    "nombre_jugador = '" + editarUsuario.nombre_jugador + "', " +
+                    "apellido_jugador = '" + editarUsuario.apellido_jugador + "', " +
+                    "nickname_jugador = '" + editarUsuario.nickname_jugador + "', " +
+                    "email = '" + editarUsuario.email + "', " +
+                    "telefono_jugador = '" + editarUsuario.telefono_jugador + "', " +
+                    "pais_jugador = '" + editarUsuario.pais_jugador + "', " +
+                    "direccion = '" + editarUsuario.direccion + "', " +
+                    "fecha_nacimiento = '" + editarUsuario.fecha_nacimiento + "', " +
+                    "activo = '" + editarUsuario.activo + "' " +
+                    "where codJugadores = '" + editarUsuario.jugadores_codJugadores + "'";
+
+                var consulta = {
+                    query: stringQuery,
+                    method: "POST"
+                }
+
+                $http.post('../apis/porcesaAPI.php', {
+                    data: {params:  consulta}
+                }).success(function(response){
+                    console.log('stringQuery:' + JSON.stringify(stringQuery));
+                    if (response == "1") {
+                        $scope.listarUsuarios();
+                        administrarMensajeSweet({titulo:'Usuario actualizado', tipo:'success', texto: ''});
+                    } else {
+                        administrarMensajeSweet({titulo:'Error al actualizar', tipo:'error', texto: ''});
+                    }
+                }).error(function(){
+                    administrarMensajeSweet({titulo:'Error al enviar params', tipo:'error', texto: ''});
+                });
             } else {
                 administrarMensajeSweet({titulo:'Error al actualizar', tipo:'error', texto: ''});
             }
