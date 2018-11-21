@@ -19,6 +19,13 @@ var configState = function($routeProvider) {
         }
     })
 
+    .when('/juegos', {
+        templateUrl : 'juego/juegos.html',
+        data: {
+            pageTitle: 'Juegos'
+        }
+    })
+
     .when('/jugadores', {
         templateUrl : 'perfil/perfil.html',
         data: {
