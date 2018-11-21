@@ -6,8 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="0baeb02d-4315-4715-9247-5c90cff0f26d" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/usuarios/modalEditarUsuario.html" afterPath="$PROJECT_DIR$/views/usuarios/modalEditarUsuario.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/usuarios/modalNuevoUsuario.html" afterPath="$PROJECT_DIR$/views/usuarios/modalNuevoUsuario.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/appTorneo.js" afterPath="$PROJECT_DIR$/app/appTorneo.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/torneos/modalEditarTorneo.html" afterPath="$PROJECT_DIR$/views/torneos/modalEditarTorneo.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/torneos/modalInfoTorneo.html" afterPath="$PROJECT_DIR$/views/torneos/modalInfoTorneo.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/torneos/modalNuevoTorneo.html" afterPath="$PROJECT_DIR$/views/torneos/modalNuevoTorneo.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/torneos/torneos.html" afterPath="$PROJECT_DIR$/views/torneos/torneos.html" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -18,21 +21,81 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="modalNuevoUsuario.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/views/usuarios/modalNuevoUsuario.html">
+      <file leaf-file-name="appTorneo.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/appTorneo.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="568">
-              <caret line="57" column="14" lean-forward="true" selection-start-line="57" selection-start-column="14" selection-end-line="57" selection-end-column="14" />
+            <state relative-caret-position="58">
+              <caret line="288" column="63" lean-forward="true" selection-start-line="288" selection-start-column="63" selection-end-line="288" selection-end-column="63" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="modalEditarUsuario.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/views/usuarios/modalEditarUsuario.html">
+      <file leaf-file-name="modalInfoTorneo.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/views/torneos/modalInfoTorneo.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="495">
-              <caret line="33" column="28" lean-forward="true" selection-start-line="33" selection-start-column="28" selection-end-line="33" selection-end-column="28" />
+            <state relative-caret-position="270">
+              <caret line="18" column="53" lean-forward="true" selection-start-line="18" selection-start-column="53" selection-end-line="18" selection-end-column="53" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="torneos.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/views/torneos/torneos.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="192">
+              <caret line="37" column="35" lean-forward="true" selection-start-line="37" selection-start-column="35" selection-end-line="37" selection-end-column="35" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="modalEditarTorneo.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/views/torneos/modalEditarTorneo.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="375">
+              <caret line="25" column="10" lean-forward="true" selection-start-line="25" selection-start-column="10" selection-end-line="25" selection-end-column="10" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="modalNuevoTorneo.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/views/torneos/modalNuevoTorneo.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="390">
+              <caret line="26" column="1" lean-forward="false" selection-start-line="19" selection-start-column="1" selection-end-line="26" selection-end-column="1" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="usuarios.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/views/usuarios/usuarios.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="405">
+              <caret line="27" column="51" lean-forward="true" selection-start-line="27" selection-start-column="51" selection-end-line="27" selection-end-column="51" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="modalNuevoUsuario.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/views/usuarios/modalNuevoUsuario.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="150">
+              <caret line="10" column="105" lean-forward="false" selection-start-line="10" selection-start-column="105" selection-end-line="10" selection-end-column="105" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="appUsuario.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/appUsuario.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="360">
+              <caret line="48" column="0" lean-forward="false" selection-start-line="48" selection-start-column="0" selection-end-line="64" selection-end-column="25" />
               <folding />
             </state>
           </provider>
@@ -62,6 +125,11 @@
       <find>filter</find>
       <find>new</find>
       <find>perfil</find>
+      <find>torneo</find>
+      <find>rol</find>
+      <find>&quot;rol&quot;</find>
+      <find>infotorneo</find>
+      <find>infoTorneo</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -93,25 +161,31 @@
         <option value="$PROJECT_DIR$/views/usuarios/modalRegistroUsuario.html" />
         <option value="$PROJECT_DIR$/app/appRegistro.js" />
         <option value="$PROJECT_DIR$/views/jugadores/modalEditarJugador.html" />
-        <option value="$PROJECT_DIR$/views/torneos/torneos.html" />
         <option value="$PROJECT_DIR$/views/torneos/torneosJugador.html" />
-        <option value="$PROJECT_DIR$/views/torneos/modalInfoTorneo.html" />
         <option value="$PROJECT_DIR$/app/appBracket.js" />
         <option value="$PROJECT_DIR$/views/perfil/editarPerfil.html" />
-        <option value="$PROJECT_DIR$/views/config.js" />
-        <option value="$PROJECT_DIR$/views/index.php" />
         <option value="$PROJECT_DIR$/views/perfil/perfil.html" />
-        <option value="$PROJECT_DIR$/app/appTorneo.js" />
         <option value="$PROJECT_DIR$/app/appPerfil.js" />
         <option value="$PROJECT_DIR$/views/perfil/modalEditarPerfil.html" />
         <option value="$PROJECT_DIR$/css/style.css" />
-        <option value="$PROJECT_DIR$/views/torneos/modalNuevoTorneo.html" />
-        <option value="$PROJECT_DIR$/views/torneos/modalEditarTorneo.html" />
         <option value="$PROJECT_DIR$/sql/gameshow.sql" />
         <option value="$PROJECT_DIR$/views/usuarios/usuarios.html" />
         <option value="$PROJECT_DIR$/app/appUsuario.js" />
         <option value="$PROJECT_DIR$/views/usuarios/modalNuevoUsuario.html" />
         <option value="$PROJECT_DIR$/views/usuarios/modalEditarUsuario.html" />
+        <option value="$PROJECT_DIR$/app/appJuego.js" />
+        <option value="$PROJECT_DIR$/views/juego/modalNuevoJuego.html" />
+        <option value="$PROJECT_DIR$/views/juego/modalEditarJuego.html" />
+        <option value="$PROJECT_DIR$/views/config.js" />
+        <option value="$PROJECT_DIR$/views/controller.js" />
+        <option value="$PROJECT_DIR$/views/directive.js" />
+        <option value="$PROJECT_DIR$/views/index.php" />
+        <option value="$PROJECT_DIR$/views/juego/juegos.html" />
+        <option value="$PROJECT_DIR$/views/torneos/torneos.html" />
+        <option value="$PROJECT_DIR$/views/torneos/modalNuevoTorneo.html" />
+        <option value="$PROJECT_DIR$/views/torneos/modalEditarTorneo.html" />
+        <option value="$PROJECT_DIR$/app/appTorneo.js" />
+        <option value="$PROJECT_DIR$/views/torneos/modalInfoTorneo.html" />
       </list>
     </option>
   </component>
@@ -164,11 +238,6 @@
             <path>
               <item name="gameshow" type="b2602c69:ProjectViewProjectNode" />
               <item name="gameshow" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="css" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="gameshow" type="b2602c69:ProjectViewProjectNode" />
-              <item name="gameshow" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="sql" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
@@ -186,19 +255,19 @@
               <item name="gameshow" type="b2602c69:ProjectViewProjectNode" />
               <item name="gameshow" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="views" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="jugadores" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="gameshow" type="b2602c69:ProjectViewProjectNode" />
-              <item name="gameshow" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="views" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="perfil" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="juego" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="gameshow" type="b2602c69:ProjectViewProjectNode" />
               <item name="gameshow" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="views" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="roles" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="gameshow" type="b2602c69:ProjectViewProjectNode" />
+              <item name="gameshow" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="views" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="torneos" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="gameshow" type="b2602c69:ProjectViewProjectNode" />
@@ -222,6 +291,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\XAMPP\htdocs\gameshow\views\juego" />
       <recent name="E:\XAMPP\htdocs\gameshow\views\torneos" />
     </key>
   </component>
@@ -263,7 +333,7 @@
       <workItem from="1541808382195" duration="2813000" />
       <workItem from="1542548186581" duration="27536000" />
       <workItem from="1542633513073" duration="3233000" />
-      <workItem from="1542754045528" duration="12214000" />
+      <workItem from="1542754045528" duration="18615000" />
     </task>
     <task id="LOCAL-00001" summary="Agregue brackets a pagina principal">
       <created>1538080715291</created>
@@ -440,11 +510,32 @@
       <option name="project" value="LOCAL" />
       <updated>1542763053399</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="validaciones completas agregar/editar usuario">
+      <created>1542766296827</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1542766296827</updated>
+    </task>
+    <task id="LOCAL-00027" summary="modulo juegos agregado">
+      <created>1542770031329</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1542770031329</updated>
+    </task>
+    <task id="LOCAL-00028" summary="modulo juegos agregado">
+      <created>1542770043243</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1542770043243</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="108658000" />
+    <option name="totallyTimeSpent" value="115059000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -457,12 +548,14 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.123667374" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16847827" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32934782" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16847827" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32934782" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -474,7 +567,6 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32934782" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -533,19 +625,24 @@
     <MESSAGE value="BD Actualizada con el procedimiento InsertarUsuario" />
     <MESSAGE value="Registro de usuario/jugador nuevo listo" />
     <MESSAGE value="Editar usuario/jugador pero no refresca listado" />
-    <option name="LAST_COMMIT_MESSAGE" value="Editar usuario/jugador pero no refresca listado" />
+    <MESSAGE value="validaciones completas agregar/editar usuario" />
+    <MESSAGE value="modulo juegos agregado" />
+    <option name="LAST_COMMIT_MESSAGE" value="modulo juegos agregado" />
     <option name="UPDATE_GROUP_BY_PACKAGES" value="true" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/app/appJuego.js</url>
+          <properties />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="1" />
+    </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/vista/registro-vista.php" />
-    <entry file="file://$PROJECT_DIR$/vista/principal-vista.php" />
-    <entry file="file://$PROJECT_DIR$/mysql/gameshow.sql" />
-    <entry file="file://$PROJECT_DIR$/model/obtener-teams.php" />
-    <entry file="file://$PROJECT_DIR$/model/brackets.php" />
     <entry file="file://$PROJECT_DIR$/sql/gameshow2.sql" />
     <entry file="file://$PROJECT_DIR$/sql/torneos.sql" />
     <entry file="file://$PROJECT_DIR$/views/modulos/modulos.html">
@@ -611,13 +708,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/torneos/modalInfoTorneo.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="24" column="6" lean-forward="true" selection-start-line="24" selection-start-column="6" selection-end-line="24" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/appBracket.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
@@ -650,49 +740,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="14" column="59" lean-forward="false" selection-start-line="14" selection-start-column="59" selection-end-line="14" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/config.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-333">
-          <caret line="24" column="34" lean-forward="true" selection-start-line="24" selection-start-column="34" selection-end-line="24" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/directive.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="27" column="38" lean-forward="true" selection-start-line="27" selection-start-column="38" selection-end-line="27" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="39" column="73" lean-forward="true" selection-start-line="39" selection-start-column="73" selection-end-line="39" selection-end-column="97" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/torneos/torneos.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="14" column="4" lean-forward="false" selection-start-line="12" selection-start-column="26" selection-end-line="14" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/jugadores/jugadores.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="710">
@@ -704,6 +751,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2055">
           <caret line="152" column="52" lean-forward="true" selection-start-line="152" selection-start-column="52" selection-end-line="152" selection-end-column="52" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -737,26 +785,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/appTorneo.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4470">
-          <caret line="298" column="7" lean-forward="false" selection-start-line="298" selection-start-column="7" selection-end-line="298" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/css/style.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
           <caret line="13" column="22" lean-forward="false" selection-start-line="13" selection-start-column="22" selection-end-line="16" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/torneos/modalNuevoTorneo.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="28" column="8" lean-forward="false" selection-start-line="28" selection-start-column="8" selection-end-line="28" selection-end-column="149" />
           <folding />
         </state>
       </provider>
@@ -793,30 +825,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/torneos/modalEditarTorneo.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="3" lean-forward="true" selection-start-line="0" selection-start-column="3" selection-end-line="0" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/usuarios/usuarios.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="49" column="35" lean-forward="true" selection-start-line="49" selection-start-column="35" selection-end-line="49" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/appUsuario.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="199" column="85" lean-forward="true" selection-start-line="199" selection-start-column="85" selection-end-line="199" selection-end-column="85" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/perfil/perfil.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="522">
@@ -833,18 +841,154 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/usuarios/modalNuevoUsuario.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="568">
-          <caret line="57" column="14" lean-forward="true" selection-start-line="57" selection-start-column="14" selection-end-line="57" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/usuarios/modalEditarUsuario.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="495">
           <caret line="33" column="28" lean-forward="true" selection-start-line="33" selection-start-column="28" selection-end-line="33" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/juego/modalEditarTorneo.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/juego/modalEditarJuego.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="23" column="7" lean-forward="true" selection-start-line="23" selection-start-column="7" selection-end-line="23" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/config.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="13" lean-forward="true" selection-start-line="0" selection-start-column="13" selection-end-line="0" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="60" lean-forward="false" selection-start-line="6" selection-start-column="60" selection-end-line="6" selection-end-column="60" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/directive.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="735">
+          <caret line="49" column="91" lean-forward="false" selection-start-line="49" selection-start-column="91" selection-end-line="49" selection-end-column="91" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/appJuego.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="27" column="28" lean-forward="false" selection-start-line="27" selection-start-column="19" selection-end-line="27" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="570">
+          <caret line="116" column="40" lean-forward="true" selection-start-line="116" selection-start-column="40" selection-end-line="116" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/juego/juegos.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="16" lean-forward="true" selection-start-line="0" selection-start-column="16" selection-end-line="0" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/juego/modalNuevoJuego.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" column="7" lean-forward="true" selection-start-line="15" selection-start-column="7" selection-end-line="15" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/usuarios/modalNuevoUsuario.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="105" lean-forward="false" selection-start-line="10" selection-start-column="105" selection-end-line="10" selection-end-column="105" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/usuarios/usuarios.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="27" column="51" lean-forward="true" selection-start-line="27" selection-start-column="51" selection-end-line="27" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/appUsuario.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="48" column="0" lean-forward="false" selection-start-line="48" selection-start-column="0" selection-end-line="64" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/torneos/torneos.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="37" column="35" lean-forward="true" selection-start-line="37" selection-start-column="35" selection-end-line="37" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/torneos/modalNuevoTorneo.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="26" column="1" lean-forward="false" selection-start-line="19" selection-start-column="1" selection-end-line="26" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/torneos/modalEditarTorneo.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="25" column="10" lean-forward="true" selection-start-line="25" selection-start-column="10" selection-end-line="25" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/torneos/modalInfoTorneo.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" column="53" lean-forward="true" selection-start-line="18" selection-start-column="53" selection-end-line="18" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/appTorneo.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="58">
+          <caret line="288" column="63" lean-forward="true" selection-start-line="288" selection-start-column="63" selection-end-line="288" selection-end-column="63" />
           <folding />
         </state>
       </provider>

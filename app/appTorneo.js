@@ -36,7 +36,7 @@ var torneoCtrl = function($rootScope, $scope, $uibModal, $http) {
     $scope.listarTorneos = function() {
         $scope.torneos = [];
         var consulta = {
-            query:"select * from torneos",
+            query:"SELECT * FROM torneos left join juego on torneos.juego_id_juego = juego.id_juego",
             method: "GET"
         }
 
@@ -50,6 +50,24 @@ var torneoCtrl = function($rootScope, $scope, $uibModal, $http) {
     };
 
     $scope.listarTorneos();
+
+    $scope.listarJuegos = function() {
+        $scope.juegos = [];
+        var consulta = {
+            query:"select * from juego",
+            method: "GET"
+        }
+
+        $http.post('../apis/porcesaAPI.php', {
+            data: {params:  consulta}
+        }).success(function(data){
+            $scope.juegos = data;
+        }).error(function(){
+            alert('Error al intentar enviar el query.');
+        });
+    };
+
+    $scope.listarJuegos();
 
     $scope.cssEstado = function(activo) {
         var css = 'label-danger';
@@ -121,12 +139,13 @@ var crearTorneoCtrl = function($rootScope, $scope, $uibModal, $http, $window) {
             administrarMensajeSweet2({titulo:'Ingrese numero de participantes', tipo:'error', texto: ''});
             return false;
         }
-        var stringQuery = "INSERT INTO torneos (Nombre, activo, tipo_torneo, num_participantes, descripcion) VALUES (" +
+        var stringQuery = "INSERT INTO torneos (Nombre, activo, tipo_torneo, num_participantes, descripcion, juego_id_juego) VALUES (" +
         "'" + newTorneo.Nombre + "'," +
         "true," +
         "'" + newTorneo.tipo_torneo + "'," +
         "" + newTorneo.num_participantes + ", " +
-        "'" + newTorneo.descripcion + "')";
+        "'" + newTorneo.descripcion + "'," +
+        "" + newTorneo.id_juego + ")";
 
         var consulta = {
            query: stringQuery,
@@ -208,7 +227,8 @@ var editarTorneoCtrl = function($rootScope, $scope, $uibModal, $http, $window) {
         "tipo_torneo = '" + editarTorneo.tipo_torneo + "', " +
         "num_participantes = '" + editarTorneo.num_participantes + "', " +
         "activo = '" + editarTorneo.activo + "', " +
-        "descripcion = '" + editarTorneo.descripcion + "' " +
+        "descripcion = '" + editarTorneo.descripcion + "', " +
+        "juego_id_juego = '" + editarTorneo.id_juego + "' " +
         "where codTorneo = " + editarTorneo.codTorneo + "";
         var consulta = {
             query: stringQuery,
