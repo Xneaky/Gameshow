@@ -40,7 +40,15 @@
                                 <!--</tr>-->
                             <!--</thead>-->
                             <div class="contenedor">
-                                <div class="box" ng-repeat="torneo in torneos | filter: {activo:1} | filter: query">
+                                <div ng-class="{'box-lol':torneo.nombre_juego==='League of Legends',
+                                                'box-fifa':torneo.nombre_juego==='FIFA',
+                                                'box-royale':torneo.nombre_juego==='Clash Royale',
+                                                'box-fn':torneo.nombre_juego==='Fortnite',
+                                                'box-csgo':torneo.nombre_juego==='CS:GO',
+                                                'box-ow':torneo.nombre_juego==='Overwatch'
+                                                }"
+
+                                     class="box" ng-repeat="torneo in torneos | filter: {activo:1} | filter: query">
                                     <div ng-click="infoTorneo(torneo)" class="tor"><span class="pie">{{torneo.Nombre}}</span></div>
                                 </div>
                             </div>
