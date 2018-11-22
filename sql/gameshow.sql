@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 22, 2018 at 03:29 AM
+-- Generation Time: Nov 22, 2018 at 07:42 AM
 -- Server version: 5.7.20-log
 -- PHP Version: 5.6.23
 
@@ -95,11 +95,11 @@ CREATE TABLE `jugadores` (
 --
 
 INSERT INTO `jugadores` (`codJugadores`, `nombre_jugador`, `apellido_jugador`, `nickname_jugador`, `email`, `fecha_nacimiento`, `activo`, `telefono_jugador`, `pais_jugador`, `direccion`, `img_jugador`) VALUES
-(1, 'Javier', 'Castillo', 'Xneaky', 'admin@admin.com', '2018-11-13', 1, 12345678, 'El Salvador', 'Algo algo', '../img/base.jpg'),
-(2, 'caleb', 'caleb', 'caleb0304', 'caleb@caleb.com', '2018-11-13', 1, 12345678, 'El Salvador', 'algun lugar', ''),
+(1, 'Javier', 'Castillo', 'Xneaky', 'admin@admin.com', '2018-11-08', 1, 12345678, 'El Salvador', 'Algo algo', '../img/base.jpg'),
+(2, 'caleb', 'caleb', 'caleb0304', 'caleb@caleb.com', '2018-11-13', 1, 12345678, 'El Salvador', 'algun lugar', '../img/base.jpg'),
 (3, 'Raulo', 'Batrelen', 'Blazeit', 'blaze@blaze.com', '2018-02-07', 1, 11112222, 'El Salvador', 'por ahi algun lugar', '../img/blaze.png'),
-(4, 'Kevin', 'Sandoval', 'Kain', 'kain@gmail.com', '2018-11-13', 1, 22222222, 'El Salvador', 'por ahi', ''),
-(5, 'asd', 'asd', 'asd', 'castillo_5326@hotmail.com', '2018-11-13', 1, 77463553, 'El Salvador', 'santa tecla el salvador', ''),
+(4, 'Kevin', 'Sandoval', 'Kain', 'kain@gmail.com', '2018-11-13', 1, 22222222, 'El Salvador', 'por ahi', '../img/base.jpg'),
+(5, 'asd', 'asd', 'asd', 'castillo_5326@hotmail.com', '2018-11-13', 1, 77463553, 'El Salvador', 'santa tecla el salvador', '../img/base.jpg'),
 (6, 'Alvaro', 'Archila', 'Nismo', 'nismo@nismo.com', '2018-11-13', 1, 78787878, 'USA', 'Por ahi', '../img/base.jpg'),
 (7, 'Roberto', 'Portillo', 'Xtillo', 'asd@asd.com', '2018-11-13', 1, 87878787, 'El Salvador', 'por ahi', '../img/base.jpg'),
 (8, 'magda', 'magda', 'magda', 'magda@magda.com', '2018-11-07', 1, 45454545, 'magda', 'magda', '../img/base.jpg');
@@ -122,7 +122,7 @@ CREATE TABLE `jugadores_team` (
 
 INSERT INTO `jugadores_team` (`idjugadores_team`, `jugadores_codJugadores`, `team_codTeam`) VALUES
 (2, 1, 1),
-(3, 1, 1);
+(4, 6, 1);
 
 -- --------------------------------------------------------
 
@@ -164,6 +164,14 @@ CREATE TABLE `participantes` (
   `team_codTeams` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `participantes`
+--
+
+INSERT INTO `participantes` (`codParticipantes`, `torneos_codTorneo`, `team_codTeams`) VALUES
+(2, 1, 1),
+(1, 2, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -197,7 +205,7 @@ CREATE TABLE `roles` (
 INSERT INTO `roles` (`id_rol`, `nombre_rol`, `modulos`, `descripcion_rol`, `activo`) VALUES
 (1, 'Administrador', '1,2,5,6,7,3,4,8,9', 'Administrador', 1),
 (2, 'Especial', '1,3,4,9', 'Ayudante del administrador', 1),
-(3, 'Simple', '2,5', 'Jugador o visitante', 1);
+(3, 'Simple', '1,6,5', 'Jugador o visitante', 1);
 
 -- --------------------------------------------------------
 
@@ -217,7 +225,7 @@ CREATE TABLE `team` (
 --
 
 INSERT INTO `team` (`codTeam`, `nombre`, `activo`, `id_capitan`) VALUES
-(1, 'Barcelona FC', 1, 1);
+(1, 'Wolfpack', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -242,7 +250,7 @@ CREATE TABLE `torneos` (
 
 INSERT INTO `torneos` (`codTorneo`, `Nombre`, `activo`, `tipo_torneo`, `num_participantes`, `descripcion`, `juego_id_juego`, `round_robin`) VALUES
 (1, 'Get', 1, 'Equipos', 23, 'asassaas', 1, 0),
-(2, 'test', 1, 'Equipos', 12, 'asdasd', 7, 0),
+(2, 'AXE FIFA', 1, 'Solitario', 12, '7', 7, 0),
 (3, 'AXE Royale', 1, 'Solitario', 32, 'Torneo especial', 3, 0),
 (4, 'AXE CSGO', 1, 'Equipos', 16, 'Prueba', 5, 0),
 (5, 'AXE Fortnite', 1, 'Equipos', 16, 'Prueba', 2, 0),
@@ -348,7 +356,8 @@ ALTER TABLE `juego`
 -- Indexes for table `jugadores`
 --
 ALTER TABLE `jugadores`
-  ADD PRIMARY KEY (`codJugadores`);
+  ADD PRIMARY KEY (`codJugadores`),
+  ADD UNIQUE KEY `email` (`email`);
 
 --
 -- Indexes for table `jugadores_team`
@@ -403,6 +412,7 @@ ALTER TABLE `torneos`
 --
 ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`id_usuario`,`jugadores_codJugadores`,`id_rol`),
+  ADD UNIQUE KEY `usuario` (`usuario`),
   ADD KEY `fk_usuarios_jugadores1_idx` (`jugadores_codJugadores`),
   ADD KEY `fk_usuarios_roles1_idx` (`id_rol`);
 
@@ -424,7 +434,7 @@ ALTER TABLE `jugadores`
 -- AUTO_INCREMENT for table `jugadores_team`
 --
 ALTER TABLE `jugadores_team`
-  MODIFY `idjugadores_team` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idjugadores_team` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `modulos`
 --
@@ -434,7 +444,7 @@ ALTER TABLE `modulos`
 -- AUTO_INCREMENT for table `participantes`
 --
 ALTER TABLE `participantes`
-  MODIFY `codParticipantes` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `codParticipantes` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `partidos`
 --
