@@ -299,8 +299,9 @@ var bracketCtrl = function($rootScope, $scope, $uibModal, $http) {
                                     var groupData = JSON.parse(result[0].bracket);
                                     $('.playoffround').group({
                                         init: groupData,
-                                        save: saveFn2,
-                                        userData: torneo
+                                        save: function(state) {
+                                            saveFn(state, torneo);
+                                        }
                                     })
                                     $(".block").removeClass("loading");
                                     return false;
@@ -338,8 +339,7 @@ var bracketCtrl = function($rootScope, $scope, $uibModal, $http) {
                                         $('.playoffround').group({
                                             init: groupData,
                                             save: function(state) {
-                                                console.log(state);
-                                                // Reconstruct read-only version by initializing it with received state
+                                                saveFn(state, torneo);
                                             }
                                         })
                                         $(".block").removeClass("loading");
@@ -397,39 +397,21 @@ var bracketCtrl = function($rootScope, $scope, $uibModal, $http) {
                                     init: groupData,
                                     save: function(state) {
                                         saveFn(state, torneo);
-                                        // Reconstruct read-only version by initializing it with received state
                                     }
                                 })
                                 $(".block").removeClass("loading");
                                 return false;
                             } else {                        
-                                bracket.forEach(function(item) {
-                                    itemsArr.push(item.nombre);
-                                    if (itemsArr.length == 2) {
-                                        teamsArr.push(itemsArr);
-                                        itemsArr = [];
-                                    }
-                                    if (bracket.length - 1 == bracket.indexOf(item)) {
-                                        var registros = $scope.crearBracketBye(bracket.length, itemsArr, teamsArr);
-                                        var singleEliminations = {
-                                            "teams": registros,
-                                            "results": [
-                                                [
-                                                    
-                                                ]
-                                            ]
-                                        }
-                                        $('.playoff').bracket({
-                                            init: singleEliminations,
-                                            teamWidth: 100,
-                                            scoreWidth: 30,
-                                            save: saveFn,
-                                            disableToolbar: false,
-                                            disableTeamEdit: false
-                                        });
-                                        $(".block").removeClass("loading");
-                                    }
+                                var singleEliminations = JSON.parse(result[0].bracket);
+                                $('.playoff').bracket({
+                                    init: singleEliminations,
+                                    teamWidth: 100,
+                                    scoreWidth: 30,
+                                    save: saveFn,
+                                    disableToolbar: false,
+                                    disableTeamEdit: false
                                 });
+                                $(".block").removeClass("loading");
                             }
                         } else {
                             if (bracket.length == 0) {
@@ -441,10 +423,6 @@ var bracketCtrl = function($rootScope, $scope, $uibModal, $http) {
 
                                     $('.playoffround').group({
                                         init: groupData
-                                        //save: function(state) {
-                                        //    console.log(state);
-                                        //    // Reconstruct read-only version by initializing it with received state
-                                        //}
                                     })
                                     $(".block").removeClass("loading");
                                     return false;
