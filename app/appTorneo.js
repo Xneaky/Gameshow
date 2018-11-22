@@ -306,7 +306,7 @@ var infoTorneoCtrl = function($rootScope, $scope, $uibModal, $http, $window) {
 
         var stringQuery ="INSERT INTO participantes (torneos_codTorneo, team_codTeams) VALUES (" +
              + infoTorneo.codTorneo + "," +
-            "" + $rootScope.securityDataUser.id_usuarios + ")";
+            "" + $rootScope.securityDataUser.id_usuario + ")";
 
         var consulta = {
             query: stringQuery,
@@ -315,8 +315,10 @@ var infoTorneoCtrl = function($rootScope, $scope, $uibModal, $http, $window) {
         $http.post('../apis/porcesaAPI.php', {
             data: {params:  consulta}
         }).success(function(response){
+            console.log("consulta :" + JSON.stringify(consulta));
             if (response == "1") {
                 $scope.listarTorneos();
+
                 administrarMensajeSweet({titulo:'Se ha registrado exitosamente', tipo:'success', texto: ''});
                 window.location.reload();
             } else {

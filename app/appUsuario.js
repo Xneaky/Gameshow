@@ -148,7 +148,7 @@ var crearUsuarioCtrl = function($rootScope, $scope, $uibModal, $http, $window) {
                 $scope.listarUsuarios();
                 administrarMensajeSweet({titulo:'Usuario ingresado', tipo:'success', texto: ''});
             } else {
-                administrarMensajeSweet({titulo:'Error al ingresar', tipo:'error', texto: ''});
+                administrarMensajeSweet({titulo:'Usuario o Email ya existe', tipo:'error', texto: ''});
             }
         }).error(function(){
             administrarMensajeSweet({titulo:'Error al enviar params', tipo:'error', texto: ''});
@@ -226,13 +226,13 @@ var editarUsuarioCtrl = function($rootScope, $scope, $uibModal, $http, $window) 
                         $scope.listarUsuarios();
                         administrarMensajeSweet({titulo:'Usuario actualizado', tipo:'success', texto: ''});
                     } else {
-                        administrarMensajeSweet({titulo:'Error al actualizar', tipo:'error', texto: ''});
+                        administrarMensajeSweet({titulo:'Email ya existe', tipo:'error', texto: ''});
                     }
                 }).error(function(){
                     administrarMensajeSweet({titulo:'Error al enviar params', tipo:'error', texto: ''});
                 });
             } else {
-                administrarMensajeSweet({titulo:'Error al actualizar', tipo:'error', texto: ''});
+                administrarMensajeSweet({titulo:'Usuario ya existe', tipo:'error', texto: ''});
             }
         }).error(function(){
             administrarMensajeSweet({titulo:'Error al enviar params', tipo:'error', texto: ''});
