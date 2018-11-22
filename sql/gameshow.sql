@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 22, 2018 at 02:22 AM
+-- Generation Time: Nov 22, 2018 at 03:29 AM
 -- Server version: 5.7.20-log
 -- PHP Version: 5.6.23
 
@@ -82,7 +82,7 @@ CREATE TABLE `jugadores` (
   `apellido_jugador` varchar(45) NOT NULL,
   `nickname_jugador` varchar(45) NOT NULL,
   `email` varchar(45) NOT NULL,
-  `fecha_nacimiento` varchar(200) NOT NULL,
+  `fecha_nacimiento` date NOT NULL,
   `activo` tinyint(1) NOT NULL,
   `telefono_jugador` int(20) DEFAULT NULL,
   `pais_jugador` varchar(45) NOT NULL,
@@ -95,13 +95,14 @@ CREATE TABLE `jugadores` (
 --
 
 INSERT INTO `jugadores` (`codJugadores`, `nombre_jugador`, `apellido_jugador`, `nickname_jugador`, `email`, `fecha_nacimiento`, `activo`, `telefono_jugador`, `pais_jugador`, `direccion`, `img_jugador`) VALUES
-(1, 'Javier', 'Castillo', 'Xneaky', 'admin@admin.com', 'Wed Nov 07 2018 00:00:00 GMT-0600 (Central Standard Time)', 1, 12345678, 'El Salvador', 'Algo algo', '../img/base.jpg'),
-(2, 'caleb', 'caleb', 'caleb0304', 'caleb@caleb.com', '11/6/1990', 1, 12345678, 'El Salvador', 'algun lugar', ''),
-(3, 'Raulo', 'Batrelen', 'Blazeit', 'Blaze@blaze.com', 'Tue Nov 13 2018 00:00:00 GMT-0600 (Central Standard Time)', 1, 11112222, 'El Salvador', 'por ahi algun lugar', '../img/blaze.png'),
-(4, 'Kevin', 'Sandoval', 'Kain', 'kain@gmail.com', 'Wed Nov 14 2018 00:00:00 GMT-0600 (Central Standard Time)', 1, 22222222, 'El Salvador', 'por ahi', ''),
-(5, 'asd', 'asd', 'asd', 'castillo_5326@hotmail.com', 'Tue Nov 20 2018 00:00:00 GMT-0600 (Central Standard Time)', 1, 77463553, 'El Salvador', 'santa tecla el salvador', ''),
-(6, 'Alvaro', 'Archila', 'Nismo', 'nismo@nismo.com', 'Wed Nov 07 2018 00:00:00 GMT-0600 (Central Standard Time)', 1, 78787878, 'USA', 'Por ahi', '../img/base.jpg'),
-(7, 'Roberto', 'Portillo', 'Xtillo', 'asd@asd.com', 'Tue Nov 20 2018 00:00:00 GMT-0600 (Central Standard Time)', 1, 87878787, 'El Salvador', 'por ahi', '../img/base.jpg');
+(1, 'Javier', 'Castillo', 'Xneaky', 'admin@admin.com', '2018-11-13', 1, 12345678, 'El Salvador', 'Algo algo', '../img/base.jpg'),
+(2, 'caleb', 'caleb', 'caleb0304', 'caleb@caleb.com', '2018-11-13', 1, 12345678, 'El Salvador', 'algun lugar', ''),
+(3, 'Raulo', 'Batrelen', 'Blazeit', 'blaze@blaze.com', '2018-02-07', 1, 11112222, 'El Salvador', 'por ahi algun lugar', '../img/blaze.png'),
+(4, 'Kevin', 'Sandoval', 'Kain', 'kain@gmail.com', '2018-11-13', 1, 22222222, 'El Salvador', 'por ahi', ''),
+(5, 'asd', 'asd', 'asd', 'castillo_5326@hotmail.com', '2018-11-13', 1, 77463553, 'El Salvador', 'santa tecla el salvador', ''),
+(6, 'Alvaro', 'Archila', 'Nismo', 'nismo@nismo.com', '2018-11-13', 1, 78787878, 'USA', 'Por ahi', '../img/base.jpg'),
+(7, 'Roberto', 'Portillo', 'Xtillo', 'asd@asd.com', '2018-11-13', 1, 87878787, 'El Salvador', 'por ahi', '../img/base.jpg'),
+(8, 'magda', 'magda', 'magda', 'magda@magda.com', '2018-11-07', 1, 45454545, 'magda', 'magda', '../img/base.jpg');
 
 -- --------------------------------------------------------
 
@@ -273,7 +274,8 @@ INSERT INTO `usuarios` (`id_usuario`, `usuario`, `pwd`, `activo`, `jugadores_cod
 (4, 'Kain', '1234', 1, 4, 3),
 (5, 'asd', 'aqwsde', 1, 5, 3),
 (6, 'Nismo', 'Nismo', 1, 6, 3),
-(7, 'Xtillo', 'asd@asd.com', 1, 7, 1);
+(7, 'Xtillo', 'asd@asd.com', 1, 7, 1),
+(8, 'magda', 'magda@magda.com', 1, 8, 1);
 
 -- --------------------------------------------------------
 
@@ -306,7 +308,7 @@ CREATE TABLE `vt_usuarios_roles_jugadores` (
 ,`apellido_jugador` varchar(45)
 ,`nickname_jugador` varchar(45)
 ,`email` varchar(45)
-,`fecha_nacimiento` varchar(200)
+,`fecha_nacimiento` date
 ,`jugadorActivo` tinyint(1)
 ,`telefono_jugador` int(20)
 ,`pais_jugador` varchar(45)
@@ -417,7 +419,7 @@ ALTER TABLE `juego`
 -- AUTO_INCREMENT for table `jugadores`
 --
 ALTER TABLE `jugadores`
-  MODIFY `codJugadores` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `codJugadores` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `jugadores_team`
 --
@@ -457,7 +459,7 @@ ALTER TABLE `torneos`
 -- AUTO_INCREMENT for table `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- Constraints for dumped tables
 --

@@ -118,12 +118,15 @@ var crearUsuarioCtrl = function($rootScope, $scope, $uibModal, $http, $window) {
 
     $scope.guardar = function(newUsuario) {
 
+        var d = new Date(newUsuario.fecha_nacimiento );
+        var x = d.getFullYear()  + "/" + (d.getMonth() + 1) + "/" + d.getDate();
+
         var stringQuery = "call InsertarUsuario ("+
         "'" + newUsuario.nombre_jugador + "'," +
         "'" + newUsuario.apellido_jugador + "'," +
         "'" + newUsuario.nickname_jugador + "'," +
         "'" + newUsuario.email + "'," +
-        "'" + newUsuario.fecha_nacimiento + "'," +
+        "'" + x + "'," +
         "1," +
         "" + newUsuario.telefono_jugador + "," +
         "'" + newUsuario.pais_jugador + "'," +
@@ -176,6 +179,10 @@ var editarUsuarioCtrl = function($rootScope, $scope, $uibModal, $http, $window) 
     };
 
     $scope.modificar = function(editarUsuario) {
+
+        var d = new Date(editarUsuario.fecha_nacimiento );
+        var x = d.getFullYear()  + "/" + (d.getMonth() + 1) + "/" + d.getDate();
+
         var stringQuery2 = "UPDATE usuarios set  " +
         "id_rol = '" + editarUsuario.id_rol + "', " +
         "usuario = '" + editarUsuario.usuario + "', " +
@@ -192,6 +199,8 @@ var editarUsuarioCtrl = function($rootScope, $scope, $uibModal, $http, $window) 
         }).success(function(response){
             console.log('stringQuery:' + JSON.stringify(stringQuery2));
             if (response == "1") {
+
+
                 var stringQuery = "UPDATE jugadores set  " +
                     "nombre_jugador = '" + editarUsuario.nombre_jugador + "', " +
                     "apellido_jugador = '" + editarUsuario.apellido_jugador + "', " +
@@ -200,7 +209,7 @@ var editarUsuarioCtrl = function($rootScope, $scope, $uibModal, $http, $window) 
                     "telefono_jugador = '" + editarUsuario.telefono_jugador + "', " +
                     "pais_jugador = '" + editarUsuario.pais_jugador + "', " +
                     "direccion = '" + editarUsuario.direccion + "', " +
-                    "fecha_nacimiento = '" + editarUsuario.fecha_nacimiento + "', " +
+                    "fecha_nacimiento = '" + x + "', " +
                     "activo = '" + editarUsuario.activo + "' " +
                     "where codJugadores = '" + editarUsuario.jugadores_codJugadores + "'";
 

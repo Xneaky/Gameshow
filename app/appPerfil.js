@@ -90,7 +90,8 @@ var editarPerfilCtrl = function($rootScope, $scope, $uibModal, $http, $window) {
             return false;
         }
 
-
+        var d = new Date(editarPerfil.fecha_nacimiento);
+        var x = d.getFullYear()  + "/" + (d.getMonth() + 1) + "/" + d.getDate();
 
         var stringQuery = "UPDATE jugadores set  " +
             "nombre_jugador = '" + editarPerfil.nombre_jugador + "', " +
@@ -98,7 +99,7 @@ var editarPerfilCtrl = function($rootScope, $scope, $uibModal, $http, $window) {
             "nickname_jugador = '" + editarPerfil.nickname_jugador + "', " +
             "email = '" + editarPerfil.email + "', " +
             "telefono_jugador = '" + editarPerfil.telefono_jugador + "', " +
-            "fecha_nacimiento = '" + editarPerfil.fecha_nacimiento + "', " +
+            "fecha_nacimiento = '" + x + "', " +
             "pais_jugador = '" + editarPerfil.pais_jugador + "', " +
             "direccion = '" + editarPerfil.direccion + "' " +
             "where codJugadores = " + editarPerfil.jugadores_codJugadores + "";

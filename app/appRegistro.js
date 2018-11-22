@@ -111,12 +111,16 @@ app.controller('crearUsuarioCtrl', function ($scope, $http, $uibModal, $uibModal
             administrarMensajeSweet2({titulo:'Las contraseñas no son iguales', tipo:'error', texto: ''});
             return false;
         }
+
+        var d = new Date(newUsuario.fecha_nacimiento );
+        var x = d.getFullYear()  + "/" + (d.getMonth() + 1) + "/" + d.getDate();
+
         var stringQuery = "call InsertarUsuario ("+
             "'" + newUsuario.nombre_jugador + "'," +
             "'" + newUsuario.apellido_jugador + "'," +
             "'" + newUsuario.nickname_jugador + "'," +
             "'" + newUsuario.email + "'," +
-            "'" + newUsuario.fecha_nacimiento + "'," +
+            "'" + x + "'," +
             "1," +
             "" + newUsuario.telefono_jugador + "," +
             "'" + newUsuario.pais_jugador + "'," +
