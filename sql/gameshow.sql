@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 22, 2018 at 01:31 AM
+-- Generation Time: Nov 22, 2018 at 02:22 AM
 -- Server version: 5.7.20-log
 -- PHP Version: 5.6.23
 
@@ -24,7 +24,7 @@ DELIMITER $$
 --
 -- Procedures
 --
-CREATE DEFINER=`root`@`localhost` PROCEDURE `InsertarUsuario` (IN `usern` VARCHAR(50), IN `usera` VARCHAR(50), IN `usernick` VARCHAR(50), IN `usere` VARCHAR(50), IN `userfn` VARCHAR(300), IN `useract` TINYINT(1), IN `usertel` INT(8), IN `userp` VARCHAR(50), IN `userdir` VARCHAR(300), IN `useru` VARCHAR(50), IN `userpwd` VARCHAR(300), IN `userrol` TINYINT(1))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `InsertarUsuario` (IN `usern` VARCHAR(50), IN `usera` VARCHAR(50), IN `usernick` VARCHAR(50), IN `usere` VARCHAR(50), IN `userfn` VARCHAR(300), IN `useract` TINYINT(1), IN `usertel` INT(8), IN `userp` VARCHAR(50), IN `userdir` VARCHAR(300), IN `useru` VARCHAR(50), IN `userpwd` VARCHAR(300), IN `userrol` TINYINT(1), IN `userimg` VARCHAR(100))  BEGIN
 DECLARE exit handler FOR sqlexception
 BEGIN
 	ROLLBACK;
@@ -32,8 +32,8 @@ END;
 
 START TRANSACTION;
 
-INSERT into  jugadores(codJugadores, nombre_jugador, apellido_jugador, nickname_jugador,email, fecha_nacimiento,activo,telefono_jugador,pais_jugador,direccion)
-VALUES (NULL, usern,usera,usernick,usere,userfn,useract,usertel,userp,userdir);
+INSERT into  jugadores(codJugadores, nombre_jugador, apellido_jugador, nickname_jugador,email, fecha_nacimiento,activo,telefono_jugador,pais_jugador,direccion,img_jugador)
+VALUES (NULL, usern,usera,usernick,usere,userfn,useract,usertel,userp,userdir,userimg);
 
 SELECT @idjugador:=MAX(codJugadores) FROM jugadores;
 
@@ -86,19 +86,22 @@ CREATE TABLE `jugadores` (
   `activo` tinyint(1) NOT NULL,
   `telefono_jugador` int(20) DEFAULT NULL,
   `pais_jugador` varchar(45) NOT NULL,
-  `direccion` varchar(45) NOT NULL
+  `direccion` varchar(45) NOT NULL,
+  `img_jugador` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `jugadores`
 --
 
-INSERT INTO `jugadores` (`codJugadores`, `nombre_jugador`, `apellido_jugador`, `nickname_jugador`, `email`, `fecha_nacimiento`, `activo`, `telefono_jugador`, `pais_jugador`, `direccion`) VALUES
-(1, 'Javier', 'Castillo', 'Xneaky', 'admin@admin.com', 'Wed Nov 07 2018 00:00:00 GMT-0600 (Central Standard Time)', 1, 12345678, 'El Salvador', 'Algo algo'),
-(2, 'caleb', 'caleb', 'caleb0304', 'caleb@caleb.com', '11/6/1990', 1, 12345678, 'El Salvador', 'algun lugar'),
-(3, 'Raulo', 'Batrelen', 'Blazeit', 'Blaze@blaze.com', 'Tue Nov 13 2018 00:00:00 GMT-0600 (Central Standard Time)', 1, 11112222, 'El Salvador', 'por ahi algun lugar'),
-(4, 'Kevin', 'Sandoval', 'Kain', 'kain@gmail.com', 'Wed Nov 14 2018 00:00:00 GMT-0600 (Central Standard Time)', 1, 22222222, 'El Salvador', 'por ahi'),
-(5, 'asd', 'asd', 'asd', 'castillo_5326@hotmail.com', 'Tue Nov 20 2018 00:00:00 GMT-0600 (Central Standard Time)', 1, 77463553, 'El Salvador', 'santa tecla el salvador');
+INSERT INTO `jugadores` (`codJugadores`, `nombre_jugador`, `apellido_jugador`, `nickname_jugador`, `email`, `fecha_nacimiento`, `activo`, `telefono_jugador`, `pais_jugador`, `direccion`, `img_jugador`) VALUES
+(1, 'Javier', 'Castillo', 'Xneaky', 'admin@admin.com', 'Wed Nov 07 2018 00:00:00 GMT-0600 (Central Standard Time)', 1, 12345678, 'El Salvador', 'Algo algo', '../img/base.jpg'),
+(2, 'caleb', 'caleb', 'caleb0304', 'caleb@caleb.com', '11/6/1990', 1, 12345678, 'El Salvador', 'algun lugar', ''),
+(3, 'Raulo', 'Batrelen', 'Blazeit', 'Blaze@blaze.com', 'Tue Nov 13 2018 00:00:00 GMT-0600 (Central Standard Time)', 1, 11112222, 'El Salvador', 'por ahi algun lugar', '../img/blaze.png'),
+(4, 'Kevin', 'Sandoval', 'Kain', 'kain@gmail.com', 'Wed Nov 14 2018 00:00:00 GMT-0600 (Central Standard Time)', 1, 22222222, 'El Salvador', 'por ahi', ''),
+(5, 'asd', 'asd', 'asd', 'castillo_5326@hotmail.com', 'Tue Nov 20 2018 00:00:00 GMT-0600 (Central Standard Time)', 1, 77463553, 'El Salvador', 'santa tecla el salvador', ''),
+(6, 'Alvaro', 'Archila', 'Nismo', 'nismo@nismo.com', 'Wed Nov 07 2018 00:00:00 GMT-0600 (Central Standard Time)', 1, 78787878, 'USA', 'Por ahi', '../img/base.jpg'),
+(7, 'Roberto', 'Portillo', 'Xtillo', 'asd@asd.com', 'Tue Nov 20 2018 00:00:00 GMT-0600 (Central Standard Time)', 1, 87878787, 'El Salvador', 'por ahi', '../img/base.jpg');
 
 -- --------------------------------------------------------
 
@@ -268,7 +271,9 @@ INSERT INTO `usuarios` (`id_usuario`, `usuario`, `pwd`, `activo`, `jugadores_cod
 (2, 'Jhonny', 'jhonny', 1, 2, 2),
 (3, 'Blazeit420', 'Blaze@blaze.com', 1, 3, 1),
 (4, 'Kain', '1234', 1, 4, 3),
-(5, 'asd', 'aqwsde', 1, 5, 3);
+(5, 'asd', 'aqwsde', 1, 5, 3),
+(6, 'Nismo', 'Nismo', 1, 6, 3),
+(7, 'Xtillo', 'asd@asd.com', 1, 7, 1);
 
 -- --------------------------------------------------------
 
@@ -306,6 +311,7 @@ CREATE TABLE `vt_usuarios_roles_jugadores` (
 ,`telefono_jugador` int(20)
 ,`pais_jugador` varchar(45)
 ,`direccion` varchar(45)
+,`img_jugador` varchar(100)
 );
 
 -- --------------------------------------------------------
@@ -324,7 +330,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `vt_usuarios_roles_jugadores`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vt_usuarios_roles_jugadores`  AS  select `u`.`id_usuario` AS `id_usuario`,`u`.`usuario` AS `usuario`,`u`.`pwd` AS `pwd`,`u`.`activo` AS `usuarioActivo`,`u`.`jugadores_codJugadores` AS `jugadores_codJugadores`,`r`.`id_rol` AS `id_rol`,`r`.`nombre_rol` AS `nombre_rol`,`r`.`modulos` AS `modulos`,`r`.`activo` AS `rolActivo`,`j`.`nombre_jugador` AS `nombre_jugador`,`j`.`apellido_jugador` AS `apellido_jugador`,`j`.`nickname_jugador` AS `nickname_jugador`,`j`.`email` AS `email`,`j`.`fecha_nacimiento` AS `fecha_nacimiento`,`j`.`activo` AS `jugadorActivo`,`j`.`telefono_jugador` AS `telefono_jugador`,`j`.`pais_jugador` AS `pais_jugador`,`j`.`direccion` AS `direccion` from ((`usuarios` `u` join `roles` `r` on((`u`.`id_rol` = `r`.`id_rol`))) join `jugadores` `j` on((`j`.`codJugadores` = `u`.`jugadores_codJugadores`))) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vt_usuarios_roles_jugadores`  AS  select `u`.`id_usuario` AS `id_usuario`,`u`.`usuario` AS `usuario`,`u`.`pwd` AS `pwd`,`u`.`activo` AS `usuarioActivo`,`u`.`jugadores_codJugadores` AS `jugadores_codJugadores`,`r`.`id_rol` AS `id_rol`,`r`.`nombre_rol` AS `nombre_rol`,`r`.`modulos` AS `modulos`,`r`.`activo` AS `rolActivo`,`j`.`nombre_jugador` AS `nombre_jugador`,`j`.`apellido_jugador` AS `apellido_jugador`,`j`.`nickname_jugador` AS `nickname_jugador`,`j`.`email` AS `email`,`j`.`fecha_nacimiento` AS `fecha_nacimiento`,`j`.`activo` AS `jugadorActivo`,`j`.`telefono_jugador` AS `telefono_jugador`,`j`.`pais_jugador` AS `pais_jugador`,`j`.`direccion` AS `direccion`,`j`.`img_jugador` AS `img_jugador` from ((`usuarios` `u` join `roles` `r` on((`u`.`id_rol` = `r`.`id_rol`))) join `jugadores` `j` on((`j`.`codJugadores` = `u`.`jugadores_codJugadores`))) ;
 
 --
 -- Indexes for dumped tables
@@ -411,7 +417,7 @@ ALTER TABLE `juego`
 -- AUTO_INCREMENT for table `jugadores`
 --
 ALTER TABLE `jugadores`
-  MODIFY `codJugadores` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `codJugadores` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `jugadores_team`
 --
@@ -451,7 +457,7 @@ ALTER TABLE `torneos`
 -- AUTO_INCREMENT for table `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- Constraints for dumped tables
 --
