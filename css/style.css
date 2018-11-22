@@ -1474,6 +1474,11 @@ table.dataTable thead .sorting:after {
 /* CIRCLE */
 .img-circle {
   border-radius: 50%;
+  display: block;
+  max-width:48px;
+  max-height:48px;
+  width: auto;
+  height: auto;
 }
 .btn-circle {
   width: 30px;

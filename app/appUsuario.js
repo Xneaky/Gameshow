@@ -130,7 +130,7 @@ var crearUsuarioCtrl = function($rootScope, $scope, $uibModal, $http, $window) {
         "'" + newUsuario.direccion + "'," +
         "'" + newUsuario.usuario + "'," +
         "'" + newUsuario.email + "'," +
-        "" + newUsuario.id_rol + ")";
+        "" + newUsuario.id_rol + ",'../img/base.jpg')";
 
         var consulta = {
             query: stringQuery,

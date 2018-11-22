@@ -4,9 +4,13 @@
     <bookmark url="file://$PROJECT_DIR$/views/perfil/modalEditarPerfil.html" line="44" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0baeb02d-4315-4715-9247-5c90cff0f26d" name="Default" comment="">
+    <list default="true" id="0baeb02d-4315-4715-9247-5c90cff0f26d" name="Default" comment="bd actualizada (por cualquier cosa)">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/appRegistro.js" afterPath="$PROJECT_DIR$/app/appRegistro.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/appUsuario.js" afterPath="$PROJECT_DIR$/app/appUsuario.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/style.css" afterPath="$PROJECT_DIR$/css/style.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sql/gameshow.sql" afterPath="$PROJECT_DIR$/sql/gameshow.sql" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/index.php" afterPath="$PROJECT_DIR$/views/index.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -30,8 +34,48 @@
       <file leaf-file-name="perfil.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/perfil/perfil.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="9" column="17" lean-forward="true" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
+            <state relative-caret-position="315">
+              <caret line="36" column="46" lean-forward="true" selection-start-line="36" selection-start-column="46" selection-end-line="36" selection-end-column="46" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/views/index.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="495">
+              <caret line="45" column="95" lean-forward="true" selection-start-line="45" selection-start-column="95" selection-end-line="45" selection-end-column="95" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="appUsuario.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/appUsuario.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="372">
+              <caret line="140" column="37" lean-forward="true" selection-start-line="140" selection-start-column="37" selection-end-line="140" selection-end-column="37" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="appRegistro.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/appRegistro.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="447">
+              <caret line="133" column="37" lean-forward="true" selection-start-line="133" selection-start-column="37" selection-end-line="133" selection-end-column="37" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="style.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/css/style.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="274">
+              <caret line="1474" column="13" lean-forward="true" selection-start-line="1474" selection-start-column="13" selection-end-line="1474" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -51,7 +95,7 @@
         <entry file="file://$PROJECT_DIR$/sql/gameshow.sql">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="656">
-              <caret line="493" column="0" lean-forward="true" selection-start-line="493" selection-start-column="0" selection-end-line="493" selection-end-column="0" />
+              <caret line="499" column="0" lean-forward="true" selection-start-line="499" selection-start-column="0" selection-end-line="499" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -101,6 +145,7 @@
       <find>font-family:</find>
       <find>box-lol</find>
       <find>editarPerfil</find>
+      <find>img-circle</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -134,7 +179,6 @@
         <option value="$PROJECT_DIR$/views/perfil/editarPerfil.html" />
         <option value="$PROJECT_DIR$/views/perfil/modalEditarPerfil.html" />
         <option value="$PROJECT_DIR$/views/usuarios/usuarios.html" />
-        <option value="$PROJECT_DIR$/app/appUsuario.js" />
         <option value="$PROJECT_DIR$/views/usuarios/modalNuevoUsuario.html" />
         <option value="$PROJECT_DIR$/views/usuarios/modalEditarUsuario.html" />
         <option value="$PROJECT_DIR$/app/appJuego.js" />
@@ -149,16 +193,17 @@
         <option value="$PROJECT_DIR$/index.php" />
         <option value="$PROJECT_DIR$/views/usuarios/modalRegistroUsuario.html" />
         <option value="$PROJECT_DIR$/views/directive.js" />
-        <option value="$PROJECT_DIR$/app/appRegistro.js" />
         <option value="$PROJECT_DIR$/views/torneos/torneosJugador.html" />
         <option value="$PROJECT_DIR$/app/appTorneo.js" />
         <option value="$PROJECT_DIR$/views/torneos/modalNuevoTorneo.html" />
-        <option value="$PROJECT_DIR$/views/index.php" />
-        <option value="$PROJECT_DIR$/css/style.css" />
         <option value="$PROJECT_DIR$/.idea/workspace.xml" />
         <option value="$PROJECT_DIR$/views/perfil/perfil.html" />
         <option value="$PROJECT_DIR$/app/appPerfil.js" />
         <option value="$PROJECT_DIR$/views/perfil/modalEditarContra.html" />
+        <option value="$PROJECT_DIR$/css/style.css" />
+        <option value="$PROJECT_DIR$/views/index.php" />
+        <option value="$PROJECT_DIR$/app/appUsuario.js" />
+        <option value="$PROJECT_DIR$/app/appRegistro.js" />
         <option value="$PROJECT_DIR$/sql/gameshow.sql" />
       </list>
     </option>
@@ -210,6 +255,16 @@
               <item name="gameshow" type="b2602c69:ProjectViewProjectNode" />
               <item name="gameshow" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="css" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="gameshow" type="b2602c69:ProjectViewProjectNode" />
+              <item name="gameshow" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="email_templates" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="gameshow" type="b2602c69:ProjectViewProjectNode" />
+              <item name="gameshow" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="img" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="gameshow" type="b2602c69:ProjectViewProjectNode" />
@@ -284,7 +339,7 @@
       <workItem from="1542548186581" duration="27536000" />
       <workItem from="1542633513073" duration="3233000" />
       <workItem from="1542754045528" duration="26477000" />
-      <workItem from="1542838188246" duration="8553000" />
+      <workItem from="1542838188246" duration="11587000" />
     </task>
     <task id="LOCAL-00001" summary="Agregue brackets a pagina principal">
       <created>1538080715291</created>
@@ -531,11 +586,18 @@
       <option name="project" value="LOCAL" />
       <updated>1542846599190</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="bd actualizada (por cualquier cosa)">
+      <created>1542846772636</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1542846772636</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="131474000" />
+    <option name="totallyTimeSpent" value="134508000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -603,7 +665,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="modulo usuarios funcionando" />
     <MESSAGE value="Jugadores funcional, agregue numero de telefono" />
     <MESSAGE value="SQL dump actualizado con la bd funcional" />
     <MESSAGE value="Registro de usuarios regulares" />
@@ -628,7 +689,8 @@
     <MESSAGE value="Torneos jugadores css update" />
     <MESSAGE value="sombra en los boxes" />
     <MESSAGE value="modal cambio de contraseña" />
-    <option name="LAST_COMMIT_MESSAGE" value="modal cambio de contraseña" />
+    <MESSAGE value="bd actualizada (por cualquier cosa)" />
+    <option name="LAST_COMMIT_MESSAGE" value="bd actualizada (por cualquier cosa)" />
     <option name="UPDATE_GROUP_BY_PACKAGES" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -843,14 +905,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/appUsuario.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="120" column="0" lean-forward="false" selection-start-line="120" selection-start-column="0" selection-end-line="132" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/app.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
@@ -879,13 +933,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="597">
           <caret line="65" column="74" lean-forward="true" selection-start-line="65" selection-start-column="74" selection-end-line="65" selection-end-column="74" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/appRegistro.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="222">
-          <caret line="118" column="54" lean-forward="true" selection-start-line="118" selection-start-column="54" selection-end-line="118" selection-end-column="54" />
         </state>
       </provider>
     </entry>
@@ -931,22 +978,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" column="80" lean-forward="false" selection-start-line="19" selection-start-column="80" selection-end-line="19" selection-end-column="80" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/css/style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="534">
-          <caret line="5202" column="0" lean-forward="true" selection-start-line="5202" selection-start-column="0" selection-end-line="5202" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -963,10 +994,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/views/perfil/modalEditarContra.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="26" column="7" lean-forward="true" selection-start-line="26" selection-start-column="7" selection-end-line="26" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/views/perfil/perfil.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="9" column="17" lean-forward="true" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
+        <state relative-caret-position="315">
+          <caret line="36" column="46" lean-forward="true" selection-start-line="36" selection-start-column="46" selection-end-line="36" selection-end-column="46" />
           <folding />
         </state>
       </provider>
@@ -979,10 +1018,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/perfil/modalEditarContra.html">
+    <entry file="file://$PROJECT_DIR$/views/index.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="26" column="7" lean-forward="true" selection-start-line="26" selection-start-column="7" selection-end-line="26" selection-end-column="7" />
+        <state relative-caret-position="495">
+          <caret line="45" column="95" lean-forward="true" selection-start-line="45" selection-start-column="95" selection-end-line="45" selection-end-column="95" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/appUsuario.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="372">
+          <caret line="140" column="37" lean-forward="true" selection-start-line="140" selection-start-column="37" selection-end-line="140" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/appRegistro.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="447">
+          <caret line="133" column="37" lean-forward="true" selection-start-line="133" selection-start-column="37" selection-end-line="133" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="274">
+          <caret line="1474" column="13" lean-forward="true" selection-start-line="1474" selection-start-column="13" selection-end-line="1474" selection-end-column="13" />
           <folding />
         </state>
       </provider>
@@ -990,7 +1053,7 @@
     <entry file="file://$PROJECT_DIR$/sql/gameshow.sql">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="656">
-          <caret line="493" column="0" lean-forward="true" selection-start-line="493" selection-start-column="0" selection-end-line="493" selection-end-column="0" />
+          <caret line="499" column="0" lean-forward="true" selection-start-line="499" selection-start-column="0" selection-end-line="499" selection-end-column="0" />
           <folding />
         </state>
       </provider>

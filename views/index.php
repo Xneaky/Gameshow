@@ -39,7 +39,7 @@
                     <li class="nav-header">
                         <div class="dropdown profile-element">
                             <span>
-                                <img alt="image" class="img-circle" src="../img/profile_small.jpg" />
+                                <img alt="image" class="img-circle" ng-src="{{securityDataUser.img_jugador}}" />
                             </span>
                             <a data-toggle="dropdown" class="dropdown-toggle">
                                 <span class="clear"><span class="block m-t-xs">

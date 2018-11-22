@@ -123,7 +123,7 @@ app.controller('crearUsuarioCtrl', function ($scope, $http, $uibModal, $uibModal
             "'" + newUsuario.direccion + "'," +
             "'" + newUsuario.usuario + "'," +
             "'" + newUsuario.pwd + "'," +
-            "" + "3)";
+            "" + "3,'../img/base.jpg')";
 
         var consulta = {
             query: stringQuery,
@@ -133,6 +133,7 @@ app.controller('crearUsuarioCtrl', function ($scope, $http, $uibModal, $uibModal
         $http.post('apis/porcesaAPI.php', {
             data: {params:  consulta}
         }).success(function(response){
+            console.log("consulta :" + JSON.stringify(consulta));
             if (response == "1") {
                 administrarMensajeSweet({titulo:'Usuario ingresado', tipo:'success', texto: ''});
             } else {
