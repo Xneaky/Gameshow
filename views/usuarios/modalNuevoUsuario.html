@@ -38,8 +38,9 @@
         </div>
         <div class="form-group">
             <label>Numero de Telefono</label>
-            <input type="number" placeholder="Ingrese su numero de contacto" name="telefono_jugador" class="form-control" ng-model="newUsuario.telefono_jugador" ng-pattern="/^[0-9]*$/" >
-            <p class="help-block" ng-show="valida.telefono_jugador.$invalid">Ingrese un numero de telefono valido</p>
+            <input type="number" placeholder="Ingrese su numero de contacto" name="telefono_jugador" class="form-control" ng-model="newUsuario.telefono_jugador" ng-minlength="6" ng-maxlength="15" ng-pattern="/^[0-9]*$/" >
+            <p class="help-block" ng-show="valida.telefono_perfil.$dirty && valida.telefono_perfil.$error.minlength">Debe ser un minimo de 6 numeros</p>
+            <p class="help-block" ng-show="valida.telefono_perfil.$dirty && valida.telefono_perfil.$invalid">Ingrese un numero de telefono valido/p>
         </div>
         <div class="form-group">
             <label>Nacionalidad</label>

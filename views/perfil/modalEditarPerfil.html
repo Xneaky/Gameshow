@@ -26,8 +26,9 @@
     </div>
     <div class="form-group">
         <label>Numero de Telefono</label>
-        <input type="number" maxlength="8" placeholder="77778888" name="telefono_perfil" class="form-control" ng-model="editarPerfil.telefono_jugador" ng-pattern="/^(7)([0-9]{7})|^(2)([0-9]){7}$/" >
-        <p class="help-block" ng-show="valida.telefono_perfil.$invalid">Ingrese un numero de telefono valido</p>
+        <input type="number" ng-maxlength="15" placeholder="Ingrese su numero de telefono" name="telefono_perfil" class="form-control" ng-model="editarPerfil.telefono_jugador" ng-required="true" ng-minlength="6" ng-pattern="/^[0-9]*$/">
+        <p class="help-block" ng-show="valida.telefono_perfil.$dirty && valida.telefono_perfil.$error.minlength">Debe ser un minimo de 6 numeros</p>
+        <p class="help-block" ng-show="valida.telefono_perfil.$dirty && valida.telefono_perfil.$invalid">Ingrese un numero de telefono valido/p>
     </div>
     <div class="form-group">
         <label>Pais</label>
