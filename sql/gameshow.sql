@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 21, 2018 at 07:12 AM
+-- Generation Time: Nov 22, 2018 at 01:31 AM
 -- Server version: 5.7.20-log
 -- PHP Version: 5.6.23
 
@@ -68,7 +68,7 @@ INSERT INTO `juego` (`id_juego`, `nombre_juego`, `activo`) VALUES
 (4, 'DOTA2', 1),
 (5, 'CS:GO', 1),
 (6, 'Overwatch', 1),
-(7, 'Harvest moon', 1);
+(7, 'FIFA', 1);
 
 -- --------------------------------------------------------
 
@@ -238,7 +238,11 @@ CREATE TABLE `torneos` (
 
 INSERT INTO `torneos` (`codTorneo`, `Nombre`, `activo`, `tipo_torneo`, `num_participantes`, `descripcion`, `juego_id_juego`, `round_robin`) VALUES
 (1, 'Get', 1, 'Equipos', 23, 'asassaas', 1, 0),
-(2, 'test', 1, 'Equipos', 12, 'asdasd', 7, 0);
+(2, 'test', 1, 'Equipos', 12, 'asdasd', 7, 0),
+(3, 'AXE Royale', 1, 'Solitario', 32, 'Torneo especial', 3, 0),
+(4, 'AXE CSGO', 1, 'Equipos', 16, 'Prueba', 5, 0),
+(5, 'AXE Fortnite', 1, 'Equipos', 16, 'Prueba', 2, 0),
+(6, 'AXE Overwatch', 1, 'Equipos', 16, 'Prueba', 6, 0);
 
 -- --------------------------------------------------------
 
@@ -260,7 +264,7 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id_usuario`, `usuario`, `pwd`, `activo`, `jugadores_codJugadores`, `id_rol`) VALUES
-(1, 'Xneaky', 'admin', 1, 1, 1),
+(1, 'Xneaky', 'adminadmin', 1, 1, 1),
 (2, 'Jhonny', 'jhonny', 1, 2, 2),
 (3, 'Blazeit420', 'Blaze@blaze.com', 1, 3, 1),
 (4, 'Kain', '1234', 1, 4, 3),
@@ -442,7 +446,7 @@ ALTER TABLE `team`
 -- AUTO_INCREMENT for table `torneos`
 --
 ALTER TABLE `torneos`
-  MODIFY `codTorneo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `codTorneo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `usuarios`
 --

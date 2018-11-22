@@ -5,10 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0baeb02d-4315-4715-9247-5c90cff0f26d" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/views/perfil/modalEditarContra.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/appPerfil.js" afterPath="$PROJECT_DIR$/app/appPerfil.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/perfil/perfil.html" afterPath="$PROJECT_DIR$/views/perfil/perfil.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sql/gameshow.sql" afterPath="$PROJECT_DIR$/sql/gameshow.sql" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -49,7 +47,17 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="modalEditarContra.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="gameshow.sql" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/sql/gameshow.sql">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="656">
+              <caret line="493" column="0" lean-forward="true" selection-start-line="493" selection-start-column="0" selection-end-line="493" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="modalEditarContra.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/perfil/modalEditarContra.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="390">
@@ -142,7 +150,6 @@
         <option value="$PROJECT_DIR$/views/usuarios/modalRegistroUsuario.html" />
         <option value="$PROJECT_DIR$/views/directive.js" />
         <option value="$PROJECT_DIR$/app/appRegistro.js" />
-        <option value="$PROJECT_DIR$/sql/gameshow.sql" />
         <option value="$PROJECT_DIR$/views/torneos/torneosJugador.html" />
         <option value="$PROJECT_DIR$/app/appTorneo.js" />
         <option value="$PROJECT_DIR$/views/torneos/modalNuevoTorneo.html" />
@@ -152,6 +159,7 @@
         <option value="$PROJECT_DIR$/views/perfil/perfil.html" />
         <option value="$PROJECT_DIR$/app/appPerfil.js" />
         <option value="$PROJECT_DIR$/views/perfil/modalEditarContra.html" />
+        <option value="$PROJECT_DIR$/sql/gameshow.sql" />
       </list>
     </option>
   </component>
@@ -202,6 +210,11 @@
               <item name="gameshow" type="b2602c69:ProjectViewProjectNode" />
               <item name="gameshow" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="css" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="gameshow" type="b2602c69:ProjectViewProjectNode" />
+              <item name="gameshow" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="sql" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="gameshow" type="b2602c69:ProjectViewProjectNode" />
@@ -271,7 +284,7 @@
       <workItem from="1542548186581" duration="27536000" />
       <workItem from="1542633513073" duration="3233000" />
       <workItem from="1542754045528" duration="26477000" />
-      <workItem from="1542838188246" duration="8385000" />
+      <workItem from="1542838188246" duration="8553000" />
     </task>
     <task id="LOCAL-00001" summary="Agregue brackets a pagina principal">
       <created>1538080715291</created>
@@ -511,11 +524,18 @@
       <option name="project" value="LOCAL" />
       <updated>1542845096615</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="modal cambio de contraseña">
+      <created>1542846599190</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1542846599190</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="131306000" />
+    <option name="totallyTimeSpent" value="131474000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -583,7 +603,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="comienzo del login" />
     <MESSAGE value="modulo usuarios funcionando" />
     <MESSAGE value="Jugadores funcional, agregue numero de telefono" />
     <MESSAGE value="SQL dump actualizado con la bd funcional" />
@@ -608,7 +627,8 @@
     <MESSAGE value="sql update" />
     <MESSAGE value="Torneos jugadores css update" />
     <MESSAGE value="sombra en los boxes" />
-    <option name="LAST_COMMIT_MESSAGE" value="sombra en los boxes" />
+    <MESSAGE value="modal cambio de contraseña" />
+    <option name="LAST_COMMIT_MESSAGE" value="modal cambio de contraseña" />
     <option name="UPDATE_GROUP_BY_PACKAGES" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -869,14 +889,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sql/gameshow.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="636">
-          <caret line="489" column="0" lean-forward="false" selection-start-line="489" selection-start-column="0" selection-end-line="489" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/torneos/modalInfoTorneo.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
@@ -971,6 +983,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="390">
           <caret line="26" column="7" lean-forward="true" selection-start-line="26" selection-start-column="7" selection-end-line="26" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sql/gameshow.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="656">
+          <caret line="493" column="0" lean-forward="true" selection-start-line="493" selection-start-column="0" selection-end-line="493" selection-end-column="0" />
           <folding />
         </state>
       </provider>
