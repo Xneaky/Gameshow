@@ -5,18 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0baeb02d-4315-4715-9247-5c90cff0f26d" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/img/FIFA.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/img/csgo.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/img/fortnite.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/img/lol.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/img/overwatch.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/img/royale.jpg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/appTorneo.js" afterPath="$PROJECT_DIR$/app/appTorneo.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/style.css" afterPath="$PROJECT_DIR$/css/style.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/index.php" afterPath="$PROJECT_DIR$/views/index.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/perfil/perfil.html" afterPath="$PROJECT_DIR$/views/perfil/perfil.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/torneos/torneosJugador.html" afterPath="$PROJECT_DIR$/views/torneos/torneosJugador.html" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -67,16 +57,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="gameshow.sql" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/sql/gameshow.sql">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="636">
-              <caret line="489" column="0" lean-forward="false" selection-start-line="489" selection-start-column="0" selection-end-line="489" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="torneosJugador.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/torneos/torneosJugador.html">
           <provider selected="true" editor-type-id="text-editor">
@@ -109,11 +89,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="style.css" pinned="false" current-in-tab="true">
+      <file leaf-file-name="style.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/css/style.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="414">
-              <caret line="5281" column="21" lean-forward="true" selection-start-line="5281" selection-start-column="21" selection-end-line="5281" selection-end-column="21" />
+            <state relative-caret-position="534">
+              <caret line="5202" column="0" lean-forward="true" selection-start-line="5202" selection-start-column="0" selection-end-line="5202" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="workspace.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -343,7 +333,7 @@
       <workItem from="1542548186581" duration="27536000" />
       <workItem from="1542633513073" duration="3233000" />
       <workItem from="1542754045528" duration="26477000" />
-      <workItem from="1542838188246" duration="6245000" />
+      <workItem from="1542838188246" duration="6866000" />
     </task>
     <task id="LOCAL-00001" summary="Agregue brackets a pagina principal">
       <created>1538080715291</created>
@@ -569,11 +559,18 @@
       <option name="project" value="LOCAL" />
       <updated>1542780821998</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="Torneos jugadores css update">
+      <created>1542844468550</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1542844468550</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="129166000" />
+    <option name="totallyTimeSpent" value="129787000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -586,12 +583,13 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12473348" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16847827" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16847827" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32934782" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -640,7 +638,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Matenimiento jugadores, agregue brackets al menu" />
     <MESSAGE value="base de datos actualizada" />
     <MESSAGE value="comienzo del login" />
     <MESSAGE value="modulo usuarios funcionando" />
@@ -665,7 +662,8 @@
     <MESSAGE value="BD update" />
     <MESSAGE value="Registro usuarios jugadores" />
     <MESSAGE value="sql update" />
-    <option name="LAST_COMMIT_MESSAGE" value="sql update" />
+    <MESSAGE value="Torneos jugadores css update" />
+    <option name="LAST_COMMIT_MESSAGE" value="Torneos jugadores css update" />
     <option name="UPDATE_GROUP_BY_PACKAGES" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -680,7 +678,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/sql/torneos.sql" />
     <entry file="file://$PROJECT_DIR$/views/modulos/modulos.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="375">
@@ -1018,8 +1015,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/css/style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="5281" column="21" lean-forward="true" selection-start-line="5281" selection-start-column="21" selection-end-line="5281" selection-end-column="21" />
+        <state relative-caret-position="534">
+          <caret line="5202" column="0" lean-forward="true" selection-start-line="5202" selection-start-column="0" selection-end-line="5202" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
