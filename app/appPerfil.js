@@ -13,6 +13,17 @@ var perfilCtrl = function($rootScope, $scope, $uibModal, $http) {
         });
     };
 
+    $scope.cambiarContra = function(perfil) {
+        $scope.editarContra = angular.copy(perfil);
+        $scope.modaleditarContra = $uibModal.open({
+            backdrop: 'static',
+            scope: $scope,
+            keyboard: false,
+            templateUrl: 'perfil/modalEditarContra.html',
+            controller: editarContraCtrl
+        });
+    };
+
 };
 
 perfilCtrl.$inject = ['$rootScope', '$scope', '$uibModal', '$http'];
@@ -116,6 +127,74 @@ var editarPerfilCtrl = function($rootScope, $scope, $uibModal, $http, $window) {
 };
 
 editarPerfilCtrl.$inject = ['$rootScope', '$scope', '$uibModal', '$http', '$window'];
+
+
+var editarContraCtrl = function($rootScope, $scope, $uibModal, $http, $window) {
+    var administrarMensajeSweet = function(conf) {
+        $window.swal({
+                title: conf.titulo,
+                text: conf.texto,
+                type: conf.tipo,
+                showCancelButton: false
+            },
+            function(isConfirm){
+                if (isConfirm){
+                    $scope.modaleditarContra.close();
+                }
+            });
+    };
+
+    var administrarMensajeSweet2 = function(conf) {
+        $window.swal({
+                title: conf.titulo,
+                text: conf.texto,
+                type: conf.tipo,
+                showCancelButton: false
+            },
+            function(isConfirm){
+                //Se cierra automaticamente
+            });
+    };
+
+    $scope.modificar2 = function(editarContra) {
+        if (editarContra.pwdact != $rootScope.securityDataUser.pwd) {
+            administrarMensajeSweet2({titulo:'Contraseña incorrecta', tipo:'error', texto: ''});
+            return false;
+        }
+        if (editarContra.pwdnew != editarContra.pwdnewconf) {
+            administrarMensajeSweet2({titulo:'La nueva contraseña no coincide', tipo:'error', texto: ''});
+            return false;
+        }
+
+
+        var stringQuery = "UPDATE usuarios set  " +
+            "pwd = '" + editarContra.pwdnew + "' " +
+            "where id_usuario = " + editarContra.id_usuario + "";
+        var consulta = {
+            query: stringQuery,
+            method: "POST"
+        }
+        $http.post('../apis/porcesaAPI.php', {
+            data: {params:  consulta}
+        }).success(function(response){
+            console.log("consulta :" + JSON.stringify(consulta));
+            if (response == "1") {
+                administrarMensajeSweet({titulo:'Contraseña actualizado', tipo:'success', texto: ''});
+            } else {
+                administrarMensajeSweet({titulo:'Error al actualizar', tipo:'error', texto: ''});
+            }
+        }).error(function(){
+            administrarMensajeSweet({titulo:'Error al enviar params', tipo:'error', texto: ''});
+        });
+    };
+
+    $scope.cerrarModal = function() {
+        $scope.modaleditarContra.close();
+        window.location.reload();
+    };
+};
+
+editarContraCtrl.$inject = ['$rootScope', '$scope', '$uibModal', '$http', '$window'];
 
 angular
     .module('myApp')
