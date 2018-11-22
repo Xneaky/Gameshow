@@ -35,6 +35,10 @@
         <input type="text" placeholder="Ingrese los detalles del torneo" name="descripcion_torneo" class="form-control" ng-model="newTorneo.descripcion" ng-required="true">
         <p class="help-block" ng-show="valida.descripcion_torneo.$touched && valida.descripcion_torneo.$error.required">Este campo es obligatorio</p>
     </div>
+    <div class="form-group">
+        <input type="checkbox" ng-model="newTorneo.round_robin">
+        <label>Round Robin</label>
+    </div>
 </div>
 <div class="modal-footer">
     <button type="button" class="btn btn-outline btn-default" ng-click="cerrarModal()">Cancelar</button>

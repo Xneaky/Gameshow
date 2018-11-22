@@ -23,6 +23,11 @@ var torneoCtrl = function($rootScope, $scope, $uibModal, $http) {
     };
 
     $scope.seleccionarTorneo = function(torneo) {
+        if (torneo.round_robin == 1) {
+            torneo.round_robin = true;
+        } else {
+            torneo.round_robin = false;
+        }
         $scope.editarTorneo = angular.copy(torneo);
         $scope.modaleditarTorneo = $uibModal.open({
             backdrop: 'static',
@@ -74,6 +79,14 @@ var torneoCtrl = function($rootScope, $scope, $uibModal, $http) {
         if (activo == 1) 
             css = 'label-info';
         return css;
+    };
+
+    $scope.chequear = function  (round) {
+        if (round == 1) {
+            return 'fa fa-check';
+        } else {
+            return 'fa fa-times';
+        }
     };
 
     $scope.etiquetaEstado = function(activo) {
@@ -139,13 +152,19 @@ var crearTorneoCtrl = function($rootScope, $scope, $uibModal, $http, $window) {
             administrarMensajeSweet2({titulo:'Ingrese numero de participantes', tipo:'error', texto: ''});
             return false;
         }
-        var stringQuery = "INSERT INTO torneos (Nombre, activo, tipo_torneo, num_participantes, descripcion, juego_id_juego,round_robin) VALUES (" +
+
+        var roundRobin = 0;
+        if (newTorneo.round_robin) {
+            roundRobin = 1;
+        }
+        var stringQuery = "INSERT INTO torneos (Nombre, activo, tipo_torneo, num_participantes, descripcion, juego_id_juego, round_robin) VALUES (" +
         "'" + newTorneo.Nombre + "'," +
         "true," +
         "'" + newTorneo.tipo_torneo + "'," +
         "" + newTorneo.num_participantes + ", " +
         "'" + newTorneo.descripcion + "'," +
-        "" + newTorneo.id_juego + ", )";
+        "" + newTorneo.id_juego + ", " +
+        "" + newTorneo.round_robin + ")";
 
         var consulta = {
            query: stringQuery,
@@ -228,7 +247,8 @@ var editarTorneoCtrl = function($rootScope, $scope, $uibModal, $http, $window) {
         "num_participantes = '" + editarTorneo.num_participantes + "', " +
         "activo = '" + editarTorneo.activo + "', " +
         "descripcion = '" + editarTorneo.descripcion + "', " +
-        "juego_id_juego = '" + editarTorneo.id_juego + "' " +
+        "descripcion = '" + editarTorneo.id_juego + "', " +
+        "round_robin = " + editarTorneo.round_robin + " " +
         "where codTorneo = " + editarTorneo.codTorneo + "";
         var consulta = {
             query: stringQuery,

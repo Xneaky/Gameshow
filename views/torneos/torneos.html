@@ -41,16 +41,18 @@
                                     <th>Tipo de torneo</th>
                                     <th>Numero de participantes</th>
                                     <th>Juego</th>
+                                    <th>Round Robin</th>
                                     <th>Activo</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="torneo in torneos| filter: query">
+                                <tr ng-repeat="torneo in torneos | filter: query track by $index">
                                     <td class="project-title"><span class="pie">{{torneo.Nombre}}</span></td>
                                     <td class="project-title">{{torneo.tipo_torneo}}</td>
                                     <td class="project-title">{{torneo.num_participantes}}</td>
                                     <td class="project-title"><span class="pie">{{torneo.nombre_juego}}</span></td>
+                                    <td class="project-title"><i class="{{chequear(torneo.round_robin)}}"></i></td>
                                     <td class="project-title"><span class="label {{cssEstado(torneo.activo)}}">{{etiquetaEstado(torneo.activo)}}</span></td>
                                     <td class="text-navy">
                                         <button type="button" class="btn btn-xs btn-default" ng-click="seleccionarTorneo(torneo)">Editar</button>
