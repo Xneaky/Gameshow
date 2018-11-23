@@ -28,34 +28,6 @@ app.controller('loginCtrl', function ($scope, $uibModal, $http, $window) {
         });
     };
 
-    /*
-    $scope.loggin = function(user) {
-
-        var consulta = {
-            query: "select * from usuarios where activo = 1 and email = '" + user.email + "' and pwd = '" + user.pwd + "'",
-            method: "Security"
-        }
-
-        console.log("query : " + JSON.stringify(consulta));
-
-        $http.post('apis/security.php', {
-            data: {params:  consulta}
-        }).success(function(data){
-            console.log("data : " + JSON.stringify(data));
-
-            if (data.length == 0) {
-                administrarMensajeSweet2({titulo:'Usuario y contraseña incorrecto', tipo:'error', texto: ''});
-            } else {
-                //$cookies.username = data;
-                //window.location = 'views/torneos/torneos.html';
-                window.location = 'views/index.html';
-            }
-
-        }).error(function(){
-            alert('Error al intentar enviar el query.');
-        });
-    }
-    */
     $scope.loggin = function(user) {
 
         var consulta = {
@@ -106,7 +78,8 @@ app.controller('crearUsuarioCtrl', function ($scope, $http, $uibModal, $uibModal
             });
     };
 
-    $scope.guardar = function(newUsuario) {
+    var ingresarUsuarioJugador = function(newUsuario){
+
         if (newUsuario.pwd != newUsuario.pwd2) {
             administrarMensajeSweet2({titulo:'Las contraseñas no son iguales', tipo:'error', texto: ''});
             return false;
@@ -149,11 +122,45 @@ app.controller('crearUsuarioCtrl', function ($scope, $http, $uibModal, $uibModal
 
     };
 
+
+    $scope.guardar = function(newUsuario) {
+
+        var consulta = {
+            query: "select * from vt_usuarios_roles_jugadores where usuario = '" + newUsuario.usuario.trim() + "' or email = '" + newUsuario.email.trim() + "';",
+            method: "GET"
+        }
+
+        $http.post('apis/porcesaAPI.php', {
+            data: {params:  consulta}
+        }).success(function(data){
+            if (data.length > 0) {
+                $window.swal({
+                    title: 'Favor cambie el Usuario o Email debido a que ya se encuentra registrado con estos datos',
+                    text: '',
+                    type: 'info',
+                    showCancelButton: false
+                });
+            } else {
+                console.log("consulta :" + JSON.stringify(consulta));
+                ingresarUsuarioJugador(newUsuario);
+            }
+        }).error(function(){
+            administrarMensajeSweet({titulo:'Error al enviar params', tipo:'error', texto: ''});
+        });
+
+    };
+
+
     $scope.cerrarModal = function() {
         $uibModalInstance.close();
     };
+
 });
 
 app.directive('menuApp', function($parse) {
 
 });
+
+
+
+
