@@ -21,6 +21,7 @@
 
     <link href="../css/animate.css" rel="stylesheet">
     <link href="../css/style.css" rel="stylesheet">
+    <link href="../css/image-picker.css" rel="stylesheet">
     <link href="../css/jquery.bracket.min.css" rel="stylesheet">
     <link href="../css/jquery.group.min.css" rel="stylesheet">
 
@@ -112,6 +113,8 @@
     <script src="../js/angular-sanitize.js"></script>
     <script src="../js/ui-bootstrap-tpls-2.1.4.js"></script>
     <script src="../js/jquery.bracket.min.js"></script>
+    <script src="../js/image-picker.js"></script>
+    <script src="../js/image-picker.min.js"></script>
     <script src="../js/Bacon-1ab32ffb.min.js"></script>
     <script src="../js/lodash-2.2.1.min.js"></script>
     <script src="../js/live.js"></script>

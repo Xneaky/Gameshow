@@ -20,6 +20,7 @@
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
                     <div class="ibox-tools">
+                        <a href="" class="btn btn-primary btn-xs" ng-click="seleccionarImg(securityDataUser)">Cambiar Avatar</a>
                         <a href="" class="btn btn-primary btn-xs" ng-click="cambiarContra(securityDataUser)">Cambiar contraseña</a>
                         <a href="" class="btn btn-primary btn-xs" ng-click="seleccionarPerfil(securityDataUser)">Editar Perfil</a>
                     </div>
@@ -30,10 +31,10 @@
                             <div class="box box-info">
                                 <div class="box-body">
                                     <div class="col-sm-6">
-                                        <div  align="center"> <img alt="User Pic" ng-src="{{securityDataUser.img_jugador}}" id="profile-image1" class="img-circle img-responsive">
+                                        <div  align="center"> <img alt="User Pic" ng-src="{{securityDataUser.img_jugador}}" id="profile-image1" class="img-circle img-responsive" >
 
-                                            <input id="profile-image-upload" class="hidden" type="file">
-                                            <div style="color:#999;" >click para cambiar imagen</div>
+                                            <input id="profile-image-upload" class="hidden" type="file" >
+
                                         </div>
                                         <br>
                                     </div>
