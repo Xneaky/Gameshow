@@ -302,10 +302,10 @@ var infoTorneoCtrl = function($rootScope, $scope, $uibModal, $http, $window) {
         });
     };
 
-    $scope.registrar = function(infoTorneo) {
+    var registrarTeamJugador = function(infoTorneo){
 
         var stringQuery ="INSERT INTO participantes (torneos_codTorneo, team_codTeams) VALUES (" +
-             + infoTorneo.codTorneo + "," +
+            + infoTorneo.codTorneo + "," +
             "" + $rootScope.securityDataUser.id_usuario + ")";
 
         var consulta = {
@@ -322,12 +322,42 @@ var infoTorneoCtrl = function($rootScope, $scope, $uibModal, $http, $window) {
                 administrarMensajeSweet({titulo:'Se ha registrado exitosamente', tipo:'success', texto: ''});
                 window.location.reload();
             } else {
-                administrarMensajeSweet2({titulo:'Error al actualizar', tipo:'error', texto: ''});
+                administrarMensajeSweet({titulo:'Error al actualizar', tipo:'error', texto: ''});
                 window.location.reload();
             }
         }).error(function(){
-            administrarMensajeSweet2({titulo:'Error al enviar params', tipo:'error', texto: ''});
+            administrarMensajeSweet({titulo:'Error al enviar params', tipo:'error', texto: ''});
         });
+
+
+    };
+
+
+    $scope.registrar = function(infoTorneo) {
+
+        var consulta = {
+            query: "select * from participantes where torneos_codTorneo = '" + infoTorneo.codTorneo + "' and team_codTeams = '" + $rootScope.securityDataUser.id_usuario  + "';",
+            method: "GET"
+        }
+
+        $http.post('../apis/porcesaAPI.php', {
+            data: {params:  consulta}
+        }).success(function(data){
+            if (data.length > 0) {
+                $window.swal({
+                    title: 'Usted ya se encuentra registrado dentro de este torneo',
+                    text: '',
+                    type: 'info',
+                    showCancelButton: false
+                });
+            } else {
+                console.log("consulta :" + JSON.stringify(consulta));
+                registrarTeamJugador(infoTorneo);
+            }
+        }).error(function(){
+            administrarMensajeSweet({titulo:'Error al enviar params', tipo:'error', texto: ''});
+        });
+
     };
 
     $scope.cerrarModal = function() {
@@ -344,3 +374,6 @@ angular
     .controller('crearTorneoCtrl', crearTorneoCtrl)
     .controller('editarTorneoCtrl', editarTorneoCtrl)
     .controller('infoTorneoCtrl', infoTorneoCtrl);
+
+
+
