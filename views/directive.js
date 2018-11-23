@@ -62,7 +62,7 @@ var menuGameShow = function($rootScope, $http) {
                 	}
 
                 	if (modulos.indexOf(6) == -1) {
-                		elemento = angular.element(document.querySelector('#btn-menu-perfil'));
+                		elemento = angular.element(document.querySelector('#btn-menu-jugadores'));
                         elemento.parent().html('');
                 	}
 

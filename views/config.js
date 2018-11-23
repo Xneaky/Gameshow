@@ -26,7 +26,7 @@ var configState = function($routeProvider) {
         }
     })
 
-    .when('/perfil', {
+    .when('/jugadores', {
         templateUrl : 'perfil/perfil.html',
         data: {
             pageTitle: 'Perfil'
