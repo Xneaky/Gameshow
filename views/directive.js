@@ -22,7 +22,7 @@ var menuGameShow = function($rootScope, $http) {
                     else if (obj == 5)
     					menuTemplate += '<a href="#torneosj" id ="btn-menu-torneosj"><i class="fa fa-desktop"></i><span class="nav-label">Torneos Jugadores</span></a>';
     				else if (obj == 6)
-    					menuTemplate += '<a href="#jugadores" id ="btn-menu-jugadores"><i class="fa fa-users"></i><span class="nav-label">Jugadores</span></a>';
+    					menuTemplate += '<a href="#jugadores" id ="btn-menu-jugadores"><i class="fa fa-users"></i><span class="nav-label">Perfil</span></a>';
     				else if (obj == 7)
     					menuTemplate += '<a href="#modulos" id="btn-menu-modulos"><i class="fa fa-eye"></i> <span class="nav-label">Modulos</span></a>';
     				else if (obj == 8)
@@ -62,7 +62,7 @@ var menuGameShow = function($rootScope, $http) {
                 	}
 
                 	if (modulos.indexOf(6) == -1) {
-                		elemento = angular.element(document.querySelector('#btn-menu-jugadores'));
+                		elemento = angular.element(document.querySelector('#btn-menu-perfil'));
                         elemento.parent().html('');
                 	}
 

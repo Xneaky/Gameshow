@@ -4,7 +4,7 @@ var mainCtrl = function($rootScope, $scope, $http) {
     
     $rootScope.securityDataUser = {routers:[]};
 
-    var configRouters = ['/brackets', '/equipos', '/juegos', '/torneos', '/torneosj', '/jugadores', '/modulos', '/roles', '/usuarios'];
+    var configRouters = ['/brackets', '/equipos', '/juegos', '/torneos', '/torneosj', '/perfil', '/modulos', '/roles', '/usuarios'];
     var acessRouters = [];
 
     var asignarPermisosRutas = function(modulos) {

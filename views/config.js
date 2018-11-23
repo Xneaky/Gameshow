@@ -26,10 +26,10 @@ var configState = function($routeProvider) {
         }
     })
 
-    .when('/jugadores', {
+    .when('/perfil', {
         templateUrl : 'perfil/perfil.html',
         data: {
-            pageTitle: 'Jugadores'
+            pageTitle: 'Perfil'
         }
     })
 
