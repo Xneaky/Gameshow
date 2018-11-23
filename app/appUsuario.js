@@ -105,35 +105,35 @@ var crearUsuarioCtrl = function($rootScope, $scope, $uibModal, $http, $window) {
 
     var administrarMensajeSweet = function(conf) {
         $window.swal({
-            title: conf.titulo,
-            text: conf.texto,
-            type: conf.tipo,
-            showCancelButton: false
-        },
-        function(isConfirm){
-            if (isConfirm)
-               $scope.modalInstance.close();
-        });
+                title: conf.titulo,
+                text: conf.texto,
+                type: conf.tipo,
+                showCancelButton: false
+            },
+            function(isConfirm){
+                if (isConfirm)
+                    $scope.modalInstance.close();
+            });
     };
 
-    $scope.guardar = function(newUsuario) {
+    var ingresarUsuarioJugador = function(newUsuario) {
 
         var d = new Date(newUsuario.fecha_nacimiento );
         var x = d.getFullYear()  + "/" + (d.getMonth() + 1) + "/" + d.getDate();
 
         var stringQuery = "call InsertarUsuario ("+
-        "'" + newUsuario.nombre_jugador + "'," +
-        "'" + newUsuario.apellido_jugador + "'," +
-        "'" + newUsuario.nickname_jugador + "'," +
-        "'" + newUsuario.email + "'," +
-        "'" + x + "'," +
-        "1," +
-        "" + newUsuario.telefono_jugador + "," +
-        "'" + newUsuario.pais_jugador + "'," +
-        "'" + newUsuario.direccion + "'," +
-        "'" + newUsuario.usuario + "'," +
-        "'" + newUsuario.email + "'," +
-        "" + newUsuario.id_rol + ",'../img/base.jpg')";
+            "'" + newUsuario.nombre_jugador + "'," +
+            "'" + newUsuario.apellido_jugador + "'," +
+            "'" + newUsuario.nickname_jugador + "'," +
+            "'" + newUsuario.email + "'," +
+            "'" + x + "'," +
+            "1," +
+            "" + newUsuario.telefono_jugador + "," +
+            "'" + newUsuario.pais_jugador + "'," +
+            "'" + newUsuario.direccion + "'," +
+            "'" + newUsuario.usuario + "'," +
+            "'" + newUsuario.email + "'," +
+            "" + newUsuario.id_rol + ",'../img/base.jpg')";
 
         var consulta = {
             query: stringQuery,
@@ -148,12 +148,35 @@ var crearUsuarioCtrl = function($rootScope, $scope, $uibModal, $http, $window) {
                 $scope.listarUsuarios();
                 administrarMensajeSweet({titulo:'Usuario ingresado', tipo:'success', texto: ''});
             } else {
-                administrarMensajeSweet({titulo:'Usuario o Email ya existe', tipo:'error', texto: ''});
+                administrarMensajeSweet({titulo:'Error al ingresar', tipo:'error', texto: ''});
             }
         }).error(function(){
             administrarMensajeSweet({titulo:'Error al enviar params', tipo:'error', texto: ''});
         });
-        
+    };
+
+    $scope.guardar = function(newUsuario) {
+        var consulta = {
+            query: "select * from vt_usuarios_roles_jugadores where usuario = '" + newUsuario.usuario.trim() + "' or email = '" + newUsuario.email.trim() + "';",
+            method: "GET"
+        }
+
+        $http.post('../apis/porcesaAPI.php', {
+            data: {params:  consulta}
+        }).success(function(data){
+            if (data.length > 0) {
+                $window.swal({
+                    title: 'Favor cambie el Usuario o Email debido a que ya se encuentra registrado con estos datos',
+                    text: '',
+                    type: 'info',
+                    showCancelButton: false
+                });
+            } else {
+                ingresarUsuarioJugador(newUsuario);
+            }
+        }).error(function(){
+            administrarMensajeSweet({titulo:'Error al enviar params', tipo:'error', texto: ''});
+        });
     };
 
     $scope.cerrarModal = function() {
@@ -166,28 +189,28 @@ crearUsuarioCtrl.$inject = ['$rootScope', '$scope', '$uibModal', '$http', '$wind
 var editarUsuarioCtrl = function($rootScope, $scope, $uibModal, $http, $window) {
     var administrarMensajeSweet = function(conf) {
         $window.swal({
-            title: conf.titulo,
-            text: conf.texto,
-            type: conf.tipo,
-            showCancelButton: false
-        },
-        function(isConfirm){
-            if (isConfirm){
-                $scope.modalEditarUsuario.close();
-            }
-        });
+                title: conf.titulo,
+                text: conf.texto,
+                type: conf.tipo,
+                showCancelButton: false
+            },
+            function(isConfirm){
+                if (isConfirm){
+                    $scope.modalEditarUsuario.close();
+                }
+            });
     };
 
-    $scope.modificar = function(editarUsuario) {
+    var ingresarUsuarioMod = function(editarUsuario) {
 
         var d = new Date(editarUsuario.fecha_nacimiento );
         var x = d.getFullYear()  + "/" + (d.getMonth() + 1) + "/" + d.getDate();
 
         var stringQuery2 = "UPDATE usuarios set  " +
-        "id_rol = '" + editarUsuario.id_rol + "', " +
-        "usuario = '" + editarUsuario.usuario + "', " +
-        "activo = '" + editarUsuario.activo + "' " +
-        "where id_usuario = '" + editarUsuario.id_usuario + "'";
+            "id_rol = '" + editarUsuario.id_rol + "', " +
+            "usuario = '" + editarUsuario.usuario + "', " +
+            "activo = '" + editarUsuario.activo + "' " +
+            "where id_usuario = '" + editarUsuario.id_usuario + "'";
 
         var consulta = {
             query: stringQuery2,
@@ -226,18 +249,47 @@ var editarUsuarioCtrl = function($rootScope, $scope, $uibModal, $http, $window) 
                         $scope.listarUsuarios();
                         administrarMensajeSweet({titulo:'Usuario actualizado', tipo:'success', texto: ''});
                     } else {
-                        administrarMensajeSweet({titulo:'Email ya existe', tipo:'error', texto: ''});
+                        administrarMensajeSweet({titulo:'Error al ingresar', tipo:'error', texto: ''});
                     }
                 }).error(function(){
                     administrarMensajeSweet({titulo:'Error al enviar params', tipo:'error', texto: ''});
                 });
             } else {
-                administrarMensajeSweet({titulo:'Usuario ya existe', tipo:'error', texto: ''});
+                administrarMensajeSweet({titulo:'Error al ingresar', tipo:'error', texto: ''});
             }
         }).error(function(){
             administrarMensajeSweet({titulo:'Error al enviar params', tipo:'error', texto: ''});
         });
+
+
     };
+
+
+    $scope.modificar = function(editarUsuario) {
+        var consulta = {
+            query: "select * from vt_usuarios_roles_jugadores where usuario = '" + editarUsuario.usuario.trim() + "' or email = '" + editarUsuario.email.trim() + "';",
+            method: "GET"
+        }
+
+        $http.post('../apis/porcesaAPI.php', {
+            data: {params:  consulta}
+        }).success(function(data){
+            if (data.length > 0) {
+                $window.swal({
+                    title: 'Favor cambie el Usuario o Email debido a que ya se encuentra registrado con estos datos',
+                    text: '',
+                    type: 'info',
+                    showCancelButton: false
+                });
+            } else {
+                ingresarUsuarioMod(editarUsuario);
+            }
+        }).error(function(){
+            administrarMensajeSweet({titulo:'Error al enviar params', tipo:'error', texto: ''});
+        });
+
+    };
+
 
     $scope.cerrarModal = function() {
         $scope.modalEditarUsuario.close();
