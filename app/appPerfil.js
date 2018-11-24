@@ -219,7 +219,8 @@ var editarImgCtrl = function($rootScope, $scope, $uibModal, $http, $window) {
             },
             function(isConfirm){
                 if (isConfirm){
-                    $scope.modaleditarContra.close();
+                    $scope.modaleditarImg.close();
+                    window.location.reload();
                 }
             });
     };
@@ -236,41 +237,30 @@ var editarImgCtrl = function($rootScope, $scope, $uibModal, $http, $window) {
             });
     };
 
-    $scope.modificar3 = function(editarImg) {
+    $scope.modificar3 = function() {
 
-        var ruta = editarImg.value;
-        console.log(ruta);
+        var IMG = $('.image-picker').imagepicker().val();
+        console.log(IMG)
 
-
-        // if (editarContra.pwdact != $rootScope.securityDataUser.pwd) {
-        //     administrarMensajeSweet2({titulo:'Contraseña incorrecta', tipo:'error', texto: ''});
-        //     return false;
-        // }
-        // if (editarContra.pwdnew != editarContra.pwdnewconf) {
-        //     administrarMensajeSweet2({titulo:'La nueva contraseña no coincide', tipo:'error', texto: ''});
-        //     return false;
-        // }
-        //
-        //
-        // var stringQuery = "UPDATE usuarios set  " +
-        //     "pwd = '" + editarContra.pwdnew + "' " +
-        //     "where id_usuario = " + editarContra.id_usuario + "";
-        // var consulta = {
-        //     query: stringQuery,
-        //     method: "POST"
-        // }
-        // $http.post('../apis/porcesaAPI.php', {
-        //     data: {params:  consulta}
-        // }).success(function(response){
-        //     console.log("consulta :" + JSON.stringify(consulta));
-        //     if (response == "1") {
-        //         administrarMensajeSweet({titulo:'Contraseña actualizado', tipo:'success', texto: ''});
-        //     } else {
-        //         administrarMensajeSweet({titulo:'Error al actualizar', tipo:'error', texto: ''});
-        //     }
-        // }).error(function(){
-        //     administrarMensajeSweet({titulo:'Error al enviar params', tipo:'error', texto: ''});
-        // });
+        var stringQuery = "UPDATE jugadores set  " +
+            "img_jugador = '../img/" + IMG + ".png' " +
+            "where codJugadores = " + $rootScope.securityDataUser.id_usuario + "";
+        var consulta = {
+            query: stringQuery,
+            method: "POST"
+        }
+        $http.post('../apis/porcesaAPI.php', {
+            data: {params:  consulta}
+        }).success(function(response){
+            console.log("consulta :" + JSON.stringify(consulta));
+            if (response == "1") {
+                administrarMensajeSweet({titulo:'Avatar actualizado', tipo:'success', texto: ''});
+            } else {
+                administrarMensajeSweet({titulo:'Error al actualizar', tipo:'error', texto: ''});
+            }
+        }).error(function(){
+            administrarMensajeSweet({titulo:'Error al enviar params', tipo:'error', texto: ''});
+        });
     };
 
     $scope.cerrarModal = function() {
