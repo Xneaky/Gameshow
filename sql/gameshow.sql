@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 24, 2018 at 06:25 AM
+-- Generation Time: Nov 24, 2018 at 07:18 AM
 -- Server version: 5.7.20-log
 -- PHP Version: 5.6.23
 
@@ -161,16 +161,15 @@ INSERT INTO `modulos` (`id_modulo`, `nombre_modulo`, `descripcion_modulo`, `acti
 CREATE TABLE `participantes` (
   `codParticipantes` int(11) NOT NULL,
   `torneos_codTorneo` int(11) NOT NULL,
-  `team_codTeam` int(11) NOT NULL
+  `team_codTeams` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `participantes`
 --
 
-INSERT INTO `participantes` (`codParticipantes`, `torneos_codTorneo`, `team_codTeam`) VALUES
-(2, 1, 1),
-(1, 2, 1);
+INSERT INTO `participantes` (`codParticipantes`, `torneos_codTorneo`, `team_codTeams`) VALUES
+(3, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -217,7 +216,7 @@ CREATE TABLE `roles` (
 INSERT INTO `roles` (`id_rol`, `nombre_rol`, `modulos`, `descripcion_rol`, `activo`) VALUES
 (1, 'Administrador', '1,2,5,6,7,3,4,8,9', 'Administrador', 1),
 (2, 'Especial', '1,3,4,9', 'Ayudante del administrador', 1),
-(3, 'Simple', '1,6,5', 'Jugador o visitante', 1);
+(3, 'Simple', '1,2,6,5', 'Jugador o visitante', 1);
 
 -- --------------------------------------------------------
 
@@ -237,7 +236,8 @@ CREATE TABLE `team` (
 --
 
 INSERT INTO `team` (`codTeam`, `nombre`, `activo`, `id_capitan`) VALUES
-(1, 'Wolfpack', 1, 1);
+(1, 'Wolfpack', 1, 1),
+(2, 'EquipoNismo', 1, 6);
 
 -- --------------------------------------------------------
 
@@ -389,9 +389,9 @@ ALTER TABLE `modulos`
 -- Indexes for table `participantes`
 --
 ALTER TABLE `participantes`
-  ADD PRIMARY KEY (`codParticipantes`,`torneos_codTorneo`,`team_codTeam`),
+  ADD PRIMARY KEY (`codParticipantes`,`torneos_codTorneo`,`team_codTeams`),
   ADD KEY `fk_participantes_torneos_idx` (`torneos_codTorneo`),
-  ADD KEY `fk_participantes_team1_idx` (`team_codTeam`);
+  ADD KEY `fk_participantes_team1_idx` (`team_codTeams`);
 
 --
 -- Indexes for table `participantes_j`
@@ -465,7 +465,7 @@ ALTER TABLE `modulos`
 -- AUTO_INCREMENT for table `participantes`
 --
 ALTER TABLE `participantes`
-  MODIFY `codParticipantes` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `codParticipantes` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `participantes_j`
 --
@@ -485,7 +485,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `team`
 --
 ALTER TABLE `team`
-  MODIFY `codTeam` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `codTeam` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `torneos`
 --
@@ -511,7 +511,7 @@ ALTER TABLE `jugadores_team`
 -- Constraints for table `participantes`
 --
 ALTER TABLE `participantes`
-  ADD CONSTRAINT `fk_participantes_team1` FOREIGN KEY (`team_codTeam`) REFERENCES `team` (`codTeam`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_participantes_team1` FOREIGN KEY (`team_codTeams`) REFERENCES `team` (`codTeam`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_participantes_torneos` FOREIGN KEY (`torneos_codTorneo`) REFERENCES `torneos` (`codTorneo`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
