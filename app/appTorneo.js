@@ -318,7 +318,7 @@ var infoTorneoCtrl = function($rootScope, $scope, $uibModal, $http, $window) {
 
     var registrarTeamJugador = function(infoTorneo){
 
-        var stringQuery ="INSERT INTO participantes (torneos_codTorneo, team_codTeams) VALUES (" +
+        var stringQuery ="INSERT INTO participantes_j (torneos_codTorneo, jugadores_codJugadores) VALUES (" +
             + infoTorneo.codTorneo + "," +
             "" + $rootScope.securityDataUser.id_usuario + ")";
 
@@ -389,7 +389,7 @@ var infoTorneoCtrl = function($rootScope, $scope, $uibModal, $http, $window) {
             });
         } else {
             var consulta = {
-                query: "select * from participantes where torneos_codTorneo = '" + infoTorneo.codTorneo + "' and team_codTeams = '" + $rootScope.securityDataUser.id_usuario  + "';",
+                query: "select * from participantes_j where torneos_codTorneo = '" + infoTorneo.codTorneo + "' and jugadores_codJugadores = '" + $rootScope.securityDataUser.id_usuario  + "';",
                 method: "GET"
             }
 
