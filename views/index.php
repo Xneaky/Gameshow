@@ -50,7 +50,7 @@
                                 </span>
                             </a>
                             <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                                <li><a ui-sref="profile">Perfil</a></li>
+                                <li><a href="#jugadores">Perfil</a></li>
                                 <li><a ng-click="cerrarSession()">Cerrar Sesión</a></li>
                             </ul>
                         </div>

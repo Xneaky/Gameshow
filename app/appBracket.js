@@ -199,6 +199,7 @@ var bracketCtrl = function($rootScope, $scope, $uibModal, $http) {
     function saveFn(data, userData) {
         //userData aloja la informacion del torneo
         //data es toda la informacion del bracket
+        console.log('Si entra' + JSON.stringify(userData));
         $(".block").addClass("loading");
         var consulta = {
             query:"select * from partidos where torneos_codTorneo = " + userData.codTorneo + "",
@@ -275,7 +276,7 @@ var bracketCtrl = function($rootScope, $scope, $uibModal, $http) {
                 }
             } else {
                 consulta = {
-                    query:"SELECT nickname_jugador as nombre FROM jugadores AS t1 INNER JOIN participantes AS t2 ON t1.codJugadores = t2.team_codTeams WHERE t2.torneos_codTorneo = " + parseInt(torneo.codTorneo) + "",
+                    query:"SELECT nickname_jugador as nombre FROM jugadores AS t1 INNER JOIN participantes_j AS t2 ON t1.codJugadores = t2.jugadores_codJugadores WHERE t2.torneos_codTorneo = " + parseInt(torneo.codTorneo) + "",
                     method: "GET"
                 }
             }
@@ -410,12 +411,14 @@ var bracketCtrl = function($rootScope, $scope, $uibModal, $http) {
                                     teamWidth: 100,
                                     scoreWidth: 30,
                                     save: saveFn,
+                                    userData: torneo,
                                     disableToolbar: false,
                                     disableTeamEdit: false
                                 });
                                 $(".block").removeClass("loading");
                             }
                         } else {
+                            console.log('Si');
                             if (bracket.length == 0) {
                                 if (torneo.round_robin == 1) {
                                     var groupData = {
@@ -438,6 +441,7 @@ var bracketCtrl = function($rootScope, $scope, $uibModal, $http) {
                                             ]
                                         ]
                                     }
+                                    console.log('Rorneo ' + JSON.stringify(torneo))
                                     $('.playoff').bracket({
                                         init: singleEliminations,
                                         teamWidth: 100,
@@ -498,6 +502,7 @@ var bracketCtrl = function($rootScope, $scope, $uibModal, $http) {
                                                 teamWidth: 100,
                                                 scoreWidth: 30,
                                                 save: saveFn,
+                                                userData: torneo,
                                                 disableToolbar: false,
                                                 disableTeamEdit: false
                                             });

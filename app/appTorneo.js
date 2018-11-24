@@ -11,7 +11,8 @@ var torneoCtrl = function($rootScope, $scope, $uibModal, $http) {
         });
     };
 
-    $scope.infoTorneo = function(torneo) {
+    $scope.infoTorneoVer = function(torneo) {
+        $scope.infoTorneo = {};
         $scope.infoTorneo = angular.copy(torneo);
         $scope.modalInfoTorneo = $uibModal.open({
             backdrop: 'static',
@@ -334,10 +335,10 @@ var infoTorneoCtrl = function($rootScope, $scope, $uibModal, $http, $window) {
                 $scope.listarTorneos();
 
                 administrarMensajeSweet({titulo:'Se ha registrado exitosamente', tipo:'success', texto: ''});
-                window.location.reload();
+                //window.location.reload();
             } else {
                 administrarMensajeSweet({titulo:'Error al actualizar', tipo:'error', texto: ''});
-                window.location.reload();
+                //window.location.reload();
             }
         }).error(function(){
             administrarMensajeSweet({titulo:'Error al enviar params', tipo:'error', texto: ''});
@@ -365,10 +366,10 @@ var infoTorneoCtrl = function($rootScope, $scope, $uibModal, $http, $window) {
                 $scope.listarTorneos();
 
                 administrarMensajeSweet({titulo:'Se ha registrado exitosamente', tipo:'success', texto: ''});
-                window.location.reload();
+                //window.location.reload();
             } else {
                 administrarMensajeSweet({titulo:'Error al actualizar', tipo:'error', texto: ''});
-                window.location.reload();
+                //window.location.reload();
             }
         }).error(function(){
             administrarMensajeSweet({titulo:'Error al enviar params', tipo:'error', texto: ''});
@@ -443,7 +444,7 @@ var infoTorneoCtrl = function($rootScope, $scope, $uibModal, $http, $window) {
 
     $scope.cerrarModal = function() {
         $scope.modalInfoTorneo.close();
-        window.location.reload();
+        //window.location.reload();
     };
 };
 

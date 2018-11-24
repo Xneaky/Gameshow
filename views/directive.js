@@ -21,8 +21,8 @@ var menuGameShow = function($rootScope, $http) {
                         menuTemplate += '<a href="#torneos" id ="btn-menu-torneos"><i class="fa fa-desktop"></i><span class="nav-label">Torneos</span></a>';
                     else if (obj == 5)
     					menuTemplate += '<a href="#torneosj" id ="btn-menu-torneosj"><i class="fa fa-desktop"></i><span class="nav-label">Torneos Jugadores</span></a>';
-    				else if (obj == 6)
-    					menuTemplate += '<a href="#jugadores" id ="btn-menu-jugadores"><i class="fa fa-users"></i><span class="nav-label">Perfil</span></a>';
+    				//else if (obj == 6)
+    					//menuTemplate += '<a href="#jugadores" id ="btn-menu-jugadores"><i class="fa fa-users"></i><span class="nav-label">Perfil</span></a>';
     				else if (obj == 7)
     					menuTemplate += '<a href="#modulos" id="btn-menu-modulos"><i class="fa fa-eye"></i> <span class="nav-label">Modulos</span></a>';
     				else if (obj == 8)
