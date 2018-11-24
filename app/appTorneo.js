@@ -276,6 +276,20 @@ var editarTorneoCtrl = function($rootScope, $scope, $uibModal, $http, $window) {
 editarTorneoCtrl.$inject = ['$rootScope', '$scope', '$uibModal', '$http', '$window'];
 
 var infoTorneoCtrl = function($rootScope, $scope, $uibModal, $http, $window) {
+
+    var consulta = {
+        query: "select * from team where id_capitan = '" + $rootScope.securityDataUser.id_usuario  + "';",
+        method: "GET"
+    }
+
+    $http.post('../apis/porcesaAPI.php', {
+        data: {params:  consulta}
+    }).success(function(data){
+        $scope.misequipos = data;
+    }).error(function(){
+        administrarMensajeSweet({titulo:'Error al enviar params', tipo:'error', texto: ''});
+    });
+
     var administrarMensajeSweet = function(conf) {
         $window.swal({
             title: conf.titulo,
@@ -333,13 +347,77 @@ var infoTorneoCtrl = function($rootScope, $scope, $uibModal, $http, $window) {
     };
 
 
-    $scope.registrar = function(infoTorneo) {
+    var registrarTeams = function(infoTorneo, team){
+
+        var stringQuery ="INSERT INTO participantes (torneos_codTorneo, team_codTeams) VALUES (" +
+            + infoTorneo.codTorneo + "," +
+            "" + team.codTeam + ")";
 
         var consulta = {
-            query: "select * from participantes where torneos_codTorneo = '" + infoTorneo.codTorneo + "' and team_codTeams = '" + $rootScope.securityDataUser.id_usuario  + "';",
+            query: stringQuery,
+            method: "POST"
+        }
+        $http.post('../apis/porcesaAPI.php', {
+            data: {params:  consulta}
+        }).success(function(response){
+            console.log("consulta :" + JSON.stringify(consulta));
+            if (response == "1") {
+                $scope.listarTorneos();
+
+                administrarMensajeSweet({titulo:'Se ha registrado exitosamente', tipo:'success', texto: ''});
+                window.location.reload();
+            } else {
+                administrarMensajeSweet({titulo:'Error al actualizar', tipo:'error', texto: ''});
+                window.location.reload();
+            }
+        }).error(function(){
+            administrarMensajeSweet({titulo:'Error al enviar params', tipo:'error', texto: ''});
+        });
+
+
+    };
+
+
+    $scope.registrar = function(infoTorneo) {
+        if(infoTorneo.tipo_torneo == 'Equipos') {
+            $scope.modalSelectTeam = $uibModal.open({
+                backdrop: 'static',
+                keyboard: false,
+                scope: $scope,
+                templateUrl: 'torneos/modalSelectTeam.html',
+                controller: infoTorneoCtrl
+            });
+        } else {
+            var consulta = {
+                query: "select * from participantes where torneos_codTorneo = '" + infoTorneo.codTorneo + "' and team_codTeams = '" + $rootScope.securityDataUser.id_usuario  + "';",
+                method: "GET"
+            }
+
+            $http.post('../apis/porcesaAPI.php', {
+                data: {params:  consulta}
+            }).success(function(data){
+                if (data.length > 0) {
+                    $window.swal({
+                        title: 'Usted ya se encuentra registrado dentro de este torneo',
+                        text: '',
+                        type: 'info',
+                        showCancelButton: false
+                    });
+                } else {
+                    console.log("consulta :" + JSON.stringify(consulta));
+                    registrarTeamJugador(infoTorneo);
+                }
+            }).error(function(){
+                administrarMensajeSweet({titulo:'Error al enviar params', tipo:'error', texto: ''});
+            });
+        }
+    };
+
+    $scope.registrarEquipo = function(argument) {
+        var consulta = {
+            query: "select * from participantes where torneos_codTorneo = '" + $scope.infoTorneo.codTorneo + "' and team_codTeams = '" + argument.codTeam  + "';",
             method: "GET"
         }
-
         $http.post('../apis/porcesaAPI.php', {
             data: {params:  consulta}
         }).success(function(data){
@@ -352,13 +430,16 @@ var infoTorneoCtrl = function($rootScope, $scope, $uibModal, $http, $window) {
                 });
             } else {
                 console.log("consulta :" + JSON.stringify(consulta));
-                registrarTeamJugador(infoTorneo);
+                registrarTeams($scope.infoTorneo, argument);
             }
         }).error(function(){
             administrarMensajeSweet({titulo:'Error al enviar params', tipo:'error', texto: ''});
         });
+    }
 
-    };
+    $scope.cerrarModalEquipo = function() {
+        $scope.modalSelectTeam.close();
+    }
 
     $scope.cerrarModal = function() {
         $scope.modalInfoTorneo.close();

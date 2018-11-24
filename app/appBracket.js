@@ -279,11 +279,13 @@ var bracketCtrl = function($rootScope, $scope, $uibModal, $http) {
                     method: "GET"
                 }
             }
+                    console.log('Si va aqui ' + consulta.query);
 
             //Query para traer los participantes, los tomo en cuenta cuando esta tabla ya tenga registros y no tenga resultados
             $http.post('../apis/porcesaAPI.php', {
                 data: {params:  consulta}
             }).success(function(bracket) {
+                console.log('Entra ' + bracket);
                 if (bracket.length == 4 || bracket.length == 8 || bracket.length == 16 || bracket.length == 32 || bracket.length == 64) {
                     var consulta = {
                         query:"select * from partidos where torneos_codTorneo = " + torneo.codTorneo + "",
